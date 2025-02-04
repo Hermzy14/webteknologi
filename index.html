@@ -8,19 +8,24 @@
   <body>
     <!-- Header -->
     <header>
-      <a href="index.html"><h1>Logo</h1></a>
+      <a href="index.html" title="Home"><h1>Logo</h1></a>
       <form action="search.html" method="get" id="searchbar">
-        <input type="text" name="search" placeholder="Search for courses..." />
-        <button type="submit">Search</button>
+        <input
+          title="Type and hit search to search for courses"
+          type="text"
+          name="search"
+          placeholder="Search for courses..."
+        />
+        <button type="submit" title="Search">Search</button>
         <!-- TODO: Remember to change this to an icon -->
       </form>
       <nav>
-        <a href="cart.html">Cart</a>
+        <a href="cart.html" title="Cart">Cart</a>
         <!-- TODO: Remember to change to an icon -->
-        <a href="explore.html">Courses</a>
-        <a href="about.html">About</a>
-        <a href="signin.html">Sign in</a>
-        <a href="register.html">Register</a>
+        <a href="explore.html" title="Courses">Courses</a>
+        <a href="about.html" title="About">About</a>
+        <a href="signin.html" title="Sign in">Sign in</a>
+        <a href="register.html" title="Register">Register</a>
       </nav>
     </header>
 
@@ -32,7 +37,12 @@
           <p>
             We have multiple courses within this field from multiple providers!
           </p>
-          <a href="explore.html" id="explore-btn">Explore Courses</a>
+          <a
+            href="explore.html"
+            id="explore-btn"
+            title="Explore Information Technology courses"
+            >Explore Courses</a
+          >
         </div>
       </div>
     </section>
@@ -41,11 +51,36 @@
     <section id="discounted">
       <h2>Discounted courses</h2>
       <nav id="filter-nav">
-        <button class="filter-button active">All categories</button>
-        <button class="filter-button">Information Technologies</button>
-        <button class="filter-button">Digital Marketing</button>
-        <button class="filter-button">Business and Entrepreneurship</button>
-        <button class="filter-button">Data Science and Analytics</button>
+        <button
+          class="filter-button active"
+          title="Displays discounted courses from all categories"
+        >
+          All categories
+        </button>
+        <button
+          class="filter-button"
+          title="Displays discounted courses on Information Technologies"
+        >
+          Information Technologies
+        </button>
+        <button
+          class="filter-button"
+          title="Displays discounted courses on Digital Marketing"
+        >
+          Digital Marketing
+        </button>
+        <button
+          class="filter-button"
+          title="Displays discounted courses on Business and Entrepreneurship"
+        >
+          Business and Entrepreneurship
+        </button>
+        <button
+          class="filter-button"
+          title="Displays discounted courses on Data Science and Analytics"
+        >
+          Data Science and Analytics
+        </button>
       </nav>
 
       <!-- TODO: La JavaScript her genere 'kortene' til alle de coursene som er på tilbud -->
