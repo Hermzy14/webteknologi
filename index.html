@@ -6,6 +6,61 @@
     <title>Learniverse Connect</title>
   </head>
   <body>
-    <h1>Hello World!:)</h1>
+    <!-- Header -->
+    <header>
+      <a href="index.html"><h1>Logo</h1></a>
+      <form action="search.html" method="get" id="searchbar">
+        <input type="text" name="search" placeholder="Search for courses..." />
+        <button type="submit">Search</button>
+        <!-- TODO: Remember to change this to an icon -->
+      </form>
+      <nav>
+        <a href="cart.html">Cart</a>
+        <!-- TODO: Remember to change to an icon -->
+        <a href="explore.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="signin.html">Sign in</a>
+        <a href="register.html">Register</a>
+      </nav>
+    </header>
+
+    <!-- Carousel section -->
+    <section id="carousel">
+      <div id="carousel-container">
+        <div id="carousel-content">
+          <h2>Looking for courses on Information Technologies?</h2>
+          <p>
+            We have multiple courses within this field from multiple providers!
+          </p>
+          <a href="explore.html" id="explore-btn">Explore Courses</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discounted courses section -->
+    <section id="discounted">
+      <h2>Discounted courses</h2>
+      <nav id="filter-nav">
+        <button class="filter-button active">All categories</button>
+        <button class="filter-button">Information Technologies</button>
+        <button class="filter-button">Digital Marketing</button>
+        <button class="filter-button">Business and Entrepreneurship</button>
+        <button class="filter-button">Data Science and Analytics</button>
+      </nav>
+
+      <!-- TODO: La JavaScript her genere 'kortene' til alle de coursene som er på tilbud -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <h1>LOGO</h1>
+      <p>
+        This website is a result of a university group project, performed in the
+        course IDATA2301 Web technologies, at NTNU. <br />
+        All the information provided here is a result of imagination. Any
+        resemblance with real companies or products is a coincidence.
+      </p>
+      <p>&copy; 2025 Learniverse Connect</p>
+    </footer>
   </body>
 </html>
