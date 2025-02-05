@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore courses</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <a href="index.html" title="Home"><h1>Logo</h1></a>
+      <form action="search.html" method="get" id="searchbar">
+        <input
+          title="Type and hit search to search for courses"
+          type="text"
+          name="search"
+          placeholder="Search for courses..."
+        />
+        <button type="submit" title="Search">Search</button>
+        <!-- TODO: Remember to change this to an icon -->
+      </form>
+      <nav>
+        <a href="cart.html" title="Cart">Cart</a>
+        <!-- TODO: Remember to change to an icon -->
+        <a href="explore.html" title="Courses">Courses</a>
+        <a href="about.html" title="About">About</a>
+        <a href="signin.html" title="Sign in">Sign in</a>
+        <a href="register.html" title="Register">Register</a>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- Result text and buttons for sorting -->
+      <section id="result-and-sort">
+        <p id="result-text">Search results for 'xyz...'</p>
+        <nav>
+          <button>New</button>
+          <button>Price ascending</button>
+          <button>Price descending</button>
+        </nav>
+      </section>
+
+      <!-- Side panel for filtering -->
+      <aside id="filter">
+        <input type="checkbox" name="it" id="it-checkbox" />
+        <label for="it">Information Technology courses</label>
+        <input type="checkbox" name="dm" id="dm-checkbox" />
+        <label for="dm">Digital Marketing courses</label>
+        <input type="checkbox" name="be" id="be-checkbox" />
+        <label for="be">Business and Entrepreneurship courses</label>
+        <input type="checkbox" name="dsa" id="dsa-checkbox" />
+        <label for="dsa">Data Science and Analytics courses</label>
+
+        <div id="price-range-container">
+          <label for="min-price">Price 0 NOK - 100 000 NOK</label>
+          <input
+            type="range"
+            name="min-price"
+            id="min-price"
+            min="0"
+            max="100000"
+            value="50000"
+          />
+          <input
+            type="range"
+            name="max-price"
+            id="max-price"
+            min="0"
+            max="100000"
+            value="50000"
+          />
+        </div>
+      </aside>
+
+      <!-- Course cards -->
+      <!-- TODO: This will be added automatically by JavaScript -->
+      <p>Course cards will be displayed here</p>
+
+      <!-- Footer -->
+      <footer>
+        <h1>LOGO</h1>
+        <p>
+          This website is a result of a university group project, performed in
+          the course IDATA2301 Web technologies, at NTNU. <br />
+          All the information provided here is a result of imagination. Any
+          resemblance with real companies or products is a coincidence.
+        </p>
+        <p>&copy; 2025 Learniverse Connect</p>
+      </footer>
+    </main>
+  </body>
+</html>
