@@ -10,9 +10,17 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+/* Header */
+
 header {
+  background-color: white;
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -65,4 +73,20 @@ header nav a#about {
 }
 #register-btn:hover {
   background-color: var(--neutral-bg-color);
+}
+
+/* Footer */
+
+footer {
+  width: 100%;
+  background-color: var(--primary-text-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: auto;
+}
+
+footer p {
+  padding: 32px 32px 160px 32px;
 }
