@@ -62,6 +62,45 @@ label {
     font-weight: bold;
 }
 
+/* Sign up button */
+.tabs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tabs h2 {
+    margin: 0;
+    padding: 0 10px;
+    font-weight: normal;
+}
+
+.tabs .active {
+    color: black;
+}
+
+.tabs .inactive {
+    color: gray;
+    cursor: pointer;
+}
+
+.tabs .separator {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+.signup-link {
+    color: gray;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    color: black;
+}
+
+
 input {
     padding: 10px;
     margin-bottom: 15px;
