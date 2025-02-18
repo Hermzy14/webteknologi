@@ -7,14 +7,21 @@ const signupForm = document.querySelector('#signup-form');
 const loginTab = document.querySelector('.login-tab');
 const signupTab = document.querySelector('.signup-tab');
 
+    // Set initial state
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+    loginForm.style.display = "block";
+    signupForm.style.display = "none";
+
 // Switch to Signup Form
 signupLink.addEventListener('click', (event) => {
     event.preventDefault();
     loginForm.style.display = 'none';
     signupForm.style.display = 'block';
-    signupTab.classList.add('active');
-    loginTab.classList.remove('active');
-
+    signupLink.classList.add('active');
+    loginLink.classList.add('inactive');
+    signupLink.classList.remove('inactive');
+    loginLink.classList.remove('active');
 });
 
 // Switch to Login Form
@@ -22,7 +29,9 @@ loginLink.addEventListener('click', (event) => {
     event.preventDefault();
     signupForm.style.display = 'none';
     loginForm.style.display = 'block';
-    loginTab.classList.add('active');
-    signupTab.classList.remove('active');
-
+    loginLink.classList.add('active');
+    signupLink.classList.add('inactive');
+    loginLink.classList.remove('inactive');
+    signupLink.classList.remove('active');
 });
+

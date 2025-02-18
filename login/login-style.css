@@ -14,29 +14,25 @@ body {
 /* Main container  */
 .container {
     display: flex;
-    height: 100%;
+    height: 100vh;
 }
 
-/* Left side of the page (kept empty for now) */
-.left-side {
+.image-container {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9f9f9;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* Placeholder for any icon or image */
-.icon-placeholder {
-    width: 50px;
-    height: 50px;
-    background-color: lightgray;
-    border-radius: 50%;
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
-
-/* Right side */
+/* right side of the page */
 .right-side {
     flex: 1;
+    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,22 +61,10 @@ label {
 /* Sign up button */
 .tabs {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    gap: 15px;
 }
 
 .tabs h2 {
-    margin: 0;
-    padding: 0 10px;
-    font-weight: normal;
-}
-
-.tabs .active {
-    color: black;
-}
-
-.tabs .inactive {
-    color: gray;
     cursor: pointer;
 }
 
@@ -91,13 +75,13 @@ label {
     margin: 0 10px;
 }
 
-.signup-link {
-    color: gray;
-    text-decoration: none;
+button[type="submit"] {
+    float: right;
 }
 
-.signup-link:hover {
-    color: black;
+
+#signup-form button {
+    float: right;
 }
 
 
@@ -111,7 +95,7 @@ input {
 
 a{
     text-decoration: none;
-    color:blue;
+    color: #000000;
     margin-bottom: 15px;
 }
 
@@ -121,16 +105,6 @@ button {
     background-color: black;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     cursor: pointer;
 }
-
-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        background: black;
-        color: white;
-    }
