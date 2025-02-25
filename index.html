@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learniverse Connect</title>
+    <link rel="stylesheet" href="./css/global-styles.css" />
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
     <!-- Header -->
@@ -23,29 +25,85 @@
         <a href="cart.html" title="Cart">Cart</a>
         <!-- TODO: Remember to change to an icon -->
         <a href="explore.html" title="Courses">Courses</a>
-        <a href="about.html" title="About">About</a>
-        <a href="signin.html" title="Sign in">Sign in</a>
-        <a href="register.html" title="Register">Register</a>
+        <a href="about.html" title="About" id="about">About</a>
+        <a href="signin.html" title="Sign in" id="sign-in-btn">Sign in</a>
+        <a href="register.html" title="Register" id="register-btn">Register</a>
       </nav>
     </header>
 
     <!-- Main content -->
-    <main>
+    <main id="index-main">
       <!-- Carousel section -->
       <section id="carousel">
+        <button class="nav-button prev-button">&#8592;</button>
+        <button class="nav-button next-button">&#8594;</button>
         <div id="carousel-container">
-          <div id="carousel-content">
-            <h2>Looking for courses on Information Technologies?</h2>
-            <p>
-              We have multiple courses within this field from multiple
-              providers!
-            </p>
-            <a
-              href="explore.html"
-              id="explore-btn"
-              title="Explore Information Technology courses"
-              >Explore Courses</a
-            >
+          <div class="carousel-slide" data-index="0">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Information Technologies?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Information Technology courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="1" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Digital Marketing?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Digital Marketing courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="2" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Business and Entrepreneurship?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Business and Entrepreneurship courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="3" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Data Science and Analytics?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Data Science and Analytics courses"
+                >Explore!</a
+              >
+            </div>
           </div>
         </div>
       </section>
@@ -98,8 +156,23 @@
         course IDATA2301 Web technologies, at NTNU. <br />
         All the information provided here is a result of imagination. Any
         resemblance with real companies or products is a coincidence.
+        <br />
+        &copy; 2025 Learniverse Connect
       </p>
-      <p>&copy; 2025 Learniverse Connect</p>
     </footer>
+
+    <!-- TODO: Move to JS file later -->
+    <script>
+      const buttons = document.querySelectorAll(".filter-button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Remove active class from all buttons
+          buttons.forEach((btn) => btn.classList.remove("active"));
+          // Add active class to clicked button
+          button.classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>

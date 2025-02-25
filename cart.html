@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart</title>
+</head>
+<body>
+    <!-- Header -->
+     <header>
+        <a href="index.html" title="Home"><h1>Logo</h1></a>
+        <form action="search.html" method="get" id="searchbar">
+            <input
+                title="Type and hit search to search for courses"
+                type="text"
+                name="search"
+                placeholder="search for courses..."
+            /> 
+            <button type="submit" title="Search">Search</button>
+            <!-- TODO: Remember to change this to an icon -->   
+        </form>
+        <nav>
+            <a href="cart.html" title="Cart">Cart</a> <!-- Mayber remove this from cart?-->
+            <!-- TODO: Remember to change to an icon -->
+            <a href="explore.html" title="Courses">Courses</a>
+            <a href="about.html" title="About">About</a>
+            <a href="signin.html" title="Sign in">Sign in</a>
+            <a href="register.html" title="Register">Register</a>
+        </nav>
+     </header>
+
+     <!-- Main content -->
+     <main>
+        <!-- Empty shopping cart -->
+         <section id="Shopping cart">
+            <h2>Shopping Cart</h2>
+            <h3>X Courses in cart</h3> <!-- need to make the x into a variabel -->
+            <h4>Your cart is empty</h4>
+                <nav>
+                    <button>
+                        <a href="explore.html" title="Keep shopping">Keep shopping</a>
+                    </button>
+                </nav> 
+         </section>
+
+         <!-- Cart -->
+         <div class="Box">
+            <div class="Item">
+                <div class="Image"></div>
+                <div class="Description"></div>
+            </div>
+         </div>
+     </main>
+    
+</body>
+</html>
