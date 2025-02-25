@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learniverse Connect</title>
     <link rel="stylesheet" href="./css/global-styles.css" />
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
     <!-- Header -->
@@ -31,22 +32,78 @@
     </header>
 
     <!-- Main content -->
-    <main>
+    <main id="index-main">
       <!-- Carousel section -->
       <section id="carousel">
+        <button class="nav-button prev-button">&#8592;</button>
+        <button class="nav-button next-button">&#8594;</button>
         <div id="carousel-container">
-          <div id="carousel-content">
-            <h2>Looking for courses on Information Technologies?</h2>
-            <p>
-              We have multiple courses within this field from multiple
-              providers!
-            </p>
-            <a
-              href="explore.html"
-              id="explore-btn"
-              title="Explore Information Technology courses"
-              >Explore Courses</a
-            >
+          <div class="carousel-slide" data-index="0">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Information Technologies?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Information Technology courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="1" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Digital Marketing?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Digital Marketing courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="2" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Business and Entrepreneurship?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Business and Entrepreneurship courses"
+                >Explore!</a
+              >
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="3" style="display: none">
+            <div class="carousel-image"></div>
+            <div id="carousel-content">
+              <h2>Looking for courses on Data Science and Analytics?</h2>
+              <p>
+                We have multiple courses within this field from multiple
+                providers!
+              </p>
+              <a
+                href="explore.html"
+                class="explore-btn"
+                title="Explore Data Science and Analytics courses"
+                >Explore!</a
+              >
+            </div>
           </div>
         </div>
       </section>
@@ -103,5 +160,18 @@
         &copy; 2025 Learniverse Connect
       </p>
     </footer>
+
+    <script>
+      const buttons = document.querySelectorAll(".filter-button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Remove active class from all buttons
+          buttons.forEach((btn) => btn.classList.remove("active"));
+          // Add active class to clicked button
+          button.classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>
