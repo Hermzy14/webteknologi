@@ -1,9 +1,20 @@
+/* General styles */
 :root {
   --primary-color: #8bb8e5;
   --primary-text-color: #1e1e1e;
   --primary-border-color: #d9d9d9;
   --neutral-bg-color: #e3e3e3;
   --neutral-border-color: #767676;
+}
+
+p,
+button,
+textarea,
+input,
+a {
+  font-family: sans-serif;
+  color: var(--primary-text-color);
+  font-weight: 400;
 }
 
 body {
