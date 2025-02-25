@@ -1,0 +1,101 @@
+main {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Sidebar Filters */
+
+#filter {
+  flex: 0 0 250px;
+  background: var(--primary-bg-color);
+  border-radius: 8px;
+  border: 1px solid var(--primary-border-color);
+  padding: 20px;
+  margin: 20px;
+  height: fit-content;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.filter-item input[type="checkbox"] {
+  margin-top: 4px;
+  margin-right: 10px;
+}
+
+.filter-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item-title {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.filter-item-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.price-range {
+  margin-top: 10px;
+}
+
+.price-range-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price-slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Sorting */
+.main-content {
+  flex: 1;
+  margin: 20px;
+}
+
+#result-and-sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#result-text {
+  font-size: 18px;
+  color: #666;
+  font-weight: 300;
+}
+
+#sorting-options {
+  display: flex;
+  gap: 10px;
+}
+
+.sort-option {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-border-color);
+  background: var(--primary-bg-color);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sort-option.active {
+  background: #333;
+  color: white;
+  border-color: #333;
+}

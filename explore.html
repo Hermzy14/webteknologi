@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Explore courses</title>
     <link rel="stylesheet" href="./css/global-styles.css" />
+    <link rel="stylesheet" href="./css/explore.css" />
   </head>
   <body>
     <!-- Header -->
@@ -32,63 +33,122 @@
 
     <!-- Main content -->
     <main>
-      <!-- Result text and buttons for sorting -->
-      <section id="result-and-sort">
-        <p id="result-text">Search results for 'xyz...'</p>
-        <nav>
-          <button>New</button>
-          <button>Price ascending</button>
-          <button>Price descending</button>
-        </nav>
-      </section>
-
       <!-- Side panel for filtering -->
       <aside id="filter">
-        <input type="checkbox" name="it" id="it-checkbox" />
-        <label for="it">Information Technology courses</label>
-        <input type="checkbox" name="dm" id="dm-checkbox" />
-        <label for="dm">Digital Marketing courses</label>
-        <input type="checkbox" name="be" id="be-checkbox" />
-        <label for="be">Business and Entrepreneurship courses</label>
-        <input type="checkbox" name="dsa" id="dsa-checkbox" />
-        <label for="dsa">Data Science and Analytics courses</label>
+        <h2>Categories</h2>
+        <div class="filter-group">
+          <div class="filter-item">
+            <input type="checkbox" id="it" checked />
+            <div class="filter-item-details">
+              <label for="it" class="filter-item-title">IT</label>
+              <span class="filter-item-subtitle"
+                >Information Technology courses</span
+              >
+            </div>
+          </div>
 
-        <div id="price-range-container">
-          <label for="min-price">Price 0 NOK - 100 000 NOK</label>
+          <div class="filter-item">
+            <input type="checkbox" id="marketing" checked />
+            <div class="filter-item-details">
+              <label for="marketing" class="filter-item-title"
+                >Digital Marketing</label
+              >
+              <span class="filter-item-subtitle"
+                >Digital Marketing courses</span
+              >
+            </div>
+          </div>
+
+          <div class="filter-item">
+            <input type="checkbox" id="business" />
+            <div class="filter-item-details">
+              <label for="business" class="filter-item-title">B&E</label>
+              <span class="filter-item-subtitle"
+                >Business and Entrepreneurship courses</span
+              >
+            </div>
+          </div>
+
+          <div class="filter-item">
+            <input type="checkbox" id="analytics" />
+            <div class="filter-item-details">
+              <label for="analytics" class="filter-item-title">Analytics</label>
+              <span class="filter-item-subtitle"
+                >Data Science and Analytics courses</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h2>Price</h2>
+          <div class="price-range-header">
+            <span>0 NOK</span>
+            <span id="max-price">100 000 NOK</span>
+          </div>
           <input
             type="range"
-            name="min-price"
-            id="min-price"
             min="0"
             max="100000"
-            value="50000"
-          />
-          <input
-            type="range"
-            name="max-price"
-            id="max-price"
-            min="0"
-            max="100000"
-            value="50000"
+            value="100000"
+            class="price-slider"
+            id="price-range"
           />
         </div>
       </aside>
 
-      <!-- Course cards -->
-      <!-- TODO: This will be added automatically by JavaScript -->
-      <p>Course cards will be displayed here</p>
+      <!-- Result text and buttons for sorting -->
+      <div class="main-content">
+        <section id="result-and-sort">
+          <p id="result-text">Search results for 'xyz...'</p>
+          <nav id="sorting-options">
+            <button class="sort-option active">Price ascending</button>
+            <button class="sort-option">Price descending</button>
+          </nav>
+        </section>
 
-      <!-- Footer -->
-      <footer>
-        <h1>LOGO</h1>
-        <p>
-          This website is a result of a university group project, performed in
-          the course IDATA2301 Web technologies, at NTNU. <br />
-          All the information provided here is a result of imagination. Any
-          resemblance with real companies or products is a coincidence.
-        </p>
-        <p>&copy; 2025 Learniverse Connect</p>
-      </footer>
+        <!-- Course cards -->
+        <!-- TODO: This will be added automatically by JavaScript -->
+        <p>Course cards will be displayed here</p>
+      </div>
     </main>
+
+    <!-- Footer -->
+    <footer>
+      <h1>LOGO</h1>
+      <p>
+        This website is a result of a university group project, performed in the
+        course IDATA2301 Web technologies, at NTNU. <br />
+        All the information provided here is a result of imagination. Any
+        resemblance with real companies or products is a coincidence.
+      </p>
+      <p>&copy; 2025 Learniverse Connect</p>
+    </footer>
+
+    <!-- TODO: Move to JS later -->
+    <script>
+      // Toggle sort options
+      const sortOptions = document.querySelectorAll(".sort-option");
+      sortOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          sortOptions.forEach((opt) => opt.classList.remove("active"));
+          option.classList.add("active");
+          // TODO: Trigger sorting function
+        });
+      });
+
+      // Price range slider
+      const priceRange = document.getElementById("price-range");
+      priceRange.addEventListener("input", () => {
+        // Get the value of the slider
+        const price = priceRange.value;
+        // Format to readable format
+        const formattedPrice = new Intl.NumberFormat("no-NO").format(price);
+        // Update the max price text
+        document.getElementById("max-price").textContent =
+          formattedPrice + " NOK";
+        // TODO: Trigger filtering function
+      });
+    </script>
   </body>
 </html>
