@@ -1,4 +1,30 @@
-.cart {
-    width : 28px;
-    height : 28px;
+
+
+
+
+.smallInfoText {
+    color : #CBCBCB
+}
+
+.boldText {
+    font-weight : bold;
+}
+
+.informationPanel3{
+    width : 45%;
+    border-style : solid;
+}
+
+.informationPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width : 100%;
+    gap : 112px;
+    
+}
+
+.informationPanel2 {
+    width : 45%;
+    border-style : solid;
 }
