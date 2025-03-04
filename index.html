@@ -18,7 +18,7 @@
           name="search"
           placeholder="Search for courses..."
         />
-        <button type="submit" title="Search">Search</button>
+        <button type="submit" title="Search" id="search-btn">Search</button>
         <!-- TODO: Remember to change this to an icon -->
       </form>
       <nav>
@@ -26,9 +26,66 @@
         <!-- TODO: Remember to change to an icon -->
         <a href="explore.html" title="Courses">Courses</a>
         <a href="about.html" title="About" id="about">About</a>
-        <a href="signin.html" title="Sign in" id="sign-in-btn">Sign in</a>
-        <a href="register.html" title="Register" id="register-btn">Register</a>
+        <a href="signin.html" title="Sign in" class="sign-in-btn">Sign in</a>
+        <a href="register.html" title="Register" class="register-btn"
+          >Register</a
+        >
       </nav>
+
+      <!-- Mobile menu button -->
+      <button class="mobile-menu-button" id="menu-toggle">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 6H20M4 12H20M4 18H20"
+            stroke="#333"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+          <button class="mobile-menu-button" id="menu-close">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 6L18 18M6 18L18 6"
+                stroke="#333"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <nav class="mobile-menu-links">
+          <a href="explore.html">Courses</a>
+          <a href="compare.html">Compare courses</a>
+          <a href="about.html">About us</a>
+        </nav>
+
+        <div class="mobile-auth-buttons">
+          <a href="login.html" class="mobile-auth-button sign-in-btn"
+            >Sign in</a
+          >
+          <a href="Signup.html" class="mobile-auth-button register-btn"
+            >Register</a
+          >
+        </div>
+      </div>
     </header>
 
     <!-- Main content -->
@@ -163,6 +220,20 @@
 
     <!-- TODO: Move to JS file later -->
     <script>
+      // Mobile navigation
+      const menuToggle = document.getElementById("menu-toggle");
+      const menuClose = document.getElementById("menu-close");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.add("mobile-active");
+      });
+
+      menuClose.addEventListener("click", () => {
+        mobileMenu.classList.remove("mobile-active");
+      });
+
+      // Discounted courses filter buttons
       const buttons = document.querySelectorAll(".filter-button");
 
       buttons.forEach((button) => {

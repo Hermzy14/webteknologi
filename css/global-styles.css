@@ -70,23 +70,105 @@ header nav a#about {
   margin-right: 32px;
 }
 
-#sign-in-btn {
+.sign-in-btn {
   background-color: var(--neutral-bg-color);
   border: 1px solid var(--neutral-border-color);
   border-radius: 8px;
 }
-#sign-in-btn:hover {
+.sign-in-btn:hover {
   background-color: var(--primary-color);
 }
 
-#register-btn {
+.register-btn {
   margin-left: 12px;
   background-color: var(--primary-color);
   border: 1px solid var(--neutral-border-color);
   border-radius: 8px;
 }
-#register-btn:hover {
+.register-btn:hover {
   background-color: var(--neutral-bg-color);
+}
+
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: calc(100vh - 60px);
+  width: calc(100vw - 60px);
+  background-color: white;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: auto;
+}
+
+.mobile-menu-links a {
+  text-decoration: none;
+  color: var(--primary-text-color);
+  font-weight: 500;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--neutral-bg-color);
+}
+
+.mobile-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-auth-button {
+  padding: 1rem 0;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  border: 1px solid var(--primary-border-color);
+}
+
+@media (max-width: 768px) {
+  header form,
+  header nav {
+    display: none;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .register-btn {
+    margin-left: 0;
+  }
+}
+
+.mobile-active {
+  display: flex;
 }
 
 /* Footer */
