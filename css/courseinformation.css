@@ -1,0 +1,189 @@
+
+
+.smallInfoText {
+    color : #CBCBCB;
+    padding-left : 40px;
+}
+
+.informationPanel3 h2 {
+    padding-left : 40px;
+}
+
+.boldText {
+    font-weight : bold;
+    padding-left: 40px;
+}
+
+.informationPanel3{
+    width : 40%;
+    border : 2px solid #CBCBCB;
+    border-radius: 10px;
+}
+
+.informationPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width : 100%;
+    gap : 70px;
+    padding-top: 70px;
+    padding-bottom : 70px;
+
+}
+
+.informationPanel2 {
+    width : 40%;
+    border : 2px solid #CBCBCB;
+    position: relative;
+    border-radius: 10px;
+}
+
+.informationPanel2 p {
+    padding : 10px;
+}
+
+.informationPanel2 h2 {
+    padding-left : 10px;
+}
+
+
+.compareButton {
+    background-color: #8BB8E5;
+    position : absolute;
+    bottom : 10px;
+    left : 10px;
+    padding : 10px 20px;
+    border-radius: 5px;
+
+}
+
+.imgNotFound {
+    width : 761px;
+    height : 340px;
+    max-width : 90%;
+    max-height : 100%;
+}
+
+.imageWrapper {
+    display : flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.addToCartButton {
+    background-color: #8BB8E5;
+    position : absolute;
+    bottom : 10px;
+    right : 10px;
+    padding : 10px 20px;
+    border-radius : 5px;
+
+}
+
+.compareButton, .addToCartButton {
+    cursor: pointer; 
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.compareButton:hover, .addToCartButton:hover {
+    background-color: #6fa3d1;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.courseCarouselParent {
+    border-radius: 10px;
+    
+    margin : 0 auto;
+    width : 84%;
+    margin-bottom : 20px;
+}
+
+.courseCarouselParent h2 {
+    padding-left : 20px;
+}
+
+.courseCarousel {
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap : 80px;
+    margin-bottom : 40px;
+    min-height : 200px;
+    height : 400px;
+    
+}
+
+
+.carouselCard {
+    border : 2px solid #CBCBCB;
+    border-radius : 7px;
+}
+
+.carouselCard a {
+    color: inherit; 
+    text-decoration: none; 
+    transition: border-color 0.3s ease-in-out; 
+    padding: 2px 5px;
+    border-radius: 5px; 
+    display :block;
+
+}
+
+.carouselCard a:hover {
+    background-color: #8BB8E54D; 
+}
+
+.courseText {
+    padding-left : 12px;
+}
+
+.priceText {
+    padding-left : 12px;
+    font-weight : bold;
+}
+
+.providerText {
+    padding-left : 12px;
+    color : #CBCBCB;
+}
+
+.carouselCard img {
+    max-width: 90%;
+    max-height: 90%;
+    width : 200px;
+    height : 220px;
+    padding : 10px;
+}
+
+.leftArrow, .rightArrow {
+    height : 50px;
+    margin-top : auto;
+    margin-bottom : auto;
+}
+
+a.leftArrow, a.rightArrow {
+    position: relative; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+a.leftArrow::after, a.rightArrow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(139, 184, 229, 0.4); 
+    border-radius: 5px;
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+a.leftArrow:hover::after, a.rightArrow:hover::after {
+    opacity: 1; 
+}

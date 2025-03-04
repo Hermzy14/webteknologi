@@ -1,0 +1,52 @@
+/* About us section */
+#about-us {
+  width: 50%;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* Contact section */
+#contact-us {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#contact-us h2 {
+  width: 50%;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+}
+
+#contact-form button {
+  background: var(--primary-color);
+  color: var(--primary-text-color);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 50%;
+  margin: 0 auto;
+}
+#contact-form button:hover {
+  background: #d6e6ff;
+}

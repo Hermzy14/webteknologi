@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Explore courses</title>
+    <link rel="stylesheet" href="./css/global-styles.css" />
+    <link rel="stylesheet" href="./css/courseinformation.css"/>
   </head>
   <body>
+    <div class ="flex-container">
+
     <!-- Header -->
     <header>
       <a href="index.html" title="Home"><h1>Logo</h1></a>
@@ -20,20 +24,36 @@
         <!-- TODO: Remember to change this to an icon -->
       </form>
       <nav>
-        <a href="cart.html" title="Cart">Cart</a>
+        <a href="cart.html" title="Cart" > <img src="rescources/cart.png" class="cart" alt ="cart"> </img></a>
         <!-- TODO: Remember to change to an icon -->
         <a href="explore.html" title="Courses">Courses</a>
-        <a href="about.html" title="About">About</a>
-        <a href="signin.html" title="Sign in">Sign in</a>
-        <a href="register.html" title="Register">Register</a>
+        <a href="about.html" title="About" id="about">About</a>
+        <a href="signin.html" title="Sign in" id="sign-in-btn">Sign in</a>
+        <a href="register.html" title="Register" id="register-btn">Register</a>
       </nav>
     </header>
 
     <!-- Main content -->
     <main>
+
+        <section class = "informationPanel">
+
+        <section class = "informationPanel3">
+
         <h2>Real time programming in Java</h2>
-         <!-- TODO: Remember to change this to course picture -->
-        <p>Image goes here</p>
+       
+        <div class = "imageWrapper">
+        <img src="rescources/Image-not-found.png" class ="imgNotFound"> </img>
+        </div>
+
+        <p class ="boldText">29 999 - 32 000 nok</p>
+        <p class ="boldText">June 3rd - june 28th</p>
+        <p class ="boldText">40 hours per week</p>
+        <p class = "smallInfoText">Available courses from NTNU and Oracle</p>
+
+      </section>
+
+        <section class = "informationPanel2">
 
         <h2>Course information</h2>
 
@@ -46,18 +66,69 @@
         Elevate your Java programming expertise to new heights and stay ahead in the ever-evolving
         landscape of real-time systems with our comprehensive and immersive course. 
         </p>
-         <!-- TODO: Add functionallity to the buttons -->
-        <button type = "button"> Compare to other courses</button>
-        <button type = "button"> Add to cart</button>
-        <h2> Simulare courses </h2>
-         <!-- TODO: Add pictures for the course displays -->
-        <p>Pictures goes here</p>
-         <!-- TODO: Add functionallity for the buttons, to browse between displayed courses -->
-        <button type = "button"> <- </button>
-        <button type = "button"> -> </button>
 
+        <a href ="">
+        <button type = "button" class = "compareButton"> Compare to other courses</button>
+        </a>
+
+        <a href ="">
+        <button type = "button" class = "addToCartButton"> Add to cart</button>
+        </a>
+
+      </section>
+      </section>
+
+        <section class = "courseCarouselParent">
+        <h2> Simulare courses </h2>
+        <section class = "courseCarousel">
+        
+        <a href="" class= "leftArrow" title="left" > <img src="rescources/leftArrow.PNG" class="leftArrow" alt ="leftArrow"> </img></a>
+
+        <section class = "carouselCard">
+        <a href="">  
+        <img src="rescources/Image-not-found.png"></img>
+        <p class="courseText"> programming in java</p>
+        <p class="priceText"> 25 000 NOK</p>
+        <p class="providerText"> NTNU</p>
+        </a>
+        </section>
+
+        <section class = "carouselCard">  
+        <a href="">  
+        <img src="rescources/Image-not-found.png"></img>
+        <p class="courseText"> programming in java</p>
+        <p class="priceText"> 25 000 NOK</p>
+        <p class="providerText"> NTNU</p>
+        </a>
+        </section>
+
+        <section class = "carouselCard">  
+        <a href="">  
+        <img src="rescources/Image-not-found.png"></img>
+        <p class="courseText"> programming in java</p>
+        <p class="priceText"> 25 000 NOK</p>
+        <p class="providerText"> NTNU</p>
+        </a>
+        </section>
+            
+        <section class = "carouselCard">  
+        <a href="">  
+        <img src="rescources/Image-not-found.png"></img>
+        <p class="courseText"> programming in java</p>
+        <p class="priceText"> 25 000 NOK</p>
+        <p class="providerText"> NTNU</p>
+        </a>
+        </section>
+
+      <a href="" class="rightArrow" title="right" > <img src="rescources/rightArrow.PNG" class="rightArrow" alt ="rightArrow"> </img></a>
+      </section>
+
+         <!-- TODO: Add functionallity for the buttons, to browse between displayed courses -->
+      </section>
+      </div>
       <!-- Footer -->
       <footer>
+        <div class="flex-footer">
          <!-- TODO: Remember to change this to an icon -->
         <h1>LOGO</h1>
         <p>
@@ -67,7 +138,9 @@
           resemblance with real companies or products is a coincidence.
         </p>
         <p>&copy; 2025 Learniverse Connect</p>
+      </div>
       </footer>
     </main>
+  </div>
   </body>
 </html>
