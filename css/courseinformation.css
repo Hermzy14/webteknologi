@@ -3,16 +3,23 @@
 
 
 .smallInfoText {
-    color : #CBCBCB
+    color : #CBCBCB;
+    padding-left : 40px;
+}
+
+.informationPanel3 h2 {
+    padding-left : 40px;
 }
 
 .boldText {
     font-weight : bold;
+    padding-left: 40px;
 }
 
 .informationPanel3{
-    width : 45%;
+    width : 40%;
     border-style : solid;
+    border-radius: 10px;
 }
 
 .informationPanel {
@@ -20,11 +27,57 @@
     flex-direction: row;
     justify-content: center;
     width : 100%;
-    gap : 112px;
-    
+    gap : 70px;
+    padding-top: 30px;
 }
 
 .informationPanel2 {
-    width : 45%;
+    width : 40%;
     border-style : solid;
+    position: relative;
+    border-radius: 10px;
+}
+
+.informationPanel2 p {
+    padding : 10px;
+}
+
+.informationPanel2 h2 {
+    padding-left : 10px;
+}
+
+
+
+.compareButton {
+    background-color: #8BB8E5;
+    position : absolute;
+    bottom : 10px;
+    left : 10px;
+    padding : 10px 20px;
+    border-radius: 5px;
+
+}
+
+.imgNotFound {
+    width : 761px;
+    height : 340px;
+    max-width : 90%;
+    max-height : 100%;
+}
+
+.imageWrapper {
+    display : flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.addToCartButton {
+    background-color: #8BB8E5;
+    position : absolute;
+    bottom : 10px;
+    right : 10px;
+    padding : 10px 20px;
+    border-radius : 5px;
+
 }
