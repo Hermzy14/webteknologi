@@ -88,26 +88,58 @@
     margin-bottom : 20px;
 }
 
+.courseCarouselParent h2 {
+    padding-left : 20px;
+}
+
 .courseCarousel {
     display : flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap : 80px;
+    margin-bottom : 40px;
+    min-height : 200px;
+    height : 400px;
     
 }
 
 
 .carouselCard {
     border-style : solid;
-    margin-bottom : 40px;
-      
+}
+
+.courseText {
+    padding-left : 12px;
+}
+
+.priceText {
+    padding-left : 12px;
+    font-weight : bold;
+}
+
+.providerText {
+    padding-left : 12px;
+    color : #CBCBCB;
 }
 
 .carouselCard img {
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height: 90%;
     width : 200px;
     height : 220px;
     padding : 10px;
 }
 
+.leftArrow {
+    height : 50px;
+    margin-top : auto;
+    margin-bottom : auto;
+}
+
+.rightArrow {
+    
+    height : 50px;
+    margin-top :auto;
+    margin-bottom : auto;
+}
