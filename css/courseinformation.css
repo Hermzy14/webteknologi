@@ -26,8 +26,9 @@
     justify-content: center;
     width : 100%;
     gap : 70px;
-    padding-top: 30px;
+    padding-top: 70px;
     padding-bottom : 70px;
+
 }
 
 .informationPanel2 {
@@ -163,7 +164,7 @@
 }
 
 a.leftArrow, a.rightArrow {
-    position: relative; /* Viktig for at ::after skal posisjonere seg riktig */
+    position: relative; 
     display: inline-flex;
     align-items: center;
     justify-content: center;
