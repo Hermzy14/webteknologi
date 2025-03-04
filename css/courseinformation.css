@@ -1,7 +1,5 @@
 
 
-
-
 .smallInfoText {
     color : #CBCBCB;
     padding-left : 40px;
@@ -29,6 +27,7 @@
     width : 100%;
     gap : 70px;
     padding-top: 30px;
+    padding-bottom : 70px;
 }
 
 .informationPanel2 {
@@ -45,7 +44,6 @@
 .informationPanel2 h2 {
     padding-left : 10px;
 }
-
 
 
 .compareButton {
@@ -81,3 +79,35 @@
     border-radius : 5px;
 
 }
+
+.courseCarouselParent {
+    border-radius: 10px;
+    border-style : solid;
+    margin : 0 auto;
+    width : 84%;
+    margin-bottom : 20px;
+}
+
+.courseCarousel {
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    gap : 80px;
+    
+}
+
+
+.carouselCard {
+    border-style : solid;
+    margin-bottom : 40px;
+      
+}
+
+.carouselCard img {
+    max-width: 95%;
+    max-height: 95%;
+    width : 200px;
+    height : 220px;
+    padding : 10px;
+}
+
