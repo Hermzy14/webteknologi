@@ -6,7 +6,7 @@
 }
 
 /* Contact section */
-#contact-us {
+#contact-form-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@
   margin-bottom: 2rem;
 }
 
-#contact-us h2 {
+#contact-form-section h2 {
   width: 50%;
 }
 
@@ -49,4 +49,22 @@
 }
 #contact-form button:hover {
   background: #d6e6ff;
+}
+
+/* Other ways to contact us */
+#other-contact-options-section {
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+#list-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.contact-option {
+  list-style: none;
+  font-family: sans-serif;
 }
