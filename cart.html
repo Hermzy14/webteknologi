@@ -9,27 +9,28 @@
 </head>
 <body>
     <!-- Header -->
-     <header>
+    <header>
         <a href="index.html" title="Home"><h1>Logo</h1></a>
-        <form action="search.html" method="get" id="searchbar">
-            <input
-                title="Type and hit search to search for courses"
-                type="text"
-                name="search"
-                placeholder="search for courses..."
-            /> 
-            <button type="submit" title="Search">Search</button>
-            <!-- TODO: Remember to change this to an icon -->   
+        <form action="explore.html" method="get" id="searchbar">
+          <input
+            title="Type and hit search to search for courses"
+            type="text"
+            name="search"
+            placeholder="Search for courses..."
+          />
+          <button type="submit" title="Search">Search</button>
+          <!-- TODO: Remember to change this to an icon -->
         </form>
         <nav>
-            <a href="cart.html" title="Cart">Cart</a> <!-- Mayber remove this from cart?-->
-            <!-- TODO: Remember to change to an icon -->
-            <a href="explore.html" title="Courses">Courses</a>
-            <a href="about.html" title="About">About</a>
-            <a href="login.html" title="Sign in">Sign in</a>
-            <a href="Signup.html" title="Register">Register</a>
+          <a href="cart.html" title="Cart">Cart</a>
+          <!-- TODO: Remember to change to an icon -->
+          <a href="explore.html" title="Courses">Courses</a>
+          <a href="compare.html">Compare</a>
+          <a href="about.html" title="About" id="about">About</a>
+          <a href="login.html" title="Sign in" id="sign-in-btn">Sign in</a>
+          <a href="Signup.html" title="Register" id="register-btn">Register</a>
         </nav>
-     </header>
+      </header>
 
      <!-- Main content -->
      <main>
@@ -39,9 +40,7 @@
             <h3>X Courses in cart</h3> <!-- need to make the x into a variabel -->
             <div class="empty-cart">
                 <h4>Your cart is empty</h4>
-                
-                    <a href="explore.html" class="cart-btn" title="Keep shopping">Keep shopping</a>
-            
+                <a href="explore.html" class="cart-btn" title="Keep shopping">Keep shopping</a>
             </div>
          </section>
 
