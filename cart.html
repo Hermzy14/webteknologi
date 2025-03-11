@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping cart</title>
+    <link rel="stylesheet" href="./css/global-styles.css" />
+    <link rel="stylesheet" href="./css/cart.css" />
 </head>
 <body>
     <!-- Header -->
@@ -32,15 +34,15 @@
      <!-- Main content -->
      <main>
         <!-- Empty shopping cart -->
-         <section id="Shopping cart">
+         <section id="Shopping-cart">
             <h2>Shopping Cart</h2>
             <h3>X Courses in cart</h3> <!-- need to make the x into a variabel -->
-            <h4>Your cart is empty</h4>
-                <nav>
-                    <button>
-                        <a href="explore.html" title="Keep shopping">Keep shopping</a>
-                    </button>
-                </nav> 
+            <div class="empty-cart">
+                <h4>Your cart is empty</h4>
+                
+                    <a href="explore.html" class="cart-btn" title="Keep shopping">Keep shopping</a>
+            
+            </div>
          </section>
 
          <!-- Cart -->
