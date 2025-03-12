@@ -1,0 +1,61 @@
+body {
+    box-sizing: border-box;
+}
+
+.comparisons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.course {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.course.y {
+    border-left: 1px solid black;
+    padding-left: 20px;
+}
+
+.carouselHolder {
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px; /* Add space between course content and carousel */
+    width: 100%;
+}
+
+.similarCourses {
+    width: 100%;
+    background-color: white;
+}
+
+/* Changes size of the image */
+.imageWrapper {
+    width: 40%; /* Adjust as needed */
+    height: auto;
+    display: inline-block;
+}
+
+.top {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Space out image and text container */
+    align-items: flex-start; /* Align items at the top */
+    width: 100%;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column; /* Stack text elements vertically */
+    width: 55%; /* Adjust as needed */
+    margin-left: 20px; /* Add some space between image and text */
+}
+
+.boldText, .smallInfoText {
+    margin: 0; /* Remove default margins */
+}
