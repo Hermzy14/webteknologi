@@ -1,6 +1,5 @@
 /* DESIGN FOR ALL CARDS */
 .card {
-  width: 270px;
   border: 1px solid var(--primary-border-color);
   border-radius: 8px;
   overflow: hidden;
@@ -32,7 +31,9 @@
 }
 
 .wrapper-tag {
+  width: 270px;
   text-decoration: none;
+  display: block;
 }
 
 .course-price {
