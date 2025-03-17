@@ -13,7 +13,9 @@ body {
     padding: 20px;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column; /* Stack content vertically */
+    flex-direction: column;
+    border-top: 1px solid black;
+    align-items: flex-start; 
 }
 
 .course.y {
@@ -51,11 +53,12 @@ body {
 
 .textContainer {
     display: flex;
-    flex-direction: column; /* Stack text elements vertically */
+    flex-direction: column; 
     width: 55%; /* Adjust as needed */
-    margin-left: 20px; /* Add some space between image and text */
+    margin-left: 20px; 
 }
 
 .boldText, .smallInfoText {
-    margin: 0; /* Remove default margins */
+    margin: 0; 
 }
+
