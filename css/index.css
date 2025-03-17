@@ -84,7 +84,7 @@
 }
 
 .nav-button:hover {
-  background: #f8f8f8;
+  background: var(--hover-color);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
