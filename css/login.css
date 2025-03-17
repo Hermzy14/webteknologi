@@ -60,25 +60,29 @@ body {
 /* Tabs - Log in and Sign up */
 .tabs {
     display: flex;
-    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
 .tabs h2 {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold; /* Make it bold */
     color: #333; /* Default color for tabs */
 }
 
-.tabs .login-tab {
-    color: #dd0404; /* Red color for Log in */
-}
+
+
 
 .tabs .separator {
     width: 1px;
     height: 30px;
     background-color: #ccc;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 /* Form styling */
@@ -88,18 +92,17 @@ form {
 }
 
 label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
+    margin-bottom: 2px;
+    color: #474646;
     font-size: 14px;
 }
 
 input {
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     width: 100%;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 3px;
     font-size: 14px;
 }
 
@@ -107,7 +110,6 @@ a {
     text-decoration: none;
     color: #000;
     margin-bottom: 15px;
-    font-size: 14px;
 }
 
 /* Buttons */
