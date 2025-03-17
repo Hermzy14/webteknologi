@@ -1,28 +1,33 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 body {
-
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 210vh;
+    width: 100vw;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow: hidden; /* Prevent scrolling */
 }
 
-/* Main container  */
+/* Main container */
 .container {
     display: flex;
     height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Prevent scrolling */
 }
 
+/* Left side - Image container */
 .image-container {
     flex: 1;
     height: 100vh;
     overflow: hidden;
+    background-color: #e0e0e0; /* Placeholder for image */
 }
 
 .image-container img {
@@ -31,49 +36,42 @@ body {
     object-fit: cover;
     object-position: center;
 }
-/* right side of the page */
+
+/* Right side - Login form */
 .right-side {
     flex: 1;
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #ffffff;
+    overflow: hidden; /* Prevent scrolling */
 }
 
-/* Styles for the login box */
+/* Login box */
 .login-container {
     width: 300px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-
     transform: scale(1.2);
-    transform-origin: center;
-
 }
 
-h2 {
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-/* Sign up button */
+/* Tabs - Log in and Sign up */
 .tabs {
     display: flex;
     gap: 30px;
+    margin-bottom: 20px;
 }
 
 .tabs h2 {
     cursor: pointer;
+    font-size: 18px;
+    color: #333; /* Default color for tabs */
+}
+
+.tabs .login-tab {
+    color: #dd0404; /* Red color for Log in */
 }
 
 .tabs .separator {
@@ -83,15 +81,18 @@ label {
     margin: 0 10px;
 }
 
-button[type="submit"] {
-    float: right;
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-
-#signup-form button {
-    float: right;
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
 }
-
 
 input {
     padding: 10px;
@@ -99,15 +100,17 @@ input {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
 }
 
-a{
+a {
     text-decoration: none;
-    color: #000000;
+    color: #000;
     margin-bottom: 15px;
+    font-size: 14px;
 }
 
-/* Login button */
+/* Buttons */
 button {
     padding: 10px;
     background-color: black;
@@ -115,4 +118,31 @@ button {
     border: none;
     border-radius: 7px;
     cursor: pointer;
+}
+
+button[type="submit"] {
+    float: right;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+footer p {
+    margin-bottom: 10px;
 }
