@@ -114,3 +114,11 @@ footer p,
 footer a {
   color: var(--neutral-bg-color);
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  footer .wrapper {
+    padding: 32px;
+    grid-template-columns: 1fr;
+  }
+}
