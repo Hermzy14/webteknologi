@@ -85,11 +85,6 @@ body {
     margin: 0 15px;
 }
 
-/* Form styling */
-form {
-    display: flex;
-    flex-direction: column;
-}
 
 label {
     margin-bottom: 2px;
@@ -113,7 +108,7 @@ a {
 }
 
 /* Buttons */
-button {
+#login-button {
     padding: 10px;
     background-color: black;
     color: white;
@@ -122,29 +117,5 @@ button {
     cursor: pointer;
 }
 
-button[type="submit"] {
-    float: right;
-    padding: 10px 20px;
-    font-size: 16px;
-}
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-    font-size: 14px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
 
-footer h1 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-footer p {
-    margin-bottom: 10px;
-}

@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/global-styles.css" />
     <link rel="stylesheet" href="./css/login.css">
     <title>Log in</title>
 </head>
 <body>
+
+<header>
+    <a href="index.html" title="Home"><h1>Logo</h1></a>
+    <form action="explore.html" method="get" id="searchbar">
+        <input
+                title="Type and hit search to search for courses"
+                type="text"
+                name="search"
+                placeholder="Search for courses..."
+        />
+        <button type="submit" title="Search">Search</button>
+        <!-- TODO: Remember to change this to an icon -->
+    </form>
+    <button id="hamburger-icon">&#9776;</button>
+    <button id="x-icon">&#9747;</button>
+    <nav>
+        <a href="cart.html" title="Cart" id="cart">Cart</a>
+        <!-- TODO: Remember to change to an icon -->
+        <a href="explore.html" title="Courses">Courses</a>
+        <a href="compare.html">Compare</a>
+        <a href="about.html" title="About" id="about">About</a>
+        <a href="login.html" title="Sign in" id="sign-in-btn">Sign in</a>
+        <a href="Signup.html" title="Register" id="register-btn">Register</a>
+    </nav>
+</header>
+
 <!-- Main container  -->
 <div class="container">
 
@@ -30,23 +57,27 @@
                 <input type="password" id="password" name="password" required>
 
                 <a href="#">Forgot password?</a>
-                <button type="submit">Log in</button>
+                <button type="submit" id="login-button">Log in</button>
             </form>
 
         </div>
     </div>
 </div>
 
-<!-- Footer -->
 <footer>
-    <h1>LOGO</h1>
-    <p>
-        This website is a result of a university group project, performed in
-        the course IDATA2301 Web technologies, at NTNU. <br />
-        All the information provided here is a result of imagination. Any
-        resemblance with real companies or products is a coincidence.
-    </p>
-    <p>&copy; 2025 Learniverse Connect</p>
+    <div class="wrapper">
+        <h1>LOGO</h1>
+        <div class="inner-wrapper">
+            <p>
+                This website is a result of a university group project, performed in
+                the course IDATA2301 Web technologies, at NTNU. <br />
+                All the information provided here is a result of imagination. Any
+                resemblance with real companies or products is a coincidence.
+            </p>
+            <p>&copy; 2025 Learniverse Connect</p>
+            <a href="about.html">Contact us</a>
+        </div>
+    </div>
 </footer>
 </body>
 </html>
