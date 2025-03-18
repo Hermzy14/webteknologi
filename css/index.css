@@ -1,15 +1,23 @@
 #index-main {
-  max-width: 1500px;
-  margin: 0 auto;
+  width: 100%;
   padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Carousel section */
 #carousel {
-  max-width: 1200px;
+  width: 70%;
   margin: 0 auto;
   position: relative;
   padding: 2rem 0;
+}
+
+@media (min-width: 1800px) {
+  #carousel {
+    width: 50%;
+  }
 }
 
 .carousel-slide {
@@ -84,7 +92,7 @@
 }
 
 .nav-button:hover {
-  background: #f8f8f8;
+  background: var(--hover-color);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -96,30 +104,15 @@
   right: -25px;
 }
 
-@media (max-width: 1250px) {
-  #carousel {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-slide {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .carousel-image {
-    margin-right: 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .nav-button {
-    width: 40px;
-    height: 40px;
-  }
-}
-
 /* Discounted section */
+#discounted {
+  padding: 0 4rem;
+}
+
+#filter-select {
+  display: none;
+}
+
 .filter-nav {
   display: flex;
   gap: 1rem;
@@ -133,6 +126,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .filter-button {
@@ -153,14 +147,76 @@
   color: var(--primary-text-color);
   font-weight: 500;
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .filter-button.active::after {
   content: "";
   position: absolute;
-  bottom: -1rem;
+  bottom: -0.5rem;
   left: 0;
   width: 100%;
   height: 2px;
   background-color: var(--primary-text-color);
+}
+
+.card-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.wrapper-tag {
+  flex: 0 0 auto;
+}
+
+/* Mobile styles */
+
+@media (max-width: 1250px) {
+  #index-main {
+    display: block;
+  }
+
+  #carousel {
+    width: 80%;
+  }
+
+  #discounted {
+    padding: 0 2rem;
+  }
+
+  #filter-nav {
+    display: none;
+  }
+
+  #filter-select {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 1rem;
+  }
+
+  .card-wrapper {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .carousel-image {
+    display: none;
+  }
+
+  .nav-button {
+    width: 40px;
+    height: 40px;
+  }
 }

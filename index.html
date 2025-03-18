@@ -6,6 +6,7 @@
     <title>Learniverse Connect</title>
     <link rel="stylesheet" href="./css/global-styles.css" />
     <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/card.css" />
   </head>
   <body>
     <!-- Header -->
@@ -21,8 +22,10 @@
         <button type="submit" title="Search">Search</button>
         <!-- TODO: Remember to change this to an icon -->
       </form>
+      <button id="hamburger-icon">&#9776;</button>
+      <button id="x-icon">&#9747;</button>
       <nav>
-        <a href="cart.html" title="Cart">Cart</a>
+        <a href="cart.html" title="Cart" id="cart">Cart</a>
         <!-- TODO: Remember to change to an icon -->
         <a href="explore.html" title="Courses">Courses</a>
         <a href="compare.html">Compare</a>
@@ -145,25 +148,105 @@
           </button>
         </nav>
 
+        <!-- Mobile select menu -->
+        <select id="filter-select">
+          <option value="all">All categories</option>
+          <option value="it">Information Technologies</option>
+          <option value="dm">Digital Marketing</option>
+          <option value="be">Business and Entrepreneurship</option>
+          <option value="dsa">Data Science and Analytics</option>
+        </select>
+
         <!-- TODO: La JavaScript her genere 'kortene' til alle de coursene som er på tilbud -->
+        <div class="card-wrapper">
+          <a class="wrapper-tag" href="courseinformation.html">
+            <div class="card">
+              <div class="image"></div>
+              <div class="course-details">
+                <h3 class="course-title">Programming in Java</h3>
+                <p class="course-price">25 000 NOK</p>
+                <p class="discounted-price">29 999 NOK</p>
+                <p class="provider">NTNU</p>
+              </div>
+            </div>
+          </a>
+
+          <a class="wrapper-tag" href="courseinformation.html">
+            <div class="card">
+              <div class="image"></div>
+              <div class="course-details">
+                <h3 class="course-title">Programming in Java</h3>
+                <p class="course-price">25 000 NOK</p>
+                <p class="discounted-price">29 999 NOK</p>
+                <p class="provider">NTNU</p>
+              </div>
+            </div>
+          </a>
+
+          <a class="wrapper-tag" href="courseinformation.html">
+            <div class="card">
+              <div class="image"></div>
+              <div class="course-details">
+                <h3 class="course-title">Programming in Java</h3>
+                <p class="course-price">25 000 NOK</p>
+                <p class="discounted-price">29 999 NOK</p>
+                <p class="provider">NTNU</p>
+              </div>
+            </div>
+          </a>
+
+          <a class="wrapper-tag" href="courseinformation.html">
+            <div class="card">
+              <div class="image"></div>
+              <div class="course-details">
+                <h3 class="course-title">Programming in Java</h3>
+                <p class="course-price">25 000 NOK</p>
+                <p class="discounted-price">29 999 NOK</p>
+                <p class="provider">NTNU</p>
+              </div>
+            </div>
+          </a>
+        </div>
       </section>
     </main>
 
     <!-- Footer -->
     <footer>
-      <h1>LOGO</h1>
-      <p>
-        This website is a result of a university group project, performed in the
-        course IDATA2301 Web technologies, at NTNU. <br />
-        All the information provided here is a result of imagination. Any
-        resemblance with real companies or products is a coincidence.
-        <br />
-        &copy; 2025 Learniverse Connect
-      </p>
+      <div class="wrapper">
+        <h1>LOGO</h1>
+        <div class="inner-wrapper">
+          <p>
+            This website is a result of a university group project, performed in
+            the course IDATA2301 Web technologies, at NTNU. <br />
+            All the information provided here is a result of imagination. Any
+            resemblance with real companies or products is a coincidence.
+          </p>
+          <p>&copy; 2025 Learniverse Connect</p>
+          <a href="about.html">Contact us</a>
+        </div>
+      </div>
     </footer>
 
     <!-- TODO: Move to JS file later -->
     <script>
+      // Hamburger menu
+      const hamburgerIcon = document.getElementById("hamburger-icon");
+      const xIcon = document.getElementById("x-icon");
+      const nav = document.querySelector("nav");
+
+      hamburgerIcon.addEventListener("click", () => {
+        nav.classList.add("active");
+        hamburgerIcon.style.display = "none";
+        xIcon.style.display = "block";
+      });
+
+      xIcon.addEventListener("click", () => {
+        nav.classList.remove("active");
+        xIcon.style.display = "none";
+        hamburgerIcon.style.display = "block";
+      });
+
+      // Carousel
       const buttons = document.querySelectorAll(".filter-button");
 
       buttons.forEach((button) => {

@@ -5,6 +5,8 @@
   --primary-border-color: #d9d9d9;
   --neutral-bg-color: #e3e3e3;
   --neutral-border-color: #767676;
+  --hover-color: #e0e0e0;
+  --blue-hover-color: #d6e6ff;
 }
 
 p,
@@ -53,6 +55,14 @@ header form input {
   width: 100%;
 }
 
+#hamburger-icon,
+#x-icon {
+  display: none;
+  font-size: 1.5rem;
+  border: none;
+  background-color: transparent;
+}
+
 header nav {
   display: flex;
 }
@@ -61,12 +71,13 @@ header nav a {
   padding: 8px;
   text-decoration: none;
   color: var(--primary-text-color);
+  transition: 0.3s ease-in-out;
 }
 header nav a:hover {
-  background-color: var(--primary-color);
+  background-color: var(--hover-color);
   border-radius: 8px;
 }
-header nav a#about {
+#about {
   margin-right: 32px;
 }
 
@@ -76,7 +87,7 @@ header nav a#about {
   border-radius: 8px;
 }
 #sign-in-btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--hover-color);
 }
 
 #register-btn {
@@ -86,7 +97,7 @@ header nav a#about {
   border-radius: 8px;
 }
 #register-btn:hover {
-  background-color: var(--neutral-bg-color);
+  background-color: var(--blue-hover-color);
 }
 
 /* Footer */
@@ -94,19 +105,83 @@ header nav a#about {
 footer {
   width: 100%;
   background-color: var(--primary-text-color);
-  color: white;
+  color: var(--neutral-bg-color);
   display: flex;
-  justify-content: center;
-  gap: 48px;
+  flex-direction: column;
   margin-top: auto;
 }
 
-footer p {
-  padding: 32px 32px 160px 32px;
+footer .wrapper {
+  padding: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+footer .wrapper .inner-wrapper {
+  grid-column: span 2;
+}
+
+footer p,
+footer a {
   color: var(--neutral-bg-color);
 }
 
-.cart {
-  width : 28px;
-  height : 28px;
+/* Mobile styles */
+@media (max-width: 768px) {
+  /* Header */
+  header a {
+    font-size: 0.7rem;
+  }
+
+  header form {
+    width: 60%;
+  }
+
+  #hamburger-icon {
+    display: block;
+  }
+
+  header nav {
+    display: none;
+  }
+
+  header nav.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 99%;
+    background-color: white;
+    border: 1px solid var(--primary-border-color);
+    border-radius: 8px;
+    gap: 1rem;
+  }
+
+  header nav.active a {
+    border-radius: 8px;
+    border: 1px solid var(--primary-border-color);
+    background-color: var(--neutral-bg-color);
+  }
+
+  header nav.active a,
+  #about,
+  #sign-in-btn,
+  #register-btn {
+    margin: 0 1rem;
+  }
+
+  #cart {
+    margin-top: 1rem;
+  }
+
+  #register-btn {
+    margin-bottom: 1rem;
+  }
+
+  /* Footer */
+  footer .wrapper {
+    padding: 32px;
+    grid-template-columns: 1fr;
+  }
 }

@@ -6,6 +6,7 @@
     <title>Explore courses</title>
     <link rel="stylesheet" href="./css/global-styles.css" />
     <link rel="stylesheet" href="./css/explore.css" />
+    <link rel="stylesheet" href="./css/card.css" />
   </head>
   <body>
     <!-- Header -->
@@ -21,8 +22,10 @@
         <button type="submit" title="Search">Search</button>
         <!-- TODO: Remember to change this to an icon -->
       </form>
+      <button id="hamburger-icon">&#9776;</button>
+      <button id="x-icon">&#9747;</button>
       <nav>
-        <a href="cart.html" title="Cart">Cart</a>
+        <a href="cart.html" title="Cart" id="cart">Cart</a>
         <!-- TODO: Remember to change to an icon -->
         <a href="explore.html" title="Courses">Courses</a>
         <a href="compare.html">Compare</a>
@@ -39,7 +42,7 @@
         <h2>Categories</h2>
         <div class="filter-group">
           <div class="filter-item">
-            <input type="checkbox" id="it" checked />
+            <input type="checkbox" id="it" />
             <div class="filter-item-details">
               <label for="it" class="filter-item-title">IT</label>
               <span class="filter-item-subtitle"
@@ -49,7 +52,7 @@
           </div>
 
           <div class="filter-item">
-            <input type="checkbox" id="marketing" checked />
+            <input type="checkbox" id="marketing" />
             <div class="filter-item-details">
               <label for="marketing" class="filter-item-title"
                 >Digital Marketing</label
@@ -110,21 +113,34 @@
 
         <!-- Course cards -->
         <!-- TODO: This will be added automatically by JavaScript -->
-        <p>Course cards will be displayed here</p>
+        <a class="wrapper-tag" href="courseinformation.html">
+          <div class="card">
+            <div class="image"></div>
+            <div class="course-details">
+              <h3 class="course-title">Programming in Java</h3>
+              <p class="course-price">25 000 NOK</p>
+              <p class="provider">NTNU</p>
+            </div>
+          </div>
+        </a>
       </div>
     </main>
 
     <!-- Footer -->
     <footer>
-      <h1>LOGO</h1>
-      <p>
-        This website is a result of a university group project, performed in the
-        course IDATA2301 Web technologies, at NTNU. <br />
-        All the information provided here is a result of imagination. Any
-        resemblance with real companies or products is a coincidence.
-        <br />
-        &copy; 2025 Learniverse Connect
-      </p>
+      <div class="wrapper">
+        <h1>LOGO</h1>
+        <div class="inner-wrapper">
+          <p>
+            This website is a result of a university group project, performed in
+            the course IDATA2301 Web technologies, at NTNU. <br />
+            All the information provided here is a result of imagination. Any
+            resemblance with real companies or products is a coincidence.
+          </p>
+          <p>&copy; 2025 Learniverse Connect</p>
+          <a href="about.html">Contact us</a>
+        </div>
+      </div>
     </footer>
 
     <!-- TODO: Move to JS later -->
