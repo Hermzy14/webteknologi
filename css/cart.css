@@ -1,6 +1,6 @@
 /* Empty cart box */
 .empty-cart {
-  background-color: var(--neutral-border-color);
+  background-color: #eee;
   width: 100%;
   height: 400px;
   display: flex;
