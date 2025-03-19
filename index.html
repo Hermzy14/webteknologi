@@ -7,13 +7,20 @@
     <link rel="stylesheet" href="./css/global-styles.css" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/card.css" />
+    <link rel="icon" href="rescources/short white cropped.png" />
   </head>
   <body>
     <!-- Header -->
     <header>
-      <a href="index.html" title="Home"><h1>Logo</h1></a>
-      <form action="explore.html" method="get" id="searchbar">
+      <a href="index.html" title="Home" id="index-link"
+        ><img
+          src="rescources/Short dark cropped.png"
+          alt="Logo for Learniverse Connect"
+          id="logo-header"
+      /></a>
+      <form id="header-form" action="explore.html" method="get" id="searchbar">
         <input
+          id="search-bar"
           title="Type and hit search to search for courses"
           type="text"
           name="search"
@@ -24,14 +31,28 @@
       </form>
       <button id="hamburger-icon">&#9776;</button>
       <button id="x-icon">&#9747;</button>
-      <nav>
-        <a href="cart.html" title="Cart" id="cart">Cart</a>
+      <nav id="header-nav">
+        <a class="header-link" href="cart.html" title="Cart" id="cart">Cart</a>
         <!-- TODO: Remember to change to an icon -->
-        <a href="explore.html" title="Courses">Courses</a>
-        <a href="compare.html">Compare</a>
-        <a href="about.html" title="About" id="about">About</a>
-        <a href="login.html" title="Sign in" id="sign-in-btn">Sign in</a>
-        <a href="Signup.html" title="Register" id="register-btn">Register</a>
+        <a class="header-link" href="explore.html" title="Courses">Courses</a>
+        <a class="header-link" href="compare.html">Compare</a>
+        <a class="header-link" href="about.html" title="About" id="about"
+          >About</a
+        >
+        <a
+          class="header-link"
+          href="login.html"
+          title="Sign in"
+          id="sign-in-btn"
+          >Sign in</a
+        >
+        <a
+          class="header-link"
+          href="Signup.html"
+          title="Register"
+          id="register-btn"
+          >Register</a
+        >
       </nav>
     </header>
 
@@ -213,16 +234,20 @@
     <!-- Footer -->
     <footer>
       <div class="wrapper">
-        <h1>LOGO</h1>
+        <img
+          id="logo-footer"
+          src="rescources/short white cropped.png"
+          alt="Logo of Learniverse Connect"
+        />
         <div class="inner-wrapper">
-          <p>
+          <p class="footer-text">
             This website is a result of a university group project, performed in
             the course IDATA2301 Web technologies, at NTNU. <br />
             All the information provided here is a result of imagination. Any
             resemblance with real companies or products is a coincidence.
           </p>
-          <p>&copy; 2025 Learniverse Connect</p>
-          <a href="about.html">Contact us</a>
+          <p class="footer-text">&copy; 2025 Learniverse Connect</p>
+          <a href="about.html" id="contact-link">Contact us</a>
         </div>
       </div>
     </footer>
