@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare</title>
+  <link rel="stylesheet" href="./css/global-styles.css" />
+  <link rel="stylesheet" href="./css/compare.css" />
+  <link rel="stylesheet" href="./css/courseinformation.css" />
 </head>
 <body>
   <!-- Header -->
-   <header>
+  <header>
     <a href="index.html" title="Home"><h1>Logo</h1></a>
-    <form action="search.html" method="get" id="searchbar">
+    <form action="explore.html" method="get" id="searchbar">
       <input
         title="Type and hit search to search for courses"
         type="text"
@@ -21,13 +24,14 @@
     </form>
     <nav>
       <a href="cart.html" title="Cart">Cart</a>
-      <!-- TODO: Remeber to change to an icon -->
-       <a href="explore.html" title="Courses">Courses</a>
-       <a href="about.html" title="About">About</a>
-       <a href="signin.html" title="Sign in">Sign in</a>
-       <a href="register.html" title="Register">Register</a>
+      <!-- TODO: Remember to change to an icon -->
+      <a href="explore.html" title="Courses">Courses</a>
+      <a href="compare.html">Compare</a>
+      <a href="about.html" title="About" id="about">About</a>
+      <a href="login.html" title="Sign in" id="sign-in-btn">Sign in</a>
+      <a href="Signup.html" title="Register" id="register-btn">Register</a>
     </nav>
-   </header>
+  </header>
 
    <!-- Main content -->
     <main>
@@ -35,17 +39,150 @@
        <section>
         <H1>Compare courses</H1>
        </section>
-
+       
+       <div class="comparisons">
        <!-- Course x -->
-        <section>
+       <section class="course x">
+        <h2>Course x</h2> <!-- Keep this outside the .top div -->
+      
+        <div class="top">
+          <div class="imageWrapper">
+            <img src="rescources/Image-not-found.png" class="imgNotFound">
+          </div>
+          <div class="textAndButtons">
+            <div class="textContainer">
+              <p class="boldText">29 999 - 32 000 nok</p>
+              <p class="boldText">June 3rd - june 28th</p>
+              <p class="boldText">40 hours per week</p>
+              <p class="smallInfoText">Available courses from NTNU and Oracle</p>
+            </div>
+            <!-- Button container -->
+            <div class="buttonContainer">
+              <button id="Remove">Remove</button>
+              <button id="Add">Add to cart</button>
+            </div>
+          </div>
+        </div>
 
+          <p>Embark on a transformative learning experience with our expert-level online course, "RealTime Programming in Java." Designed for seasoned developers
+            and Java enthusiasts seeking mastery in real-time applications, this advanced course delves deep into the intricacies of leveraging Java for
+            mission-critical systems. Explore cutting-edge concepts such as multithreading, synchronization, and low-latency programming, equipping you with the
+            kills needed to build responsive and robust real-time solutions.
+            ed by industry experts with extensive hands-on experience, this course combines theoretical insights with practical application,
+            nsuring you not only grasp the theoretical underpinnings but also gain the proficiency to implement real-time solutions confidently.
+            Elevate your Java programming expertise to new heights and stay ahead in the ever-evolving
+            landscape of real-time systems with our comprehensive and immersive course. 
+            </p>
+
+            <div class="similarCourses">
+
+              <h2>Similar courses</h2>
+
+            <div class="carouselHolder">
+
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+            </div>
+            </div>
         </section>
 
+        
+
         <!-- Course y -->
-         <section>
-          
-         </section>
-    </main>
+        <section class="course y">
+          <h2>Course x</h2> <!-- Keep this outside the .top div -->
+        
+          <div class="top">
+            <div class="imageWrapper">
+              <img src="rescources/Image-not-found.png" class="imgNotFound">
+            </div>
+            <div class="textAndButtons">
+              <div class="textContainer">
+                <p class="boldText">29 999 - 32 000 nok</p>
+                <p class="boldText">June 3rd - june 28th</p>
+                <p class="boldText">40 hours per week</p>
+                <p class="smallInfoText">Available courses from NTNU and Oracle</p>
+              </div>
+              <!-- Button container -->
+              <div class="buttonContainer">
+                <button id="Remove">Remove</button>
+                <button id="Add">Add to cart</button>
+              </div>
+            </div>
+          </div>
   
+            <p>Embark on a transformative learning experience with our expert-level online course, "RealTime Programming in Java." Designed for seasoned developers
+              and Java enthusiasts seeking mastery in real-time applications, this advanced course delves deep into the intricacies of leveraging Java for
+              mission-critical systems. Explore cutting-edge concepts such as multithreading, synchronization, and low-latency programming, equipping you with the
+              kills needed to build responsive and robust real-time solutions.
+              ed by industry experts with extensive hands-on experience, this course combines theoretical insights with practical application,
+              nsuring you not only grasp the theoretical underpinnings but also gain the proficiency to implement real-time solutions confidently.
+              Elevate your Java programming expertise to new heights and stay ahead in the ever-evolving
+              landscape of real-time systems with our comprehensive and immersive course. 
+              </p>
+
+            <div class="similarCourses">
+
+              <h2>Similar courses</h2>
+
+            <div class="carouselHolder">
+
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+              <section class = "carouselCard">  
+                <a href="">  
+                <img src="rescources/Image-not-found.png"></img>
+                <p class="courseText"> programming in java</p>
+                <p class="priceText"> 25 000 NOK</p>
+                <p class="providerText"> NTNU</p>
+                </a>
+              </section>
+    
+            </div>
+            </div>
+         </section>
+      </div>
+    </main>
 </body>
 </html>
