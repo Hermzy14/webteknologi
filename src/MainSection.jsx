@@ -14,8 +14,8 @@ export function MainSection() {
     <main>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/explore" element={<Explore />}></Route>
-        <Route path="/about" element={<About />}></Route>
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </main>
   );
