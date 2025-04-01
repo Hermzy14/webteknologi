@@ -1,6 +1,11 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import "../css/global-styles.css";
 import logo from "../assets/Short dark cropped.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCartShopping,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * Header component for the application.
@@ -22,8 +27,8 @@ export function Header() {
           name="search"
           placeholder="Search for courses..."
         />
-        <button type="submit" title="Search">
-          Search
+        <button type="submit" title="Search" id="search-btn">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
         {/*<!-- TODO: Remember to change this to an icon -->*/}
       </form>
@@ -31,7 +36,7 @@ export function Header() {
       <button id="x-icon">&#9747;</button>
       <nav id="header-nav">
         <NavLink className="header-link" to="cart.html" title="Cart" id="cart">
-          Cart
+          <FontAwesomeIcon icon={faCartShopping} />
         </NavLink>
         {/*<!-- TODO: Remember to change to an icon -->*/}
         <NavLink className="header-link" to="/explore" title="Courses">
