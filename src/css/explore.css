@@ -99,3 +99,10 @@ main {
   color: white;
   border-color: #333;
 }
+
+/* Course cards */
+#courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
