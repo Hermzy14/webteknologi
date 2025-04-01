@@ -1,3 +1,7 @@
+#about-page {
+  flex-direction: column;
+}
+
 /* About us section */
 #about-us {
   width: 50%;

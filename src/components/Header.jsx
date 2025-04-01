@@ -34,18 +34,13 @@ export function Header() {
           Cart
         </NavLink>
         {/*<!-- TODO: Remember to change to an icon -->*/}
-        <NavLink className="header-link" to="explore.html" title="Courses">
+        <NavLink className="header-link" to="/explore" title="Courses">
           Courses
         </NavLink>
         <NavLink className="header-link" to="compare.html">
           Compare
         </NavLink>
-        <NavLink
-          className="header-link"
-          to="about.html"
-          title="About"
-          id="about"
-        >
+        <NavLink className="header-link" to="/about" title="About" id="about">
           About
         </NavLink>
         <NavLink
