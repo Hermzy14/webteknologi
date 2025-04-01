@@ -14,7 +14,7 @@ export function Header() {
       <NavLink to="/" title="Home" id="index-link">
         <img src={logo} alt="Logo for Learniverse Connect" id="logo-header" />
       </NavLink>
-      <form id="header-form" action="explore.html" method="get">
+      <form id="header-form" action="/explore" method="get">
         <input
           id="search-bar"
           title="Type and hit search to search for courses"
