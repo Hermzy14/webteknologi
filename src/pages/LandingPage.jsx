@@ -1,6 +1,7 @@
 import "../css/global-styles.css";
 import "../css/index.css";
 import "../css/card.css";
+import { NavLink } from "react-router";
 
 function LandingPage() {
   return (
@@ -18,13 +19,13 @@ function LandingPage() {
                 We have multiple courses within this field from multiple
                 providers!
               </p>
-              <a
-                href="explore.html"
+              <NavLink
+                to="/explore"
                 className="explore-btn"
                 title="Explore Information Technology courses"
               >
                 Explore!
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

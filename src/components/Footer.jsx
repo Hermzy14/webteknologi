@@ -20,7 +20,7 @@ export function Footer() {
             resemblance with real companies or products is a coincidence.
           </p>
           <p className="footer-text">&copy; 2025 Learniverse Connect</p>
-          <NavLink to="about.html" id="contact-link">
+          <NavLink to="/about" id="contact-link">
             Contact us
           </NavLink>
         </div>
