@@ -288,7 +288,13 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                       {course.providers.map((provider) => (
                         <li key={provider.id}>
                           {provider.name}:{" "}
-                          {formatPrice(provider.price, provider.currency)}
+                          {/* Format price with discount if applicable */}
+                          {provider.discount > 0
+                            ? formatPrice(
+                                provider.price * (1 - provider.discount / 100),
+                                provider.currency
+                              )
+                            : formatPrice(provider.price, provider.currency)}
                         </li>
                       ))}
                     </ul>
