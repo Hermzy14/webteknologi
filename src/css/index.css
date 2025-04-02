@@ -107,6 +107,14 @@
 /* Discounted section */
 #discounted {
   padding: 0 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#discounted-title {
+  width: 100%;
+  text-align: left;
 }
 
 #filter-select {
@@ -183,6 +191,7 @@
   }
 
   #discounted {
+    display: block;
     padding: 0 2rem;
   }
 

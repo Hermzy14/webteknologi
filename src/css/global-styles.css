@@ -169,11 +169,11 @@ footer .wrapper .inner-wrapper {
     display: block;
   }
 
-  header nav {
+  #header-nav {
     display: none;
   }
 
-  header nav.active {
+  #header-nav.active {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -186,13 +186,13 @@ footer .wrapper .inner-wrapper {
     gap: 1rem;
   }
 
-  header nav.active a {
+  #header-nav.active a {
     border-radius: 8px;
     border: 1px solid var(--primary-border-color);
     background-color: var(--neutral-bg-color);
   }
 
-  header nav.active a,
+  #header-nav.active a,
   #about,
   #sign-in-btn,
   #register-btn {

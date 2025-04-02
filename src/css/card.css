@@ -36,7 +36,7 @@
   display: block;
 }
 
-.course-price {
+.discounted-price {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -44,7 +44,7 @@
   display: inline-block;
 }
 
-.discounted-price {
+.course-price {
   font-size: 14px;
   color: #999;
   font-weight: normal;
