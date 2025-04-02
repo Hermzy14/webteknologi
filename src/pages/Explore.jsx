@@ -21,6 +21,8 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const urlSearchTerm = queryParams.get("search") || "";
+  // Get category from URL query params
+  const categoryFromQuery = queryParams.get("category");
 
   // Use external search term if provided, otherwise use URL search term
   const [searchTerm, setSearchTerm] = useState(
@@ -62,6 +64,13 @@ export function Explore({ searchTerm: externalSearchTerm }) {
 
     fetchCourses();
   }, []);
+
+  //Apply category filter from URL if present
+  useEffect(() => {
+    if (categoryFromQuery) {
+      setActiveCategories([categoryFromQuery]);
+    }
+  }, [categoryFromQuery]);
 
   // Apply filters, searching, and sorting
   useEffect(() => {

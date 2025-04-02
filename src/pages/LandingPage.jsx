@@ -132,7 +132,7 @@ function LandingPage() {
                 providers!
               </p>
               <NavLink
-                to="/explore"
+                to="/explore?category=Information Technologies"
                 className="explore-btn"
                 title="Explore Information Technology courses"
               >
