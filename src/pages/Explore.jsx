@@ -132,6 +132,16 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     setSortOption(option);
   };
 
+  // Format price with appropriate currency
+  const formatPrice = (price, currency) => {
+    if (currency === "NOK") {
+      return `${Math.round(price).toLocaleString()} NOK`;
+    } else if (currency === "USD") {
+      return `$${price.toLocaleString()}`;
+    }
+    return `${price} ${currency}`;
+  };
+
   return (
     <main>
       {/* Side panel for filtering */}
@@ -277,7 +287,8 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                     <ul>
                       {course.providers.map((provider) => (
                         <li key={provider.id}>
-                          {provider.name}: {provider.price} {provider.currency}
+                          {provider.name}:{" "}
+                          {formatPrice(provider.price, provider.currency)}
                         </li>
                       ))}
                     </ul>
