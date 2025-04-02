@@ -21,6 +21,7 @@ function LandingPage() {
   const [courses, setCourses] = useState([]);
   const [discountedCourses, setDiscountedCourses] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   // Fetch courses when the component mounts
   useEffect(() => {
@@ -116,30 +117,72 @@ function LandingPage() {
     return `${price} ${currency}`;
   };
 
+  // Categories for the carousel
+  const categories = [
+    "Information Technologies",
+    "Digital Marketing",
+    "Business and Entrepreneurship",
+    "Data Science and Analytics",
+  ];
+
+  // Navigate to the next slide
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === categories.length - 1 ? 0 : prevSlide + 1
+    );
+  };
+
+  // Navigate to the previous slide
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? categories.length - 1 : prevSlide - 1
+    );
+  };
+
   return (
     <main id="index-main">
       {/* Carousel section */}
       <section id="carousel">
-        <button className="nav-button prev-button">&#8592;</button>
-        <button className="nav-button next-button">&#8594;</button>
+        <button
+          className="nav-button prev-button"
+          onClick={handlePrevSlide}
+          title="Previous slide"
+        >
+          &#8592;
+        </button>
+        <button
+          className="nav-button next-button"
+          onClick={handleNextSlide}
+          title="Next slide"
+        >
+          &#8594;
+        </button>
         <div id="carousel-container">
-          <div className="carousel-slide" data-index="0">
-            <div className="carousel-image"></div>
-            <div id="carousel-content">
-              <h2>Looking for courses on Information Technologies?</h2>
-              <p>
-                We have multiple courses within this field from multiple
-                providers!
-              </p>
-              <NavLink
-                to="/explore?category=Information Technologies"
-                className="explore-btn"
-                title="Explore Information Technology courses"
-              >
-                Explore!
-              </NavLink>
+          {categories.map((category, index) => (
+            <div
+              className={`carousel-slide ${
+                index === currentSlide ? "active" : "inactive"
+              }`}
+              data-index={index}
+              key={category}
+            >
+              <div className="carousel-image"></div>
+              <div id="carousel-content">
+                <h2>Looking for courses on {category}?</h2>
+                <p>
+                  We have multiple courses within this field from multiple
+                  providers!
+                </p>
+                <NavLink
+                  to={`/explore?category=${encodeURIComponent(category)}`}
+                  className="explore-btn"
+                  title={`Explore ${category} courses"`}
+                >
+                  Explore!
+                </NavLink>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
