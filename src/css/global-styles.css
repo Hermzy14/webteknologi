@@ -161,8 +161,12 @@ footer .wrapper .inner-wrapper {
     font-size: 0.7rem;
   }
 
-  header form {
+  #header-form {
     width: 60%;
+  }
+
+  #search-bar {
+    width: 100%;
   }
 
   #hamburger-icon {
@@ -175,24 +179,25 @@ footer .wrapper .inner-wrapper {
 
   #header-nav.active {
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     position: absolute;
-    top: 55px;
+    top: 100%;
     left: 0;
-    width: 99%;
+    width: 100%;
     background-color: white;
     border: 1px solid var(--primary-border-color);
     border-radius: 8px;
     gap: 1rem;
   }
 
-  #header-nav.active a {
+  .header-link {
     border-radius: 8px;
     border: 1px solid var(--primary-border-color);
     background-color: var(--neutral-bg-color);
   }
 
-  #header-nav.active a,
+  .header-link,
   #about,
   #sign-in-btn,
   #register-btn {
@@ -211,5 +216,17 @@ footer .wrapper .inner-wrapper {
   footer .wrapper {
     padding: 32px;
     grid-template-columns: 1fr;
+  }
+}
+
+/* Hide hamburger and x icons on larger screens */
+@media (min-width: 769px) {
+  #hamburger-icon,
+  #x-icon {
+    display: none !important; /* Force hiding the icons on larger screens */
+  }
+
+  #header-nav {
+    display: flex !important; /* Ensure the navigation menu is always visible */
   }
 }

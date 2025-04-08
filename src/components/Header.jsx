@@ -31,9 +31,43 @@ export function Header({ setSearchTerm }) {
     navigate(`/explore?search=${inputValue}`);
   };
 
+  // Handle opening and closing of the hamburger menu
+  const handleMobileMenu = () => {
+    const nav = document.getElementById("header-nav");
+    const xIcon = document.getElementById("x-icon");
+    const hamburgerIcon = document.getElementById("hamburger-icon");
+
+    // Hide the hamburger icon and show the x icon when the menu is open
+    if (nav.classList.contains("active")) {
+      hamburgerIcon.style.display = "block";
+      xIcon.style.display = "none";
+    } else {
+      // Hide the hamburger icon and show the x icon when the menu is closed
+      hamburgerIcon.style.display = "none";
+      xIcon.style.display = "block";
+    }
+
+    // Toggle the visibility of the navigation menu
+    nav.classList.toggle("active");
+  };
+
+  // Handle closing the mobile menu when a link is clicked
+  const handleLinkClick = () => {
+    const nav = document.getElementById("header-nav");
+    const xIcon = document.getElementById("x-icon");
+    const hamburgerIcon = document.getElementById("hamburger-icon");
+
+    // Hide the x icon and show the hamburger icon when a link is clicked
+    hamburgerIcon.style.display = "block";
+    xIcon.style.display = "none";
+
+    // Close the navigation menu
+    nav.classList.remove("active");
+  };
+
   return (
     <header>
-      <NavLink to="/" title="Home" id="index-link">
+      <NavLink to="/" title="Home" id="index-link" onClick={handleLinkClick}>
         <img src={logo} alt="Logo for Learniverse Connect" id="logo-header" />
       </NavLink>
       <form id="header-form" onSubmit={handleSubmit}>
@@ -50,19 +84,44 @@ export function Header({ setSearchTerm }) {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
-      <button id="hamburger-icon">&#9776;</button>
-      <button id="x-icon">&#9747;</button>
+      <button id="hamburger-icon" onClick={handleMobileMenu}>
+        &#9776;
+      </button>
+      <button id="x-icon" onClick={handleMobileMenu}>
+        &#9747;
+      </button>
       <nav id="header-nav">
-        <NavLink className="header-link" to="/cart" title="Cart" id="cart">
+        <NavLink
+          className="header-link"
+          to="/cart"
+          title="Cart"
+          id="cart"
+          onClick={handleLinkClick}
+        >
           <FontAwesomeIcon icon={faCartShopping} />
         </NavLink>
-        <NavLink className="header-link" to="/explore" title="Courses">
+        <NavLink
+          className="header-link"
+          to="/explore"
+          title="Courses"
+          onClick={handleLinkClick}
+        >
           Courses
         </NavLink>
-        <NavLink className="header-link" to="/compare">
+        <NavLink
+          className="header-link"
+          to="/compare"
+          onClick={handleLinkClick}
+        >
           Compare
         </NavLink>
-        <NavLink className="header-link" to="/about" title="About" id="about">
+        <NavLink
+          className="header-link"
+          to="/about"
+          title="About"
+          id="about"
+          onClick={handleLinkClick}
+        >
           About
         </NavLink>
         <NavLink
@@ -70,6 +129,7 @@ export function Header({ setSearchTerm }) {
           to="/login"
           title="Sign in"
           id="sign-in-btn"
+          onClick={handleLinkClick}
         >
           Sign in
         </NavLink>
@@ -78,6 +138,7 @@ export function Header({ setSearchTerm }) {
           to="/signup"
           title="Register"
           id="register-btn"
+          onClick={handleLinkClick}
         >
           Register
         </NavLink>
