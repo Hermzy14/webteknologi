@@ -107,9 +107,15 @@ export function About() {
       <section id="other-contact-options-section">
         <h3>Other ways to contact us:</h3>
         <ul id="list-container">
-          <li class="contact-option">Email: learniverse@connect.com</li>
-          <li class="contact-option">Phone: +47 40686044</li>
-          <li class="contact-option">Address: Gamle Blindheimsveg 197</li>
+          <li class="contact-option" title="Click to copy mail">
+            Email: learniverse@connect.com
+          </li>
+          <li class="contact-option" title="Click to copy phone number">
+            Phone: +47 40686044
+          </li>
+          <li class="contact-option" title="Click to copy address">
+            Address: Gamle Blindheimsveg 197
+          </li>
         </ul>
       </section>
     </main>

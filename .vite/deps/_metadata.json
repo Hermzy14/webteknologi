@@ -2,48 +2,54 @@
   "hash": "c90b59e4",
   "configHash": "683eedb2",
   "lockfileHash": "21a63c0c",
-  "browserHash": "cc24d236",
+  "browserHash": "aad3f0bd",
   "optimized": {
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "da82e8db",
+      "fileHash": "e85d4e1c",
       "needsInterop": true
     },
     "react-router": {
       "src": "../../node_modules/react-router/dist/development/index.mjs",
       "file": "react-router.js",
-      "fileHash": "8d98e378",
+      "fileHash": "21fc0be3",
       "needsInterop": false
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.mjs",
       "file": "react-router-dom.js",
-      "fileHash": "f634c04e",
+      "fileHash": "a5ad2473",
       "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "152f87cc",
+      "needsInterop": true
     },
     "@fortawesome/react-fontawesome": {
       "src": "../../node_modules/@fortawesome/react-fontawesome/index.es.js",
       "file": "@fortawesome_react-fontawesome.js",
-      "fileHash": "b876e6a6",
+      "fileHash": "d25c3826",
       "needsInterop": false
     },
     "@fortawesome/free-solid-svg-icons": {
       "src": "../../node_modules/@fortawesome/free-solid-svg-icons/index.mjs",
       "file": "@fortawesome_free-solid-svg-icons.js",
-      "fileHash": "885a35eb",
+      "fileHash": "3dbddde3",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-EYAH6SP3": {
-      "file": "chunk-EYAH6SP3.js"
+    "chunk-QJWJCAXU": {
+      "file": "chunk-QJWJCAXU.js"
     },
-    "chunk-GRIM2OVR": {
-      "file": "chunk-GRIM2OVR.js"
+    "chunk-WOAJEU3H": {
+      "file": "chunk-WOAJEU3H.js"
     },
-    "chunk-6NX4WOI5": {
-      "file": "chunk-6NX4WOI5.js"
+    "chunk-3527N3GG": {
+      "file": "chunk-3527N3GG.js"
     },
     "chunk-EQCVQC35": {
       "file": "chunk-EQCVQC35.js"
