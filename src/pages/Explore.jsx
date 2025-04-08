@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { Filter } from "../components/Filter";
 
 /**
  * This is the Explore page component.
  * It displays a list of courses with their details.
+ *
  * @return {JSX.Element} The rendered component.
  * @constructor
  */
@@ -164,101 +166,13 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   return (
     <main>
       {/* Side panel for filtering */}
-      <aside className="filter" id="desktop-filter">
-        <h2>Categories</h2>
-        <div className="filter-group">
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="it"
-              checked={activeCategories.includes("Information Technologies")}
-              onChange={() => handleCategoryToggle("Information Technologies")}
-            />
-            <div className="filter-item-details">
-              <label htmlFor="it" className="filter-item-title">
-                IT
-              </label>
-              <span className="filter-item-subtitle">
-                Information Technology courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="marketing"
-              checked={activeCategories.includes("Digital Marketing")}
-              onChange={() => handleCategoryToggle("Digital Marketing")}
-            />
-            <div className="filter-item-details">
-              <label htmlFor="marketing" className="filter-item-title">
-                Digital Marketing
-              </label>
-              <span className="filter-item-subtitle">
-                Digital Marketing courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="business"
-              checked={activeCategories.includes(
-                "Business and Entrepreneurship"
-              )}
-              onChange={() =>
-                handleCategoryToggle("Business and Entrepreneurship")
-              }
-            />
-            <div className="filter-item-details">
-              <label htmlFor="business" className="filter-item-title">
-                B&E
-              </label>
-              <span className="filter-item-subtitle">
-                Business and Entrepreneurship courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="analytics"
-              checked={activeCategories.includes("Data Science and Analytics")}
-              onChange={() =>
-                handleCategoryToggle("Data Science and Analytics")
-              }
-            />
-            <div className="filter-item-details">
-              <label htmlFor="analytics" className="filter-item-title">
-                Analytics
-              </label>
-              <span className="filter-item-subtitle">
-                Data Science and Analytics courses
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="filter-group">
-          <h2>Price</h2>
-          <div className="price-range-header">
-            <span>0 NOK</span>
-            <span id="max-price">{maxPrice.toLocaleString()} NOK</span>
-          </div>
-          <input
-            type="range"
-            min="0"
-            max="100000"
-            value={maxPrice}
-            className="price-slider"
-            id="price-range"
-            onChange={handlePriceChange}
-          />
-        </div>
-      </aside>
+      <Filter
+        id="desktop-filter"
+        activeCategories={activeCategories}
+        handleCategoryToggle={handleCategoryToggle}
+        maxPrice={maxPrice}
+        handlePriceChange={handlePriceChange}
+      />
 
       {/* Result text and buttons for sorting */}
       <div className="main-content">
@@ -275,107 +189,13 @@ export function Explore({ searchTerm: externalSearchTerm }) {
           </div>
 
           {/* Mobile filter - hidden by default, toggles visibility */}
-          <aside id="mobile-filter" className="filter">
-            <h2>Categories</h2>
-            <div className="filter-group">
-              <div className="filter-item">
-                <input
-                  type="checkbox"
-                  id="it"
-                  checked={activeCategories.includes(
-                    "Information Technologies"
-                  )}
-                  onChange={() =>
-                    handleCategoryToggle("Information Technologies")
-                  }
-                />
-                <div className="filter-item-details">
-                  <label htmlFor="it" className="filter-item-title">
-                    IT
-                  </label>
-                  <span className="filter-item-subtitle">
-                    Information Technology courses
-                  </span>
-                </div>
-              </div>
-
-              <div className="filter-item">
-                <input
-                  type="checkbox"
-                  id="marketing"
-                  checked={activeCategories.includes("Digital Marketing")}
-                  onChange={() => handleCategoryToggle("Digital Marketing")}
-                />
-                <div className="filter-item-details">
-                  <label htmlFor="marketing" className="filter-item-title">
-                    Digital Marketing
-                  </label>
-                  <span className="filter-item-subtitle">
-                    Digital Marketing courses
-                  </span>
-                </div>
-              </div>
-
-              <div className="filter-item">
-                <input
-                  type="checkbox"
-                  id="business"
-                  checked={activeCategories.includes(
-                    "Business and Entrepreneurship"
-                  )}
-                  onChange={() =>
-                    handleCategoryToggle("Business and Entrepreneurship")
-                  }
-                />
-                <div className="filter-item-details">
-                  <label htmlFor="business" className="filter-item-title">
-                    B&E
-                  </label>
-                  <span className="filter-item-subtitle">
-                    Business and Entrepreneurship courses
-                  </span>
-                </div>
-              </div>
-
-              <div className="filter-item">
-                <input
-                  type="checkbox"
-                  id="analytics"
-                  checked={activeCategories.includes(
-                    "Data Science and Analytics"
-                  )}
-                  onChange={() =>
-                    handleCategoryToggle("Data Science and Analytics")
-                  }
-                />
-                <div className="filter-item-details">
-                  <label htmlFor="analytics" className="filter-item-title">
-                    Analytics
-                  </label>
-                  <span className="filter-item-subtitle">
-                    Data Science and Analytics courses
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <h2>Price</h2>
-              <div className="price-range-header">
-                <span>0 NOK</span>
-                <span id="max-price">{maxPrice.toLocaleString()} NOK</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100000"
-                value={maxPrice}
-                className="price-slider"
-                id="price-range"
-                onChange={handlePriceChange}
-              />
-            </div>
-          </aside>
+          <Filter
+            id="mobile-filter"
+            activeCategories={activeCategories}
+            handleCategoryToggle={handleCategoryToggle}
+            maxPrice={maxPrice}
+            handlePriceChange={handlePriceChange}
+          />
 
           <nav id="sorting-options">
             <button
