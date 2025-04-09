@@ -3,6 +3,7 @@ import { MainSection } from "./MainSection.jsx";
 import { Header } from "./components/Header.jsx";
 import { Footer } from "./components/Footer.jsx";
 import "./css/global-styles.css";
+import { CourseProvider } from "./components/CourseProvider.jsx";
 
 /**
  * Component representing the whole application.
@@ -12,11 +13,13 @@ import "./css/global-styles.css";
 export function App() {
   return (
     <BrowserRouter>
-      <div className="app-container">
-        <Header />
-        <MainSection />
-        <Footer />
-      </div>
+      <CourseProvider>
+        <div className="app-container">
+          <Header />
+          <MainSection />
+          <Footer />
+        </div>
+      </CourseProvider>
     </BrowserRouter>
   );
 }
