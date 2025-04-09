@@ -1,6 +1,7 @@
 #admin-page {
   flex-direction: column;
-  margin: 1rem 2rem;
+  margin: 1rem auto;
+  max-width: 90%;
 }
 
 .visibility-text {
@@ -40,7 +41,7 @@
   background-color: var(--blue-hover-color);
 }
 
-/* Add this to your existing CSS */
+/* Error message styling */
 .error-message {
   background-color: #f8d7da;
   color: #721c24;
