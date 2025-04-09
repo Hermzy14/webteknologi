@@ -3,6 +3,7 @@ import "../css/index.css";
 import "../css/card.css";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
+import { asyncApiRequest } from "../tools/requests";
 
 /**
  * Component representing the landing page of the application.
@@ -23,26 +24,35 @@ function LandingPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  /**
+   * Load courses from the backend.
+   */
+  async function loadCourses() {
+    try {
+      const c = await asyncApiRequest("/courses", "GET", null);
+      setCourses(c);
+      const discounted = processCoursesWithDiscounts(c);
+      setDiscountedCourses(discounted);
+      console.log("Courses loaded successfully");
+    } catch (error) {
+      onCoursesLoadError(error);
+    }
+  }
+
+  /**
+   * Handle error when loading courses.
+   */
+  function onCoursesLoadError(error) {
+    console.error("Error loading courses:", error);
+  }
+
   // Fetch courses when the component mounts
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/courses");
-        if (!response.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-        const data = await response.json();
-        setCourses(data);
-
-        // Process courses to extract ones with discounts
-        const coursesWithDiscounts = processCoursesWithDiscounts(data);
-        setDiscountedCourses(coursesWithDiscounts);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
-
-    fetchCourses();
+    if (courses.length === 0) {
+      loadCourses();
+    } else {
+      console.log("Courses already loaded");
+    }
   }, []);
 
   // Process courses to extract only those with discounts and format them for display
