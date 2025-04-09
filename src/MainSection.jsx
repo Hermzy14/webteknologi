@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import { Explore } from "./pages/Explore";
 import { About } from "./pages/About";
+import { Admin } from "./pages/Admin";
 
 /**
  * Component representing the main section of the application.
@@ -16,6 +17,7 @@ export function MainSection() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </main>
   );
