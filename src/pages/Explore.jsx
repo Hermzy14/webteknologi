@@ -5,6 +5,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Filter } from "../components/Filter";
+import { useCourses } from "../components/CourseProvider";
 
 /**
  * This is the Explore page component.
@@ -14,12 +15,11 @@ import { Filter } from "../components/Filter";
  * @constructor
  */
 export function Explore({ searchTerm: externalSearchTerm }) {
-  const [courses, setCourses] = useState([]);
+  const { courses, isLoading } = useCourses();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(100000);
   const [sortOption, setSortOption] = useState("price-asc");
-  const [isLoading, setIsLoading] = useState(true);
 
   // Get search from URL query params
   const location = useLocation();
@@ -46,28 +46,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
       setSearchTerm(urlSearchTerm);
     }
   }, [urlSearchTerm, externalSearchTerm]);
-
-  // Fetch all courses when page loads
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch("http://localhost:8080/courses/visible");
-        if (!response.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-        const data = await response.json();
-        setCourses(data);
-        setFilteredCourses(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
 
   //Apply category filter from URL if present
   useEffect(() => {
