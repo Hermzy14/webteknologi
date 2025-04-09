@@ -12,7 +12,8 @@ const CourseContext = createContext();
  * @constructor
  */
 export function CourseProvider({ children }) {
-  const [courses, setCourses] = useState([]);
+  const [allCourses, setAllCourses] = useState([]); // For admin use
+  const [courses, setCourses] = useState([]); // For regular user pages
   const [discountedCourses, setDiscountedCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,9 +24,18 @@ export function CourseProvider({ children }) {
   async function loadCourses() {
     setIsLoading(true);
     try {
-      const courses = await asyncApiRequest("/courses", "GET", null);
-      setCourses(courses);
-      const discounted = processDiscountedCourses(courses);
+      const fetchedCourses = await asyncApiRequest("/courses", "GET", null);
+
+      // Store all courses for admin access
+      setAllCourses(fetchedCourses);
+
+      // Filter visible courses for regular users
+      const visibleCourses = fetchedCourses.filter(
+        (course) => course.isVisible !== false
+      );
+      setCourses(visibleCourses);
+
+      const discounted = processDiscountedCourses(visibleCourses);
       setDiscountedCourses(discounted);
       setError(null);
     } catch (error) {
@@ -69,13 +79,14 @@ export function CourseProvider({ children }) {
     return discounted;
   }
 
-  // Initalize courses on mount
+  // Initialize courses on mount
   useEffect(() => {
     loadCourses();
   }, []);
 
   const value = {
     courses,
+    allCourses, // For admin use
     discountedCourses,
     isLoading,
     error,
