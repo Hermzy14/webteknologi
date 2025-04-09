@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import { Explore } from "./pages/Explore";
 import { About } from "./pages/About";
 import ComparePage from "./pages/Compare";
+import ShoppingCart from "./pages/Cart";
 
 /**
  * Component representing the main section of the application.
@@ -18,6 +19,7 @@ export function MainSection() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/compare" element={<ComparePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/cart" element={<ShoppingCart />} />
       </Routes>
     </main>
   );
