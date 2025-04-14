@@ -1,4 +1,16 @@
 import "../css/about.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} str - The string to capitalize.
+ * @returns {string} The string with the first letter capitalized.
+ */
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 /**
  * This is the about page.
@@ -8,6 +20,42 @@ import "../css/about.css";
  * @constructor
  */
 export function About() {
+  // State to manage icon for copying text
+  const [copyIcons, setCopyIcons] = useState({
+    email: faCopy,
+    phone: faCopy,
+    address: faCopy,
+  });
+
+  // State to manage success message and clicked item
+  const [successMessage, setSuccessMessage] = useState("");
+  const [activeItem, setActiveItem] = useState(null);
+
+  // Function to handle copying text to clipboard
+  const handleCopyText = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      // Update the icon for the clicked item
+      setCopyIcons((prevIcons) => ({
+        ...prevIcons,
+        [type]: faCheck,
+      }));
+
+      // Set which item was clicked and the success message
+      setActiveItem(type);
+      setSuccessMessage(`${capitalizeFirstLetter(type)} copied to clipboard!`);
+
+      // Reset states after animation duration
+      setTimeout(() => {
+        setCopyIcons((prevIcons) => ({
+          ...prevIcons,
+          [type]: faCopy,
+        }));
+        setSuccessMessage("");
+        setActiveItem(null);
+      }, 2000);
+    });
+  };
+
   return (
     <main id="about-page">
       <section id="about-us">
@@ -107,9 +155,41 @@ export function About() {
       <section id="other-contact-options-section">
         <h3>Other ways to contact us:</h3>
         <ul id="list-container">
-          <li class="contact-option">Email: learniverse@connect.com</li>
-          <li class="contact-option">Phone: +47 40686044</li>
-          <li class="contact-option">Address: Gamle Blindheimsveg 197</li>
+          <li
+            className="contact-option"
+            title="Click to copy mail"
+            onClick={() => handleCopyText("learniverse@connect.com", "email")}
+          >
+            Email: learniverse@connect.com{" "}
+            <FontAwesomeIcon icon={copyIcons.email} className="copy-icon" />
+            {activeItem === "email" && (
+              <span className="success-message">{successMessage}</span>
+            )}
+          </li>
+
+          <li
+            className="contact-option"
+            title="Click to copy phone number"
+            onClick={() => handleCopyText("+47 40686044", "phone")}
+          >
+            Phone: +47 40686044{" "}
+            <FontAwesomeIcon icon={copyIcons.phone} className="copy-icon" />
+            {activeItem === "phone" && (
+              <span className="success-message">{successMessage}</span>
+            )}
+          </li>
+
+          <li
+            className="contact-option"
+            title="Click to copy address"
+            onClick={() => handleCopyText("Gamle Blindheimsveg 197", "address")}
+          >
+            Address: Gamle Blindheimsveg 197{" "}
+            <FontAwesomeIcon icon={copyIcons.address} className="copy-icon" />
+            {activeItem === "address" && (
+              <span className="success-message">{successMessage}</span>
+            )}
+          </li>
         </ul>
       </section>
     </main>

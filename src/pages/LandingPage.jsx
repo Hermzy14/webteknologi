@@ -3,6 +3,8 @@ import "../css/index.css";
 import "../css/card.css";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
+import { asyncApiRequest } from "../tools/requests";
+import { useCourses } from "../components/CourseProvider";
 
 /**
  * Component representing the landing page of the application.
@@ -18,62 +20,9 @@ import { useState, useEffect } from "react";
  * @constructor
  */
 function LandingPage() {
-  const [courses, setCourses] = useState([]);
-  const [discountedCourses, setDiscountedCourses] = useState([]);
+  const { discountedCourses, isLoading } = useCourses();
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Fetch courses when the component mounts
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/courses");
-        if (!response.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-        const data = await response.json();
-        setCourses(data);
-
-        // Process courses to extract ones with discounts
-        const coursesWithDiscounts = processCoursesWithDiscounts(data);
-        setDiscountedCourses(coursesWithDiscounts);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
-
-    fetchCourses();
-  }, []);
-
-  // Process courses to extract only those with discounts and format them for display
-  const processCoursesWithDiscounts = (coursesData) => {
-    const discounted = [];
-
-    coursesData.forEach((course) => {
-      // Check each provider for the course
-      course.providers.forEach((provider) => {
-        // Only include providers offering a discount
-        if (provider.discount > 0) {
-          const originalPrice = provider.price;
-          const discountedPrice = originalPrice * (1 - provider.discount / 100);
-
-          discounted.push({
-            id: `${course.id}-${provider.id}`,
-            courseId: course.id,
-            title: course.title,
-            originalPrice: originalPrice,
-            discountedPrice: discountedPrice,
-            provider: provider.name,
-            currency: provider.currency,
-            category: course.category.name,
-            discount: provider.discount,
-          });
-        }
-      });
-    });
-
-    return discounted;
-  };
 
   // Filter courses by category
   const filterCoursesByCategory = (category) => {
@@ -268,7 +217,9 @@ function LandingPage() {
 
         {/* Discounted courses cards */}
         <div className="card-wrapper">
-          {getFilteredCourses().length > 0 ? (
+          {isLoading ? (
+            <p>Loading courses...</p>
+          ) : getFilteredCourses().length > 0 ? (
             getFilteredCourses().map((course) => (
               <NavLink
                 className="wrapper-tag"

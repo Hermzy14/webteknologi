@@ -4,16 +4,48 @@ main {
   width: 100%;
 }
 
-/* Sidebar Filters */
-
-#filter {
-  flex: 0 0 250px;
+/* Common filter styles */
+.filter {
   background: var(--primary-bg-color);
   border-radius: 8px;
   border: 1px solid var(--primary-border-color);
   padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Filter button */
+#filter-button {
+  display: none;
+  background: var(--primary-bg-color);
+  border-radius: 100%;
+  border: 1px solid var(--primary-border-color);
+  padding: 10px;
+  height: 44px;
+  width: 44px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Desktop filter */
+#desktop-filter {
+  flex: 0 0 250px;
   margin: 20px;
   height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+/* Mobile filter - hidden by default */
+#mobile-filter {
+  display: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  margin: 20px;
 }
 
 .filter-group {
@@ -105,4 +137,54 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-content {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Hide desktop filter on mobile */
+  #desktop-filter {
+    display: none;
+  }
+
+  /* Show filter button on mobile */
+  #filter-button {
+    display: block;
+  }
+
+  .mobile-filter-result-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #result-and-sort {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #sorting-options {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  /* Show mobile filter when active */
+  #mobile-filter.active {
+    display: block;
+  }
 }

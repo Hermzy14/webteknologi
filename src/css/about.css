@@ -1,10 +1,11 @@
 #about-page {
+  display: flex;
   flex-direction: column;
 }
 
 /* About us section */
 #about-us {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   text-align: justify;
 }
@@ -19,13 +20,13 @@
 }
 
 #contact-form-section h2 {
-  width: 50%;
+  width: 60%;
 }
 
 #contact-form {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   padding: 2rem;
   border: 1px solid var(--primary-border-color);
@@ -57,18 +58,106 @@
 
 /* Other ways to contact us */
 #other-contact-options-section {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   padding-bottom: 2rem;
 }
 
 #list-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0;
+  gap: 0.5rem;
+  position: relative;
 }
 
 .contact-option {
+  color: var(--primary-text-color);
   list-style: none;
   font-family: sans-serif;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+.contact-option:hover {
+  background: var(--hover-color);
+}
+
+.copy-icon {
+  color: var(--primary-text-color);
+  opacity: 0.7;
+}
+
+/* Success message styling */
+.success-message {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  z-index: 10;
+  border: 1px solid var(--primary-border-color);
+
+  /* Animation properties */
+  animation: slideIn 0.3s ease-out forwards;
+  transform-origin: top;
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #about-page {
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+  }
+
+  #about-us {
+    width: 100%;
+  }
+
+  #contact-form-section {
+    width: 100%;
+  }
+
+  #contact-form-section h2 {
+    width: 100%;
+  }
+
+  #contact-form {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  #other-contact-options-section {
+    width: 90%;
+  }
+
+  #list-container {
+    flex-direction: column;
+  }
+
+  .contact-option {
+    display: flex;
+    justify-content: space-between;
+  }
 }

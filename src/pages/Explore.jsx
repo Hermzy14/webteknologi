@@ -2,20 +2,24 @@ import "../css/global-styles.css";
 import "../css/explore.css";
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { Filter } from "../components/Filter";
+import { useCourses } from "../components/CourseProvider";
 
 /**
  * This is the Explore page component.
  * It displays a list of courses with their details.
+ *
  * @return {JSX.Element} The rendered component.
  * @constructor
  */
 export function Explore({ searchTerm: externalSearchTerm }) {
-  const [courses, setCourses] = useState([]);
+  const { courses, isLoading } = useCourses();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(100000);
   const [sortOption, setSortOption] = useState("price-asc");
-  const [isLoading, setIsLoading] = useState(true);
 
   // Get search from URL query params
   const location = useLocation();
@@ -42,28 +46,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
       setSearchTerm(urlSearchTerm);
     }
   }, [urlSearchTerm, externalSearchTerm]);
-
-  // Fetch all courses when page loads
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch("http://localhost:8080/courses/visible");
-        if (!response.ok) {
-          throw new Error("Failed to fetch courses");
-        }
-        const data = await response.json();
-        setCourses(data);
-        setFilteredCourses(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
 
   //Apply category filter from URL if present
   useEffect(() => {
@@ -151,113 +133,48 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     return `${price} ${currency}`;
   };
 
+  // Handle filter toggle for mobile view
+  const handleFilterToggle = () => {
+    const filterElement = document.getElementById("mobile-filter");
+    if (filterElement) {
+      filterElement.classList.toggle("active");
+    }
+  };
+
   return (
     <main>
       {/* Side panel for filtering */}
-      <aside id="filter">
-        <h2>Categories</h2>
-        <div className="filter-group">
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="it"
-              checked={activeCategories.includes("Information Technologies")}
-              onChange={() => handleCategoryToggle("Information Technologies")}
-            />
-            <div className="filter-item-details">
-              <label htmlFor="it" className="filter-item-title">
-                IT
-              </label>
-              <span className="filter-item-subtitle">
-                Information Technology courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="marketing"
-              checked={activeCategories.includes("Digital Marketing")}
-              onChange={() => handleCategoryToggle("Digital Marketing")}
-            />
-            <div className="filter-item-details">
-              <label htmlFor="marketing" className="filter-item-title">
-                Digital Marketing
-              </label>
-              <span className="filter-item-subtitle">
-                Digital Marketing courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="business"
-              checked={activeCategories.includes(
-                "Business and Entrepreneurship"
-              )}
-              onChange={() =>
-                handleCategoryToggle("Business and Entrepreneurship")
-              }
-            />
-            <div className="filter-item-details">
-              <label htmlFor="business" className="filter-item-title">
-                B&E
-              </label>
-              <span className="filter-item-subtitle">
-                Business and Entrepreneurship courses
-              </span>
-            </div>
-          </div>
-
-          <div className="filter-item">
-            <input
-              type="checkbox"
-              id="analytics"
-              checked={activeCategories.includes("Data Science and Analytics")}
-              onChange={() =>
-                handleCategoryToggle("Data Science and Analytics")
-              }
-            />
-            <div className="filter-item-details">
-              <label htmlFor="analytics" className="filter-item-title">
-                Analytics
-              </label>
-              <span className="filter-item-subtitle">
-                Data Science and Analytics courses
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="filter-group">
-          <h2>Price</h2>
-          <div className="price-range-header">
-            <span>0 NOK</span>
-            <span id="max-price">{maxPrice.toLocaleString()} NOK</span>
-          </div>
-          <input
-            type="range"
-            min="0"
-            max="100000"
-            value={maxPrice}
-            className="price-slider"
-            id="price-range"
-            onChange={handlePriceChange}
-          />
-        </div>
-      </aside>
+      <Filter
+        id="desktop-filter"
+        activeCategories={activeCategories}
+        handleCategoryToggle={handleCategoryToggle}
+        maxPrice={maxPrice}
+        handlePriceChange={handlePriceChange}
+      />
 
       {/* Result text and buttons for sorting */}
       <div className="main-content">
         <section id="result-and-sort">
-          {searchTerm ? (
-            <p id="result-text">Search results for '{searchTerm}'</p>
-          ) : (
-            <p id="result-text">All courses ({filteredCourses.length})</p>
-          )}
+          <div className="mobile-filter-result-wrapper">
+            <button id="filter-button" onClick={handleFilterToggle}>
+              <FontAwesomeIcon icon={faSliders} />
+            </button>
+            {searchTerm ? (
+              <p id="result-text">Search results for '{searchTerm}'</p>
+            ) : (
+              <p id="result-text">All courses ({filteredCourses.length})</p>
+            )}
+          </div>
+
+          {/* Mobile filter - hidden by default, toggles visibility */}
+          <Filter
+            id="mobile-filter"
+            activeCategories={activeCategories}
+            handleCategoryToggle={handleCategoryToggle}
+            maxPrice={maxPrice}
+            handlePriceChange={handlePriceChange}
+          />
+
           <nav id="sorting-options">
             <button
               className={`sort-option ${
