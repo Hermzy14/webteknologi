@@ -1,0 +1,114 @@
+/* Profile container layout */
+.profile-container {
+  display: flex;
+  gap: 10%; /* Space between picture and form */
+  align-items: flex-start; /* Align items at the top */
+  margin-top: 20px;
+}
+
+.Profile-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 200px; /* Fixed width for the picture section */
+}
+
+.Profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Profile-picture button {
+  padding: 8px 16px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  width: 100%; /* Make button same width as image */
+}
+
+.Profile-details {
+  flex: 1; /* Take remaining space */
+  max-width: 500px;
+}
+
+/* Form styles */
+.Profile-details form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.save-button {
+  background-color: #4285f4;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+/* Existing styles */
+main {
+  display: block;
+  width: 100%;
+  margin-left: 5%;
+}
+
+#profile-information img {
+  height: 5%;
+}
+
+#my-courses {
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.courses-list {
+  margin-top: 20px;
+}
+
+.course-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.remove-button {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
