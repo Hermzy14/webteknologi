@@ -227,7 +227,17 @@ function LandingPage() {
                 key={course.id}
               >
                 <div className="card">
-                  <div className="image"></div>
+                  <div className="image-container">
+                    <img
+                      src={
+                        course.imagePath
+                          ? `/course-images/${course.imagePath}`
+                          : "/course-images/Long white cropped.png"
+                      }
+                      alt={course.title}
+                      className="course-image"
+                    />
+                  </div>
                   <div className="course-details">
                     <h3 className="course-title">{course.title}</h3>
                     <p className="discounted-price">

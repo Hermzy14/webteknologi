@@ -71,6 +71,7 @@ export function CourseProvider({ children }) {
             currency: provider.currency,
             category: course.category.name,
             discount: provider.discount,
+            imagePath: course.imagePath,
           });
         }
       });

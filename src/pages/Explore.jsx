@@ -21,6 +21,8 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const [maxPrice, setMaxPrice] = useState(100000);
   const [sortOption, setSortOption] = useState("price-asc");
 
+  console.log("Courses:", courses);
+
   // Get search from URL query params
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -207,7 +209,13 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                 key={course.id}
               >
                 <div className="card">
-                  <div className="image"></div>
+                  <div className="image-container">
+                    <img
+                      src={`/course-images/${course.imagePath}`}
+                      alt={course.title}
+                      className="course-image"
+                    />
+                  </div>
                   <div className="course-details">
                     <h3 className="course-title">{course.title}</h3>
                     <ul>
