@@ -4,6 +4,7 @@ import { Header } from "./components/Header.jsx";
 import { Footer } from "./components/Footer.jsx";
 import "./css/global-styles.css";
 import { CourseProvider } from "./components/CourseProvider.jsx";
+import { CartProvider } from "./components/CartContext.jsx";
 
 /**
  * Component representing the whole application.
@@ -14,11 +15,13 @@ export function App() {
   return (
     <BrowserRouter>
       <CourseProvider>
-        <div className="app-container">
-          <Header />
-          <MainSection />
-          <Footer />
-        </div>
+        <CartProvider>
+          <div className="app-container">
+            <Header />
+            <MainSection />
+            <Footer />
+          </div>
+        </CartProvider>
       </CourseProvider>
     </BrowserRouter>
   );
