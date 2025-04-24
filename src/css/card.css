@@ -4,10 +4,11 @@
   border-radius: 8px;
   overflow: hidden;
   font-family: Arial, sans-serif;
-  padding: 8px;
+  padding: 1rem;
   cursor: pointer;
+  display: grid;
+  max-width: 270px;
 }
-
 .card:hover {
   box-shadow: 0 0 8px 2px var(--hover-color);
 }
@@ -28,19 +29,14 @@
   display: block;
 }
 
-.course-details {
-  padding: 16px;
-}
-
 .course-title {
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.5rem 0 12px 0;
   color: var(--primary-text-color);
 }
 
 .wrapper-tag {
-  width: 270px;
   text-decoration: none;
   display: block;
 }
@@ -66,4 +62,30 @@
   font-size: 14px;
   color: var(--neutral-border-color);
   margin: 8px 0 0 0;
+}
+
+.provider-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.provider-select:hover {
+  background-color: var(--hover-color);
+}
+
+.add-to-cart-button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--neutral-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.add-to-cart-button:hover {
+  background-color: var(--blue-hover-color);
 }
