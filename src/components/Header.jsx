@@ -111,10 +111,10 @@ export function Header({ setSearchTerm }) {
         <NavLink
           className="header-link"
           to="/explore"
-          title="Courses"
+          title="Explore courses"
           onClick={handleLinkClick}
         >
-          Courses
+          Explore
         </NavLink>
         <NavLink
           className="header-link"
