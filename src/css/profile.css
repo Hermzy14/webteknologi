@@ -78,7 +78,7 @@
 }
 
 /* Existing styles */
-main {
+#Profile {
   display: block;
   width: 100%;
   margin-left: 5%;
@@ -91,6 +91,18 @@ main {
 #my-courses {
   margin-top: 5%;
   margin-bottom: 3%;
+}
+
+.courses-list {
+  margin-top: 20px;
+}
+
+.course-item {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  margin-right: 5%;
 }
 
 .remove-button {

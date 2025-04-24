@@ -34,7 +34,7 @@ function ProfilePage() {
 
     return (
         <>
-            <main>
+            <main id="Profile">
                 <section id="profile-information">
                     <h1>Profile</h1>
                     <div className="profile-container">
