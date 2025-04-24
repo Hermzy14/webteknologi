@@ -144,6 +144,20 @@ function LandingPage() {
             </div>
           ))}
         </div>
+
+        {/* Navigation dots */}
+        <div className="carousel-dots">
+          {categories.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${
+                index === currentSlide ? "active" : ""
+              }`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </section>
 
       {/* Discounted courses section */}
