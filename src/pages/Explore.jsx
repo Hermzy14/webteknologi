@@ -203,12 +203,12 @@ export function Explore({ searchTerm: externalSearchTerm }) {
             <div className="loading">Loading courses...</div>
           ) : filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
-              <NavLink
-                className="wrapper-tag"
-                to={`/courseinformation/${course.id}`}
-                key={course.id}
-              >
-                <div className="card">
+              <div className="card">
+                <NavLink
+                  className="wrapper-tag"
+                  to={`/courseinformation/${course.id}`}
+                  key={course.id}
+                >
                   <div className="image-container">
                     <img
                       src={`/course-images/${course.imagePath}`}
@@ -218,23 +218,24 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                   </div>
                   <div className="course-details">
                     <h3 className="course-title">{course.title}</h3>
-                    <ul>
-                      {course.providers.map((provider) => (
-                        <li key={provider.id}>
-                          {provider.name}:{" "}
-                          {/* Format price with discount if applicable */}
-                          {provider.discount > 0
-                            ? formatPrice(
-                                provider.price * (1 - provider.discount / 100),
-                                provider.currency
-                              )
-                            : formatPrice(provider.price, provider.currency)}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
-              </NavLink>
+                </NavLink>
+                <select className="provider-select">
+                  {course.providers.map((provider) => (
+                    <option key={provider.id}>
+                      {provider.name}:{" "}
+                      {/* Format price with discount if applicable */}
+                      {provider.discount > 0
+                        ? formatPrice(
+                            provider.price * (1 - provider.discount / 100),
+                            provider.currency
+                          )
+                        : formatPrice(provider.price, provider.currency)}
+                    </option>
+                  ))}
+                </select>
+                <button className="add-to-cart-button">Add to cart</button>
+              </div>
             ))
           ) : (
             <div className="no-results">

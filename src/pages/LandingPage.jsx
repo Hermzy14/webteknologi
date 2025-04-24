@@ -221,12 +221,12 @@ function LandingPage() {
             <p>Loading courses...</p>
           ) : getFilteredCourses().length > 0 ? (
             getFilteredCourses().map((course) => (
-              <NavLink
-                className="wrapper-tag"
-                to={`/courseinformation/${course.courseId}`}
-                key={course.id}
-              >
-                <div className="card">
+              <div className="card">
+                <NavLink
+                  className="wrapper-tag"
+                  to={`/courseinformation/${course.courseId}`}
+                  key={course.id}
+                >
                   <div className="image-container">
                     <img
                       src={
@@ -248,8 +248,9 @@ function LandingPage() {
                     </p>
                     <p className="provider">{course.provider}</p>
                   </div>
-                </div>
-              </NavLink>
+                </NavLink>
+                <button className="add-to-cart-button">Add to cart</button>
+              </div>
             ))
           ) : (
             <p className="no-courses-message">
