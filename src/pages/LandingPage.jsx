@@ -1,5 +1,5 @@
 import "../css/global-styles.css";
-import "../css/index.css";
+import "../css/LandingPage.css";
 import "../css/card.css";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
