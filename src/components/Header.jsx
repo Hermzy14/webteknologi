@@ -7,6 +7,7 @@ import {
   faCartShopping,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import { useCart } from "./CartContext";
 
 /**
  * Header component for the application.
@@ -17,6 +18,7 @@ import {
  * @constructor
  */
 export function Header({ setSearchTerm }) {
+  const { getCartCount } = useCart();
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
@@ -98,7 +100,13 @@ export function Header({ setSearchTerm }) {
           id="cart"
           onClick={handleLinkClick}
         >
-          <FontAwesomeIcon icon={faCartShopping} />
+          {" "}
+          <div className="cart-icon-container">
+            <FontAwesomeIcon icon={faCartShopping} />
+            {getCartCount() > 0 && (
+              <span className="cart-count">{getCartCount()}</span>
+            )}
+          </div>
         </NavLink>
         <NavLink
           className="header-link"
