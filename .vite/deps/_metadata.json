@@ -2,42 +2,42 @@
   "hash": "c90b59e4",
   "configHash": "683eedb2",
   "lockfileHash": "21a63c0c",
-  "browserHash": "aad3f0bd",
+  "browserHash": "a87547d4",
   "optimized": {
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "e85d4e1c",
+      "fileHash": "d0e82bd2",
       "needsInterop": true
-    },
-    "react-router": {
-      "src": "../../node_modules/react-router/dist/development/index.mjs",
-      "file": "react-router.js",
-      "fileHash": "21fc0be3",
-      "needsInterop": false
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.mjs",
       "file": "react-router-dom.js",
-      "fileHash": "a5ad2473",
+      "fileHash": "9f6a7fbd",
       "needsInterop": false
     },
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "152f87cc",
+      "fileHash": "07a22846",
       "needsInterop": true
     },
     "@fortawesome/react-fontawesome": {
       "src": "../../node_modules/@fortawesome/react-fontawesome/index.es.js",
       "file": "@fortawesome_react-fontawesome.js",
-      "fileHash": "d25c3826",
+      "fileHash": "29bf94d9",
       "needsInterop": false
     },
     "@fortawesome/free-solid-svg-icons": {
       "src": "../../node_modules/@fortawesome/free-solid-svg-icons/index.mjs",
       "file": "@fortawesome_free-solid-svg-icons.js",
-      "fileHash": "3dbddde3",
+      "fileHash": "e884d7ac",
+      "needsInterop": false
+    },
+    "react-router": {
+      "src": "../../node_modules/react-router/dist/development/index.mjs",
+      "file": "react-router.js",
+      "fileHash": "4e176836",
       "needsInterop": false
     }
   },
