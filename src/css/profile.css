@@ -93,17 +93,6 @@ main {
   margin-bottom: 3%;
 }
 
-.courses-list {
-  margin-top: 20px;
-}
-
-.course-item {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-}
-
 .remove-button {
   background-color: #f44336;
   color: white;
