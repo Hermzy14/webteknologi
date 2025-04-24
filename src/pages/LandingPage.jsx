@@ -3,8 +3,8 @@ import "../css/index.css";
 import "../css/card.css";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
-import { asyncApiRequest } from "../tools/requests";
 import { useCourses } from "../components/CourseProvider";
+import { useCart } from "../components/CartContext";
 
 /**
  * Component representing the landing page of the application.
@@ -21,6 +21,7 @@ import { useCourses } from "../components/CourseProvider";
  */
 function LandingPage() {
   const { discountedCourses, isLoading } = useCourses();
+  const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -86,6 +87,16 @@ function LandingPage() {
     setCurrentSlide((prevSlide) =>
       prevSlide === 0 ? categories.length - 1 : prevSlide - 1
     );
+  };
+
+  // Handle adding course to cart
+  const handleAddToCart = (course, provider) => {
+    try {
+      console.log("Adding to cart:", course.title, "from", provider);
+      addToCart(course, provider);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
 
   return (
@@ -249,7 +260,12 @@ function LandingPage() {
                     <p className="provider">{course.provider}</p>
                   </div>
                 </NavLink>
-                <button className="add-to-cart-button">Add to cart</button>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => handleAddToCart(course, course.provider)}
+                >
+                  Add to cart
+                </button>
               </div>
             ))
           ) : (
