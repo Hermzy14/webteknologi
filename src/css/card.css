@@ -91,6 +91,17 @@
   background-color: var(--blue-hover-color);
 }
 
+.cart-success-message {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: var(--blue-hover-color);
+  animation: slideIn 0.3s ease-out forwards;
+  transform-origin: top;
+}
+
 /* Mobile view */
 @media (max-width: 1250px) {
   .card {
@@ -98,5 +109,17 @@
     min-width: 260px;
     margin: 0 0.5rem 0 0;
     flex: 0 0 auto;
+  }
+}
+
+/* Animation for success message */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -23,6 +23,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const [maxPrice, setMaxPrice] = useState(100000);
   const [sortOption, setSortOption] = useState("price-asc");
   const [selectedProviders, setSelectedProviders] = useState({});
+  const [addedCourseId, setAddedCourseId] = useState(null);
 
   // Get search from URL query params
   const location = useLocation();
@@ -157,6 +158,12 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     try {
       console.log("Adding to cart:", course.title, "from", provider.name);
       addToCart(course, provider);
+      setAddedCourseId(course.id); // Set the ID of the added course
+
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+      }, 3000);
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -268,6 +275,10 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                 >
                   Add to cart
                 </button>
+                {/* Success message */}
+                {addedCourseId === course.id && (
+                  <div className="cart-success-message">Added to cart!</div>
+                )}
               </div>
             ))
           ) : (

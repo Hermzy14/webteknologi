@@ -24,6 +24,7 @@ function LandingPage() {
   const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [addedCourseId, setAddedCourseId] = useState(null);
 
   // Filter courses by category
   const filterCoursesByCategory = (category) => {
@@ -94,6 +95,12 @@ function LandingPage() {
     try {
       console.log("Adding to cart:", course.title, "from", provider);
       addToCart(course, provider);
+      setAddedCourseId(course.id); // Set the ID of the added course
+
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+      }, 3000);
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -279,6 +286,11 @@ function LandingPage() {
                 >
                   Add to cart
                 </button>
+
+                {/* Success message */}
+                {addedCourseId === course.id && (
+                  <div className="cart-success-message">Added to cart!</div>
+                )}
               </div>
             ))
           ) : (
