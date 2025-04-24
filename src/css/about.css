@@ -10,6 +10,11 @@
   text-align: justify;
 }
 
+#about-us h1 {
+  font-size: 2rem;
+  margin-block: 1rem;
+}
+
 /* Contact section */
 #contact-form-section {
   display: flex;

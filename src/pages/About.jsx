@@ -122,7 +122,7 @@ export function About() {
       <section id="contact-form-section">
         <h2>Contact us</h2>
         <form action="" id="contact-form">
-          <label for="name">Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
@@ -130,7 +130,7 @@ export function About() {
             required
             placeholder="Your full name"
           />
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -138,7 +138,7 @@ export function About() {
             required
             placeholder="Email"
           />
-          <label for="message">Message:</label>
+          <label htmlFor="message">Message:</label>
           <textarea
             name="message"
             id="message"

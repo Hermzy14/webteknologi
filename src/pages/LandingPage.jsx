@@ -246,11 +246,10 @@ function LandingPage() {
             <p>Loading courses...</p>
           ) : getFilteredCourses().length > 0 ? (
             getFilteredCourses().map((course) => (
-              <div className="card">
+              <div className="card" key={course.id}>
                 <NavLink
                   className="wrapper-tag"
                   to={`/courseinformation/${course.courseId}`}
-                  key={course.id}
                 >
                   <div className="image-container">
                     <img

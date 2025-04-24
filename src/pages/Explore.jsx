@@ -222,11 +222,10 @@ export function Explore({ searchTerm: externalSearchTerm }) {
             <div className="loading">Loading courses...</div>
           ) : filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
-              <div className="card">
+              <div className="card" key={course.id}>
                 <NavLink
                   className="wrapper-tag"
                   to={`/courseinformation/${course.id}`}
-                  key={course.id}
                 >
                   <div className="image-container">
                     <img
