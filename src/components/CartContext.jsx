@@ -1,82 +1,93 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-const CartContext = createContext();
+// Create the cart context
+const CartContext = createContext(null);
 
-/**
- * Custom hook to use the CartContext.
- * This hook provides access to the cart context value.
- * It should be used within a CartProvider component.
- * @returns {object} The context value.
- */
+// Custom hook to use the cart context
 export function useCart() {
-  return useContext(CartContext);
+  const context = useContext(CartContext);
+  if (context === null) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 }
 
-/**
- * CartProvider component to provide cart context to its children.
- * It manages the cart state and provides functions to manipulate the cart.
- * @param {object} children - The child components that will have access to the cart context.
- * @returns {JSX.Element} The CartProvider component.
- */
+// Cart provider component
 export function CartProvider({ children }) {
-  // Load cart from local storage
+  // Initialize cart from localStorage or empty array
   const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    // Parse the saved cart from local storage or return an empty array if not found
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem("cart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error("Error loading cart from localStorage:", error);
+      return [];
+    }
   });
 
-  // Save cart to local storage whenever it changes
+  // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    try {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    } catch (error) {
+      console.error("Error saving cart to localStorage:", error);
+    }
   }, [cartItems]);
 
-  /**
-   * Add a course to the cart.
-   * @param {object} course - The course to add to the cart.
-   * @param {object} provider - The provider of the course.
-   */
-  function addToCart(course, provider) {
-    // Set the selected provider, if not provided, use the first provider from the course
-    const selectedProvider =
-      provider || (course.providers && course.providers[0]);
-    if (!selectedProvider) {
-      console.error("No provider found for the course.");
+  // Add item to cart
+  const addToCart = (course, provider) => {
+    if (!course || !provider) {
+      console.error("Missing course or provider information");
       return;
     }
 
-    // Set cart items
-    setCartItems((prevItems) => {
-      // Check if the course is already in the cart
-      const existingItem = prevItems.find(
-        (item) =>
-          item.course.id === course.id &&
-          item.provider.id === selectedProvider.id
-      );
-      // If it exists, just return the existing items
-      if (existingItem) {
-        return prevItems;
-      } else {
-        // If it doesn't exist, add the new item to the cart
-        return [...prevItems, { course, provider: selectedProvider }];
-      }
-    });
-  }
+    // Calculate price with discount
+    const finalPrice =
+      provider.discount > 0
+        ? provider.price * (1 - provider.discount / 100)
+        : provider.price;
 
-  /**
-   * Get the cart item count.
-   * @returns {number} The number of items in the cart.
-   */
-  function getCartItemCount() {
+    const newItem = {
+      id: Date.now().toString(),
+      courseId: course.id,
+      providerId: provider.id,
+      title: course.title,
+      price: finalPrice,
+      currency: provider.currency,
+      providerName: provider.name,
+      imagePath: course.imagePath || "default-image.jpg",
+    };
+
+    setCartItems((prev) => [...prev, newItem]);
+  };
+
+  // Remove item from cart
+  const removeFromCart = (itemId) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+  };
+
+  // Clear the entire cart
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  // Calculate total price of items in cart
+  const getCartTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price, 0);
+  };
+
+  // Get number of items in cart
+  const getCartCount = () => {
     return cartItems.length;
-  }
+  };
 
   const value = {
     cartItems,
     addToCart,
-    getCartItemCount,
+    removeFromCart,
+    clearCart,
+    getCartTotal,
+    getCartCount,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
