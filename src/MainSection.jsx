@@ -4,11 +4,8 @@ import { Explore } from "./pages/Explore";
 import { About } from "./pages/About";
 import ComparePage from "./pages/Compare";
 import ShoppingCart from "./pages/Cart";
-<<<<<<< HEAD
 import { Admin } from "./pages/Admin";
-=======
 import ProfilePage from "./pages/Profile";
->>>>>>> ProfilePage
 
 /**
  * Component representing the main section of the application.
@@ -25,11 +22,8 @@ export function MainSection() {
         <Route path="/compare" element={<ComparePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<ShoppingCart />} />
-<<<<<<< HEAD
         <Route path="/admin" element={<Admin />} />
-=======
         <Route path="/profile" element={<ProfilePage />} />
->>>>>>> ProfilePage
       </Routes>
     </main>
   );
