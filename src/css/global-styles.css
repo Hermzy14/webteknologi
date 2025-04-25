@@ -144,6 +144,7 @@ header {
   z-index: 1000;
   max-height: 300px;
   overflow-y: auto;
+  animation: slideIn 0.2s ease-out forwards;
 }
 
 .search-suggestions li {
@@ -277,5 +278,24 @@ footer .wrapper .inner-wrapper {
 
   #header-nav {
     display: flex !important; /* Ensure the navigation menu is always visible */
+  }
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
   }
 }
