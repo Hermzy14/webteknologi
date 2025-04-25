@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../css/global-styles.css";
 import logo from "../assets/Short dark cropped.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "./CartContext";
+import { useCourses } from "./CourseProvider";
 
 /**
  * Header component for the application.
@@ -19,9 +20,76 @@ import { useCart } from "./CartContext";
  */
 export function Header({ setSearchTerm }) {
   const { getCartCount } = useCart();
+  const { courses } = useCourses();
   const [inputValue, setInputValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestion, setActiveSuggestion] = useState(-1);
+  const searchContainerRef = useRef(null);
   const navigate = useNavigate();
 
+  // Generate suggestions as user types
+  useEffect(() => {
+    if (inputValue.length >= 1) {
+      const term = inputValue.toLowerCase();
+      const matchedSuggestions = [];
+      const addedTitles = new Set(); // To prevent duplicates
+
+      courses.forEach((course) => {
+        // Add course title if it matches
+        if (
+          course.title.toLowerCase().includes(term) &&
+          !addedTitles.has(course.title)
+        ) {
+          matchedSuggestions.push({ text: course.title, id: course.id });
+          addedTitles.add(course.title);
+        }
+
+        // Add keywords if available and they match
+        if (course.keywords) {
+          const keywords = course.keywords.split(",").map((k) => k.trim());
+          keywords.forEach((keyword) => {
+            if (
+              keyword.toLowerCase().includes(term) &&
+              !addedTitles.has(keyword)
+            ) {
+              matchedSuggestions.push({ text: keyword, id: course.id });
+              addedTitles.add(keyword);
+            }
+          });
+        }
+      });
+
+      setSuggestions(matchedSuggestions);
+      setShowSuggestions(matchedSuggestions.length > 0);
+      setActiveSuggestion(-1);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [inputValue, courses]);
+
+  // Handle clicks outside to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Update the search term in the parent component
@@ -31,6 +99,42 @@ export function Header({ setSearchTerm }) {
 
     // Navigate to explore page with search query
     navigate(`/explore?search=${inputValue}`);
+    setShowSuggestions(false);
+  };
+
+  // Handle suggestion selection
+  const handleSuggestionClick = (suggestion) => {
+    setInputValue(suggestion.text);
+    if (setSearchTerm) {
+      setSearchTerm(suggestion.text);
+    }
+    navigate(`/explore?search=${suggestion.text}`);
+    setShowSuggestions(false);
+  };
+
+  // Handle keyboard navigation in suggestions
+  const handleKeyDown = (e) => {
+    // Down arrow
+    if (e.keyCode === 40) {
+      e.preventDefault();
+      setActiveSuggestion((prev) =>
+        prev < suggestions.length - 1 ? prev + 1 : prev
+      );
+    }
+    // Up arrow
+    else if (e.keyCode === 38) {
+      e.preventDefault();
+      setActiveSuggestion((prev) => (prev > 0 ? prev - 1 : 0));
+    }
+    // Enter
+    else if (e.keyCode === 13 && activeSuggestion !== -1) {
+      e.preventDefault();
+      handleSuggestionClick(suggestions[activeSuggestion]);
+    }
+    // Escape
+    else if (e.keyCode === 27) {
+      setShowSuggestions(false);
+    }
   };
 
   // Handle opening and closing of the hamburger menu
@@ -72,20 +176,45 @@ export function Header({ setSearchTerm }) {
       <NavLink to="/" title="Home" id="index-link" onClick={handleLinkClick}>
         <img src={logo} alt="Logo for Learniverse Connect" id="logo-header" />
       </NavLink>
-      <form id="header-form" onSubmit={handleSubmit}>
-        <input
-          id="search-bar"
-          title="Type and hit search to search for courses"
-          type="text"
-          name="search"
-          placeholder="Search for courses..."
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-        <button type="submit" title="Search" id="search-btn">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
-      </form>
+      <div id="search-container" ref={searchContainerRef}>
+        <form id="header-form" onSubmit={handleSubmit}>
+          <input
+            id="search-bar"
+            title="Type and hit search to search for courses"
+            type="text"
+            name="search"
+            placeholder="Search for courses..."
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            onClick={() => inputValue.length >= 2 && setSuggestions(true)}
+          />
+          <button type="submit" title="Search" id="search-btn">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+        </form>
+
+        {showSuggestions && (
+          <ul className="search-suggestions">
+            {suggestions.map((suggestion, index) => (
+              <div className="wrapper" key={`${suggestion.id}-${index}`}>
+                <li
+                  className={index === activeSuggestion ? "active" : ""}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  onMouseEnter={() => setActiveSuggestion(index)}
+                >
+                  {suggestion.text}
+                </li>
+                {suggestions.length !== index + 1 ? (
+                  <hr id="suggestion-divider" />
+                ) : (
+                  ""
+                )}
+              </div>
+            ))}
+          </ul>
+        )}
+      </div>
       <button id="hamburger-icon" onClick={handleMobileMenu}>
         &#9776;
       </button>
