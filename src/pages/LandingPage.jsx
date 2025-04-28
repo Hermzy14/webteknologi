@@ -108,6 +108,16 @@ function LandingPage() {
 
   return (
     <main id="index-main">
+      {/* Hero section */}
+      <div id="index-hero">
+        <h1>Welcome to Learniverse Connect!</h1>
+        <p>
+          Your one-stop destination for online courses and learning
+          opportunities. Explore a wide range of courses from top providers and
+          enhance your skills today!
+        </p>
+      </div>
+
       {/* Carousel section */}
       <section id="carousel">
         <button
