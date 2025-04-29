@@ -20,7 +20,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const { addToCart } = useCart();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(100000);
+  const [maxPrice, setMaxPrice] = useState(10000);
   const [sortOption, setSortOption] = useState("price-asc");
   const [selectedProviders, setSelectedProviders] = useState({});
   const [addedCourseId, setAddedCourseId] = useState(null);
