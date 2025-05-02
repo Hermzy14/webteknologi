@@ -1,6 +1,7 @@
 /* General styles */
 :root {
   --primary-color: #8bb8e5;
+  --primary-color-translucent: rgba(139, 184, 229, 0.5);
   --primary-text-color: #1e1e1e;
   --primary-border-color: #d9d9d9;
   --neutral-bg-color: #e3e3e3;
