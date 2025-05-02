@@ -8,6 +8,7 @@ import {
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 /**
  * Capitalizes the first letter of a string.
@@ -64,15 +65,24 @@ export function About() {
 
   return (
     <main id="about-page">
+      <div id="index-hero">
+        <div id="hero-content-wrapper-about">
+          <h1>About us!</h1>
+          <p>
+            Welcome to Learniverse Connect, your premier destination for
+            unlocking a world of knowledge and skills through{" "}
+            <NavLink to="/explore">
+              our dynamic online course marketplace.
+            </NavLink>
+          </p>
+        </div>
+      </div>
       <section id="about-us">
-        <h1>About us</h1>
         <p>
-          Welcome to Learniverse Connect, your premier destination for unlocking
-          a world of knowledge and skills through our dynamic online course
-          marketplace. At Learniverse, we believe that learning knows no bounds,
-          and our platform is designed to empower individuals like you to embark
-          on a journey of lifelong learning. As a marketplace, we bring together
-          a diverse array of courses from passionate and expert third-party
+          At Learniverse, we believe that learning knows no bounds, and our
+          platform is designed to empower individuals like you to embark on a
+          journey of lifelong learning. As a marketplace, we bring together a
+          diverse array of courses from passionate and expert third-party
           providers, ensuring that you have access to a comprehensive range of
           subjects and skills to fuel your personal and professional growth.
         </p>
