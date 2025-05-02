@@ -1,6 +1,12 @@
 import "../css/about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCopy,
+  faCheck,
+  faEnvelope,
+  faPhone,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 /**
@@ -160,7 +166,7 @@ export function About() {
             title="Click to copy mail"
             onClick={() => handleCopyText("learniverse@connect.com", "email")}
           >
-            Email: learniverse@connect.com{" "}
+            <FontAwesomeIcon icon={faEnvelope} /> learniverse@connect.com{" "}
             <FontAwesomeIcon icon={copyIcons.email} className="copy-icon" />
             {activeItem === "email" && (
               <span className="success-message">{successMessage}</span>
@@ -172,7 +178,7 @@ export function About() {
             title="Click to copy phone number"
             onClick={() => handleCopyText("+47 40686044", "phone")}
           >
-            Phone: +47 40686044{" "}
+            <FontAwesomeIcon icon={faPhone} /> +47 40686044{" "}
             <FontAwesomeIcon icon={copyIcons.phone} className="copy-icon" />
             {activeItem === "phone" && (
               <span className="success-message">{successMessage}</span>
@@ -182,9 +188,9 @@ export function About() {
           <li
             className="contact-option"
             title="Click to copy address"
-            onClick={() => handleCopyText("Gamle Blindheimsveg 197", "address")}
+            onClick={() => handleCopyText("Gamle Blindheimsveg 25", "address")}
           >
-            Address: Gamle Blindheimsveg 197{" "}
+            <FontAwesomeIcon icon={faHouse} /> Gamle Blindheimsveg 25{" "}
             <FontAwesomeIcon icon={copyIcons.address} className="copy-icon" />
             {activeItem === "address" && (
               <span className="success-message">{successMessage}</span>
