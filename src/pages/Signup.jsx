@@ -1,4 +1,4 @@
-import "../css/signup.css";
+import "../css/log-sign.css";
 import "../css/global-styles.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -63,15 +63,25 @@ export function Signup() {
             </div>
 
             <div className="right-side">
-                <div className="sign-up-container">
+                <div className="form-container">
                     <div className="tabs">
-                        <h2 className="sign-tab active">
-                            <NavLink to="/login" className="signup-link">Log in</NavLink>
-                        </h2>
+                        <NavLink
+                            to="/login"
+                            className={({isActive}) =>
+                                isActive ? "active-tab tab-link" : "inactive-tab tab-link"
+                            }
+                        >
+                            Log in
+                        </NavLink>
                         <div className="separator"></div>
-                        <h2 className="signup-tab">
-                            <a href="#" className="signup-link">Sign up</a>
-                        </h2>
+                        <NavLink
+                            to="/signup"
+                            className={({isActive}) =>
+                                isActive ? "active-tab tab-link" : "inactive-tab tab-link"
+                            }
+                        >
+                            Sign up
+                        </NavLink>
                     </div>
 
                     <form id="signup-form" onSubmit={handleSubmit}>

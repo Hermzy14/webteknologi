@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main container */
+.container {
+    display: flex;
+    height: 100%;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Left side - Image container */
+#image-container {
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    position: relative;
+}
+
+#image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Right side - Form section */
+.right-side {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    height: 100vh;
+}
+
+/* Form container (login/signup shared) */
+.form-container {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transform: scale(1.1);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabs h2 {
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+}
+
+.tabs .separator {
+    width: 1px;
+    height: 30px;
+    background-color: #ccc;
+    margin: 0 15px;
+}
+
+/* Labels */
+.signup-label,
+.login-label {
+    margin-bottom: 2px;
+    color: #474646;
+    font-size: 14px;
+}
+
+/* Inputs */
+.user-input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* Forgot password link */
+.forgot-password-tag {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+#sign-up-button,
+#login-button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Remove underline from nav links */
+.signup-link,
+.login-link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.signup-link:hover,
+.login-link:hover {
+    text-decoration: none;
+}
+
+/* Auth tab states */
+.active-tab {
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.inactive-tab {
+    color: #999;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.inactive-tab:hover {
+    color: black;
+}
+

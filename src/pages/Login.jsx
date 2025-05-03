@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/global-styles.css";
-import "../css/login.css";
+import "../css/log-sign.css";
 import {NavLink} from "react-router-dom";
 
 
@@ -12,15 +12,25 @@ export function Login () {
             </div>
 
             <div className="right-side">
-                <div className="login-container">
+                <div className="form-container">
                     <div className="tabs">
-                        <h2 className="login-tab active">
-                            <a href="#" className="login-link">Log in</a>
-                        </h2>
+                        <NavLink
+                            to="/login"
+                            className={({isActive}) =>
+                                isActive ? "active-tab tab-link" : "inactive-tab tab-link"
+                            }
+                        >
+                            Log in
+                        </NavLink>
                         <div className="separator"></div>
-                        <h2 className="signup-tab">
-                            <NavLink to="/signup" className="signup-link">Sign up</NavLink>
-                        </h2>
+                        <NavLink
+                            to="/signup"
+                            className={({isActive}) =>
+                                isActive ? "active-tab tab-link" : "inactive-tab tab-link"
+                            }
+                        >
+                            Sign up
+                        </NavLink>
                     </div>
 
                     <form>
@@ -37,7 +47,7 @@ export function Login () {
             </div>
         </div>
 
-);
+    );
 }
 
 export default Login;
