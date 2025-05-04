@@ -8,7 +8,6 @@ export function Login () {
     return (
         <div className="container">
             <div id="image-container">
-                <img src="your-image.jpg" alt="Login Illustration"/>
             </div>
 
             <div className="right-side">
