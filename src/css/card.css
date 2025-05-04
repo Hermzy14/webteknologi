@@ -4,10 +4,12 @@
   border-radius: 8px;
   overflow: hidden;
   font-family: Arial, sans-serif;
-  padding: 8px;
+  padding: 1rem;
   cursor: pointer;
+  display: grid;
+  width: 270px;
+  box-sizing: border-box;
 }
-
 .card:hover {
   box-shadow: 0 0 8px 2px var(--hover-color);
 }
@@ -28,19 +30,14 @@
   display: block;
 }
 
-.course-details {
-  padding: 16px;
-}
-
 .course-title {
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.5rem 0 12px 0;
   color: var(--primary-text-color);
 }
 
 .wrapper-tag {
-  width: 270px;
   text-decoration: none;
   display: block;
 }
@@ -66,4 +63,63 @@
   font-size: 14px;
   color: var(--neutral-border-color);
   margin: 8px 0 0 0;
+}
+
+.provider-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.provider-select:hover {
+  background-color: var(--hover-color);
+}
+
+.add-to-cart-button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--neutral-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.add-to-cart-button:hover {
+  background-color: var(--blue-hover-color);
+}
+
+.cart-success-message {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: var(--blue-hover-color);
+  animation: slideIn 0.3s ease-out forwards;
+  transform-origin: top;
+}
+
+/* Mobile view */
+@media (max-width: 1250px) {
+  .card {
+    width: 270px;
+    min-width: 260px;
+    margin: 0 0.5rem 0 0;
+    flex: 0 0 auto;
+  }
+}
+
+/* Animation for success message */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

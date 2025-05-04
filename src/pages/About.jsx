@@ -1,7 +1,15 @@
 import "../css/about.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCopy,
+  faCheck,
+  faEnvelope,
+  faPhone,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { asyncApiRequest } from "../tools/requests";
 
 /**
  * Capitalizes the first letter of a string.
@@ -26,10 +34,11 @@ export function About() {
     phone: faCopy,
     address: faCopy,
   });
-
   // State to manage success message and clicked item
   const [successMessage, setSuccessMessage] = useState("");
   const [activeItem, setActiveItem] = useState(null);
+  // State to manage the return message after sending a message
+  const [returnMessage, setReturnMessage] = useState("");
 
   // Function to handle copying text to clipboard
   const handleCopyText = (text, type) => {
@@ -56,17 +65,59 @@ export function About() {
     });
   };
 
+  // Function to handle form submission, should send a POST request to the server
+  const sendMessage = (event) => {
+    event.preventDefault();
+    const data = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      message: event.target.message.value,
+    };
+    console.log(data);
+    // Send a POST request to the server
+    try {
+      asyncApiRequest("/messages", "POST", data)
+        .then((response) => {
+          displayResponse(response.data);
+        })
+        .catch((error) => {
+          console.error("Error sending message:", error);
+          displayResponse("Failed to send message. Please try again.");
+        });
+    } catch (error) {
+      displayResponse("An error occurred. Please try again.");
+    }
+  };
+
+  // Function to display the response from the server
+  const displayResponse = (response) => {
+    setReturnMessage(response);
+    // Clear the message after 6 seconds
+    setTimeout(() => {
+      setReturnMessage("");
+    }, 6000);
+  };
+
   return (
     <main id="about-page">
+      <div id="index-hero">
+        <div id="hero-content-wrapper-about">
+          <h1>About us!</h1>
+          <p>
+            Welcome to Learniverse Connect, your premier destination for
+            unlocking a world of knowledge and skills through{" "}
+            <NavLink to="/explore">
+              our dynamic online course marketplace.
+            </NavLink>
+          </p>
+        </div>
+      </div>
       <section id="about-us">
-        <h1>About us</h1>
         <p>
-          Welcome to Learniverse Connect, your premier destination for unlocking
-          a world of knowledge and skills through our dynamic online course
-          marketplace. At Learniverse, we believe that learning knows no bounds,
-          and our platform is designed to empower individuals like you to embark
-          on a journey of lifelong learning. As a marketplace, we bring together
-          a diverse array of courses from passionate and expert third-party
+          At Learniverse, we believe that learning knows no bounds, and our
+          platform is designed to empower individuals like you to embark on a
+          journey of lifelong learning. As a marketplace, we bring together a
+          diverse array of courses from passionate and expert third-party
           providers, ensuring that you have access to a comprehensive range of
           subjects and skills to fuel your personal and professional growth.
         </p>
@@ -121,8 +172,14 @@ export function About() {
       {/* Contact us */}
       <section id="contact-form-section">
         <h2>Contact us</h2>
-        <form action="" id="contact-form">
-          <label for="name">Name:</label>
+        <form onSubmit={sendMessage} id="contact-form">
+          <span
+            id="return-message"
+            style={{ display: returnMessage ? "flex" : "none" }}
+          >
+            {returnMessage}
+          </span>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
@@ -130,7 +187,7 @@ export function About() {
             required
             placeholder="Your full name"
           />
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -138,7 +195,7 @@ export function About() {
             required
             placeholder="Email"
           />
-          <label for="message">Message:</label>
+          <label htmlFor="message">Message:</label>
           <textarea
             name="message"
             id="message"
@@ -160,7 +217,7 @@ export function About() {
             title="Click to copy mail"
             onClick={() => handleCopyText("learniverse@connect.com", "email")}
           >
-            Email: learniverse@connect.com{" "}
+            <FontAwesomeIcon icon={faEnvelope} /> learniverse@connect.com{" "}
             <FontAwesomeIcon icon={copyIcons.email} className="copy-icon" />
             {activeItem === "email" && (
               <span className="success-message">{successMessage}</span>
@@ -172,7 +229,7 @@ export function About() {
             title="Click to copy phone number"
             onClick={() => handleCopyText("+47 40686044", "phone")}
           >
-            Phone: +47 40686044{" "}
+            <FontAwesomeIcon icon={faPhone} /> +47 40686044{" "}
             <FontAwesomeIcon icon={copyIcons.phone} className="copy-icon" />
             {activeItem === "phone" && (
               <span className="success-message">{successMessage}</span>
@@ -182,9 +239,9 @@ export function About() {
           <li
             className="contact-option"
             title="Click to copy address"
-            onClick={() => handleCopyText("Gamle Blindheimsveg 197", "address")}
+            onClick={() => handleCopyText("Gamle Blindheimsveg 25", "address")}
           >
-            Address: Gamle Blindheimsveg 197{" "}
+            <FontAwesomeIcon icon={faHouse} /> Gamle Blindheimsveg 25{" "}
             <FontAwesomeIcon icon={copyIcons.address} className="copy-icon" />
             {activeItem === "address" && (
               <span className="success-message">{successMessage}</span>

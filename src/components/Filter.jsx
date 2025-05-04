@@ -96,13 +96,13 @@ export function Filter({
       <div className="filter-group">
         <h2>Price</h2>
         <div className="price-range-header">
-          <span>0 NOK</span>
-          <span id={`${id}-max-price`}>{maxPrice.toLocaleString()} NOK</span>
+          <span>0 USD</span>
+          <span id={`${id}-max-price`}>{maxPrice.toLocaleString()} USD</span>
         </div>
         <input
           type="range"
           min="0"
-          max="100000"
+          max="10000"
           value={maxPrice}
           className="price-slider"
           id={`${id}-price-range`}

@@ -1,10 +1,10 @@
 import "../css/global-styles.css";
-import "../css/index.css";
+import "../css/LandingPage.css";
 import "../css/card.css";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
-import { asyncApiRequest } from "../tools/requests";
 import { useCourses } from "../components/CourseProvider";
+import { useCart } from "../components/CartContext";
 
 /**
  * Component representing the landing page of the application.
@@ -21,8 +21,10 @@ import { useCourses } from "../components/CourseProvider";
  */
 function LandingPage() {
   const { discountedCourses, isLoading } = useCourses();
+  const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [addedCourseId, setAddedCourseId] = useState(null);
 
   // Filter courses by category
   const filterCoursesByCategory = (category) => {
@@ -88,8 +90,36 @@ function LandingPage() {
     );
   };
 
+  // Handle adding course to cart
+  const handleAddToCart = (course, provider) => {
+    try {
+      console.log("Adding to cart:", course.title, "from", provider);
+      addToCart(course, provider);
+      setAddedCourseId(course.id); // Set the ID of the added course
+
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
   return (
     <main id="index-main">
+      {/* Hero section */}
+      <div id="index-hero">
+        <div className="hero-content-wrapper">
+          <h1>Welcome to Learniverse Connect!</h1>
+          <p>
+            Your one-stop destination for online courses and learning
+            opportunities. <NavLink to={"/explore"}>Explore</NavLink> a wide
+            range of courses from top providers and enhance your skills today!
+          </p>
+        </div>
+      </div>
+
       {/* Carousel section */}
       <section id="carousel">
         <button
@@ -131,6 +161,20 @@ function LandingPage() {
                 </NavLink>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Navigation dots */}
+        <div className="carousel-dots">
+          {categories.map((_, index) => (
+            <button
+              key={index}
+              className={`carousel-dot ${
+                index === currentSlide ? "active" : ""
+              }`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
       </section>
@@ -221,12 +265,11 @@ function LandingPage() {
             <p>Loading courses...</p>
           ) : getFilteredCourses().length > 0 ? (
             getFilteredCourses().map((course) => (
-              <NavLink
-                className="wrapper-tag"
-                to={`/courseinformation/${course.courseId}`}
-                key={course.id}
-              >
-                <div className="card">
+              <div className="card" key={course.id}>
+                <NavLink
+                  className="wrapper-tag"
+                  to={`/courseinformation/${course.courseId}`}
+                >
                   <div className="image-container">
                     <img
                       src={
@@ -248,8 +291,19 @@ function LandingPage() {
                     </p>
                     <p className="provider">{course.provider}</p>
                   </div>
-                </div>
-              </NavLink>
+                </NavLink>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => handleAddToCart(course, course.provider)}
+                >
+                  Add to cart
+                </button>
+
+                {/* Success message */}
+                {addedCourseId === course.id && (
+                  <div className="cart-success-message">Added to cart!</div>
+                )}
+              </div>
             ))
           ) : (
             <p className="no-courses-message">

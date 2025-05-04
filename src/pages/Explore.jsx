@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Filter } from "../components/Filter";
 import { useCourses } from "../components/CourseProvider";
+import { useCart } from "../components/CartContext";
 
 /**
  * This is the Explore page component.
@@ -16,12 +17,13 @@ import { useCourses } from "../components/CourseProvider";
  */
 export function Explore({ searchTerm: externalSearchTerm }) {
   const { courses, isLoading } = useCourses();
+  const { addToCart } = useCart();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(100000);
+  const [maxPrice, setMaxPrice] = useState(10000);
   const [sortOption, setSortOption] = useState("price-asc");
-
-  console.log("Courses:", courses);
+  const [selectedProviders, setSelectedProviders] = useState({});
+  const [addedCourseId, setAddedCourseId] = useState(null);
 
   // Get search from URL query params
   const location = useLocation();
@@ -143,6 +145,30 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
+  // Handle provider selection change
+  const handleProviderChange = (courseId, providerIndex) => {
+    setSelectedProviders((prev) => ({
+      ...prev,
+      [courseId]: providerIndex,
+    }));
+  };
+
+  // Handle add to cart action
+  const handleAddToCart = (course, provider) => {
+    try {
+      console.log("Adding to cart:", course.title, "from", provider.name);
+      addToCart(course, provider);
+      setAddedCourseId(course.id); // Set the ID of the added course
+
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
   return (
     <main>
       {/* Side panel for filtering */}
@@ -203,12 +229,11 @@ export function Explore({ searchTerm: externalSearchTerm }) {
             <div className="loading">Loading courses...</div>
           ) : filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
-              <NavLink
-                className="wrapper-tag"
-                to={`/courseinformation/${course.id}`}
-                key={course.id}
-              >
-                <div className="card">
+              <div className="card" key={course.id}>
+                <NavLink
+                  className="wrapper-tag"
+                  to={`/courseinformation/${course.id}`}
+                >
                   <div className="image-container">
                     <img
                       src={`/course-images/${course.imagePath}`}
@@ -218,23 +243,43 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                   </div>
                   <div className="course-details">
                     <h3 className="course-title">{course.title}</h3>
-                    <ul>
-                      {course.providers.map((provider) => (
-                        <li key={provider.id}>
-                          {provider.name}:{" "}
-                          {/* Format price with discount if applicable */}
-                          {provider.discount > 0
-                            ? formatPrice(
-                                provider.price * (1 - provider.discount / 100),
-                                provider.currency
-                              )
-                            : formatPrice(provider.price, provider.currency)}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
-              </NavLink>
+                </NavLink>
+                <select
+                  className="provider-select"
+                  value={selectedProviders[course.id] || 0}
+                  onChange={(e) =>
+                    handleProviderChange(course.id, parseInt(e.target.value))
+                  }
+                >
+                  {course.providers.map((provider, index) => (
+                    <option key={provider.id} value={index}>
+                      {provider.name}:{" "}
+                      {provider.discount > 0
+                        ? formatPrice(
+                            provider.price * (1 - provider.discount / 100),
+                            provider.currency
+                          )
+                        : formatPrice(provider.price, provider.currency)}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() =>
+                    handleAddToCart(
+                      course,
+                      course.providers[selectedProviders[course.id] || 0]
+                    )
+                  }
+                >
+                  Add to cart
+                </button>
+                {/* Success message */}
+                {addedCourseId === course.id && (
+                  <div className="cart-success-message">Added to cart!</div>
+                )}
+              </div>
             ))
           ) : (
             <div className="no-results">

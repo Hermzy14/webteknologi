@@ -5,8 +5,8 @@ import { About } from "./pages/About";
 import ComparePage from "./pages/Compare";
 import ShoppingCart from "./pages/Cart";
 import { Admin } from "./pages/Admin";
-import {Login} from "./pages/Login.jsx";
-import {Signup} from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 /**
  * Component representing the main section of the application.

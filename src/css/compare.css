@@ -9,7 +9,7 @@ body {
 }
 
 .course {
-    width: 100%;
+    width: 50%;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
