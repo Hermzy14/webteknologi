@@ -7,6 +7,8 @@ import ShoppingCart from "./pages/Cart";
 import { Admin } from "./pages/Admin";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
+import ProfilePage from "./pages/Profile.jsx";
+
 
 /**
  * Component representing the main section of the application.
@@ -22,10 +24,11 @@ export function MainSection() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/compare" element={<ComparePage />} />
         <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </main>
   );
