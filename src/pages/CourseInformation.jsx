@@ -142,20 +142,7 @@ export function CourseInformation() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer>
-        <div className="flex-footer">
-          {/* TODO: Remember to change this to an icon */}
-          <h1>LOGO</h1>
-          <p>
-            This website is a result of a university group project, performed in
-            the course IDATA2301 Web technologies, at NTNU. <br />
-            All the information provided here is a result of imagination. Any
-            resemblance with real companies or products is a coincidence.
-          </p>
-          <p>&copy; 2025 Learniverse Connect</p>
-        </div>
-      </footer>
+     
     </div>
   );
 }
