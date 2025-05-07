@@ -1,34 +1,64 @@
 import React from 'react';
 import "../css/global-styles.css";
 import "../css/cart.css";
+import { useCart } from "../components/CartContext";
 
 function ShoppingCart() {
-  // This would typically come from your state management (like Redux or Context)
-  const cartItemCount = 0; // Replace with actual cart count from your state
+  const { cartItems, getCartCount, clearCart, removeFromCart, getCartTotal } = useCart();
 
   return (
     <>
-      {/* Main content */}
       <main>
-        {/* Empty shopping cart */}
         <section id="Shopping-cart">
           <h2>Shopping Cart</h2>
-          <h3>{cartItemCount} Courses in cart</h3>
-          <div className="empty-cart">
-            <h4>Your cart is empty</h4>
-            <a href="/explore" className="cart-btn" title="Keep shopping">
-              Keep shopping
-            </a>
-          </div>
-        </section>
+          <h3>{getCartCount()} Courses in cart</h3>
 
-        {/* Cart - This would be conditionally rendered when there are items */}
-        <div className="Box">
-          <div className="Item">
-            <div className="Image"></div>
-            <div className="Description"></div>
-          </div>
-        </div>
+          {cartItems.length === 0 ? (
+            <div className="empty-cart">
+              <h4>Your cart is empty</h4>
+              <a href="/explore" className="cart-btn" title="Keep shopping">
+                Keep shopping
+              </a>
+            </div>
+          ) : (
+            <>
+              <div className="cart-items">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="cart-item">
+                    <img 
+                      src={`/course-images/${item.imagePath}`} 
+                      alt={item.title} 
+                      className="course-image"
+                    />
+                    <div className="item-details">
+                      <h4>{item.title}</h4>
+                      <p className="provider">{item.providerName}</p>
+                      <p className="price">{item.price} {item.currency}</p>
+                      <button 
+                        className="remove-btn"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="cart-summary">
+                <p className="total-price">
+                  Total: {getCartTotal()} {cartItems[0]?.currency}
+                </p>
+                <button 
+                  className="clear-btn"
+                  onClick={clearCart}
+                >
+                  Clear Cart
+                </button>
+              </div>
+            </>
+          )}
+        </section>
       </main>
     </>
   );
