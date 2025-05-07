@@ -11,43 +11,7 @@ import { NavLink } from "react-router-dom";
 export function CourseInformation() {
   return (
     <div className="flex-container">
-      {/* Header */}
-      <header>
-        <NavLink to="/" title="Home">
-          <h1>Logo</h1>
-        </NavLink>
-        <form action="/search" method="get" id="searchbar">
-          <input
-            title="Type and hit search to search for courses"
-            type="text"
-            name="search"
-            placeholder="Search for courses..."
-          />
-          <button type="submit" title="Search">
-            Search
-          </button>
-          {/* TODO: Remember to change this to an icon */}
-        </form>
-        <nav>
-          <NavLink to="/cart" title="Cart">
-            Cart
-          </NavLink>
-          {/* TODO: Remember to change to an icon */}
-          <NavLink to="/explore" title="Courses">
-            Courses
-          </NavLink>
-          <NavLink to="/compare">Compare</NavLink>
-          <NavLink to="/about" title="About" id="about">
-            About
-          </NavLink>
-          <NavLink to="/login" title="Sign in" id="sign-in-btn">
-            Sign in
-          </NavLink>
-          <NavLink to="/signup" title="Register" id="register-btn">
-            Register
-          </NavLink>
-        </nav>
-      </header>
+      
 
       {/* Main content */}
       <main>
