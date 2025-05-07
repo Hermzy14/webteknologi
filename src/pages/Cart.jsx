@@ -28,7 +28,7 @@ function ShoppingCart() {
                     <img 
                       src={`/course-images/${item.imagePath}`} 
                       alt={item.title} 
-                      className="course-image"
+                      className="course-image-cart"
                     />
                     <div className="item-details">
                       <h4>{item.title}</h4>
