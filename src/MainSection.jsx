@@ -8,6 +8,7 @@ import { Admin } from "./pages/Admin";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import ProfilePage from "./pages/Profile.jsx";
+import { CourseInformation } from "./pages/CourseInformation.jsx";
 
 
 /**
@@ -29,6 +30,7 @@ export function MainSection() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/courseinformation" element={<CourseInformation/>} />
       </Routes>
     </main>
   );
