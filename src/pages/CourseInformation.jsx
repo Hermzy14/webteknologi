@@ -14,14 +14,14 @@ export function CourseInformation() {
       
 
       {/* Main content */}
-      <main>
+      <main id="courseInformationMain">
         <section className="informationPanel">
           <section className="informationPanel3">
             <h2>Real time programming in Java</h2>
 
             <div className="imageWrapper">
               <img
-                src="/rescources/Image-not-found.png"
+                src="src/assets/Image-not-found.png"
                 className="imgNotFound"
                 alt="Course"
               />
@@ -75,7 +75,7 @@ export function CourseInformation() {
           <section className="courseCarousel">
             <NavLink to="" className="leftArrow" title="left">
               <img
-                src="/rescources/leftArrow.PNG"
+                src="src/assets/leftArrow.PNG"
                 className="leftArrow"
                 alt="leftArrow"
               />
@@ -84,7 +84,7 @@ export function CourseInformation() {
             <section className="carouselCard">
               <NavLink to="">
                 <img
-                  src="/rescources/Image-not-found.png"
+                  src="src/assets/Image-not-found.png"
                   alt="Course thumbnail"
                 />
                 <p className="courseText"> programming in java</p>
@@ -96,7 +96,7 @@ export function CourseInformation() {
             <section className="carouselCard">
               <NavLink to="">
                 <img
-                  src="/rescources/Image-not-found.png"
+                  src="src/assets/Image-not-found.png"
                   alt="Course thumbnail"
                 />
                 <p className="courseText"> programming in java</p>
@@ -108,7 +108,7 @@ export function CourseInformation() {
             <section className="carouselCard">
               <NavLink to="">
                 <img
-                  src="/rescources/Image-not-found.png"
+                  src="src/assets/Image-not-found.png"
                   alt="Course thumbnail"
                 />
                 <p className="courseText"> programming in java</p>
@@ -120,7 +120,7 @@ export function CourseInformation() {
             <section className="carouselCard">
               <NavLink to="">
                 <img
-                  src="/rescources/Image-not-found.png"
+                  src="src/assets/Image-not-found.png"
                   alt="Course thumbnail"
                 />
                 <p className="courseText"> programming in java</p>
@@ -131,7 +131,7 @@ export function CourseInformation() {
 
             <NavLink to="" className="rightArrow" title="right">
               <img
-                src="/rescources/rightArrow.PNG"
+                src="src/assets/rightArrow.PNG"
                 className="rightArrow"
                 alt="rightArrow"
               />

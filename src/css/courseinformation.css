@@ -187,3 +187,9 @@ a.leftArrow::after, a.rightArrow::after {
 a.leftArrow:hover::after, a.rightArrow:hover::after {
     opacity: 1; 
 }
+
+#courseInformationMain {
+
+    flex-direction: column;
+
+}
