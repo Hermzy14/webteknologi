@@ -22,7 +22,7 @@ export function CourseInformation() {
             <div className="imageWrapper">
               <img
                 src="src/assets/Image-not-found.png"
-                className="imgNotFound"
+                className="imgNotFound2"
                 alt="Course"
               />
             </div>
