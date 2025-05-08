@@ -7,6 +7,7 @@ import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Filter } from "../components/Filter";
 import { useCourses } from "../components/CourseProvider";
 import { useCart } from "../components/CartContext";
+import { useCompare } from "../components/CompareContext";
 
 /**
  * This is the Explore page component.
@@ -24,6 +25,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const [sortOption, setSortOption] = useState("price-asc");
   const [selectedProviders, setSelectedProviders] = useState({});
   const [addedCourseId, setAddedCourseId] = useState(null);
+  const { addToCompare } = useCompare();
 
   // Get search from URL query params
   const location = useLocation();
@@ -169,6 +171,15 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
+  const handleAddToCompare = (course) => {
+    try {
+      addToCompare(course);
+      console.log("Added to compare:", course.title);
+    } catch (error) {
+      console.error("Error adding to compare:", error);
+    }
+  };
+
   return (
     <main>
       {/* Side panel for filtering */}
@@ -275,6 +286,15 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                 >
                   Add to cart
                 </button>
+
+                <button
+                  className="add-to-compare-button"
+                  onClick={() => handleAddToCompare(course)}
+                >
+                  Add to compare
+                </button>
+
+
                 {/* Success message */}
                 {addedCourseId === course.id && (
                   <div className="cart-success-message">Added to cart!</div>

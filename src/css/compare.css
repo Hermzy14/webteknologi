@@ -1,92 +1,133 @@
-body {
-    box-sizing: border-box;
-}
-
-.comparisons {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.course {
-    width: 50%;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid black;
-    align-items: flex-start; 
-}
-
-.course.y {
-    border-left: 1px solid black;
-    padding-left: 20px;
-}
-
-.carouselHolder {
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px; /* Add space between course content and carousel */
-    width: 100%;
-}
-
-.similarCourses {
-    width: 100%;
-    background-color: white;
-}
-
-
-.top {
-    box-sizing: border-box;
-    display: flex;
-    align-items: flex-start; 
-    width: 100%;
-    gap: 20px; 
-}
-
-.imageWrapper {
-    width: 40%; 
-    height: auto;
-    display: inline-block;
-}
-
-.textAndButtons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    flex-grow: 1;
-}
-
-.textContainer {
-    display: flex;
-    flex-direction: column; 
-    width: 100%;
-}
-
-.buttonContainer {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-end;
-    margin-top: 100px; 
-}
-
-#Remove, #Add {
-    border: none;
-    padding: 10px 20px; 
+.compare-page main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .compare-page h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
+  }
+  
+  .compare-page .comparisons {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .compare-page .compare-course-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    flex: 1 1 48%;
+    min-width: 300px;
+    box-sizing: border-box;
+  }
+  
+  .compare-page .compare-course-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .compare-page .compare-top {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .compare-page .compare-image-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .compare-page .compare-image-wrapper img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  .compare-page .compare-text-and-buttons {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .compare-page .compare-text-container .boldText {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .compare-page .compare-text-container .smallInfoText {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .compare-page .compare-button-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .compare-page .compare-button-container button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #0047ab;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .compare-page .compare-button-container button:hover {
+    background-color: #00358c;
+  }
+  
+  .compare-page .compare-button-container button:first-child {
+    background-color: #e74c3c;
+  }
+  
+  .compare-page .compare-button-container button:first-child:hover {
+    background-color: #c0392b;
+  }
+  
+  .compare-page .compare-course-card p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-top: 1rem;
+  }
+  
+  .compare-page .compare-placeholder {
+    text-align: center;
+    padding: 4rem;
+    background: #f9f9f9;
+    border-radius: 12px;
+  }
+  
+  .compare-page .compare-placeholder p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .compare-page .compare-placeholder a {
     display: inline-block;
-    width: auto; 
-    min-width: 120px; 
-    font-size: 14px; 
-    cursor: pointer; 
-    background-color: #007BFF; 
-    color: white; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease; 
-    white-space: nowrap; 
-}
-
-#Remove:hover, #Add:hover {
-    background-color: #0056b3; 
-}
+    padding: 0.75rem 1.5rem;
+    background-color: #0047ab;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .compare-page .compare-placeholder a:hover {
+    background-color: #00358c;
+  }
+  
