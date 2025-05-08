@@ -1,12 +1,12 @@
 .compare-page {
     padding: 2rem;
+    flex-direction: column;
   }
   
   .compare-heading {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #222;
   }
   
   .compare-empty {
