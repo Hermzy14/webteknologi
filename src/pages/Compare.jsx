@@ -1,102 +1,95 @@
 import React from "react";
 import "../css/global-styles.css";
 import "../css/compare.css";
-import "../css/courseinformation.css";
 import { useCompare } from "../components/CompareContext";
 import { useCart } from "../components/CartContext";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function ComparePage() {
   const { compareItems, removeFromCompare } = useCompare();
   const { addToCart } = useCart();
 
+  const handleAddToCart = (course) => {
+    addToCart(course, course.providers?.[0]); // Adjust provider logic as needed
+  };
+
   return (
-    <div className="compare-page">
-      <main>
-        <section>
-          <h1>Compare courses</h1>
-        </section>
+    <main className="compare-page">
+      <h1 className="compare-heading">Compare courses</h1>
 
-        {compareItems.length === 0 && (
-          <div className="compare-placeholder">
-            <p>You have no courses to compare.</p>
-            <Link to="/explore">Browse Courses</Link>
-          </div>
-        )}
-
-        {compareItems.length === 1 && (
-          <div className="comparisons">
-            <section className="compare-course-card">
-              <h2>{compareItems[0].title}</h2>
-              <div className="compare-top">
-                <div className="compare-image-wrapper">
-                  <img
-                    src={compareItems[0].imagePath || "rescources/Image-not-found.png"}
-                    alt={compareItems[0].title}
-                  />
-                </div>
-                <div className="compare-text-and-buttons">
-                  <div className="compare-text-container">
-                    <p className="boldText">{compareItems[0].price}</p>
-                    <p className="boldText">{compareItems[0].date}</p>
-                    <p className="boldText">{compareItems[0].hours}</p>
-                    <p className="smallInfoText">{compareItems[0].provider}</p>
-                  </div>
-                  <div className="compare-button-container">
-                    <button onClick={() => removeFromCompare(compareItems[0].id)}>
-                      Remove
-                    </button>
-                    <button onClick={() => addToCart(compareItems[0])}>
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+      {compareItems.length === 0 ? (
+        <div className="compare-empty">
+          <p>You have no courses to compare.</p>
+          <NavLink to="/explore" className="compare-button">
+            Browse Courses
+          </NavLink>
+        </div>
+      ) : (
+        <div className="compare-courses-wrapper">
+          {compareItems.length === 1 ? (
+            <>
+              <div className="compare-course-card">
+                <CompareCard
+                  course={compareItems[0]}
+                  onRemove={() => removeFromCompare(compareItems[0].id)}
+                  onAddToCart={() => handleAddToCart(compareItems[0])}
+                />
               </div>
-              <p>{compareItems[0].description}</p>
-            </section>
-            <div className="compare-placeholder" style={{ flex: 1 }}>
-              <p>Add one more course to compare.</p>
-              <Link to="/explore">Browse More Courses</Link>
-            </div>
-          </div>
-        )}
+              <div className="compare-placeholder-card">
+                <p>Select another course to compare.</p>
+                <NavLink to="/explore" className="compare-button">
+                  Find Another Course
+                </NavLink>
+              </div>
+            </>
+          ) : (
+            compareItems.slice(0, 2).map((course) => (
+              <div key={course.id} className="compare-course-card">
+                <CompareCard
+                  course={course}
+                  onRemove={() => removeFromCompare(course.id)}
+                  onAddToCart={() => handleAddToCart(course)}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      )}
+    </main>
+  );
+}
 
-        {compareItems.length === 2 && (
-          <div className="comparisons">
-            {compareItems.map((course) => (
-              <section key={course.id} className="compare-course-card">
-                <h2>{course.title}</h2>
-                <div className="compare-top">
-                  <div className="compare-image-wrapper">
-                    <img
-                      src={course.imagePath || "rescources/Image-not-found.png"}
-                      alt={course.title}
-                    />
-                  </div>
-                  <div className="compare-text-and-buttons">
-                    <div className="compare-text-container">
-                      <p className="boldText">{course.price}</p>
-                      <p className="boldText">{course.date}</p>
-                      <p className="boldText">{course.hours}</p>
-                      <p className="smallInfoText">{course.provider}</p>
-                    </div>
-                    <div className="compare-button-container">
-                      <button onClick={() => removeFromCompare(course.id)}>
-                        Remove
-                      </button>
-                      <button onClick={() => addToCart(course)}>
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <p>{course.description}</p>
-              </section>
-            ))}
+function CompareCard({ course, onRemove, onAddToCart }) {
+  return (
+    <section className="compare-card">
+      <h2 className="course-title">{course.title}</h2>
+      <div className="compare-top">
+        <div className="compare-img-wrapper">
+          <img
+            src={
+              course.imagePath
+                ? `/course-images/${course.imagePath}`
+                : "resources/Image-not-found.png"
+            }
+            alt={course.title}
+            className="compare-img"
+          />
+        </div>
+        <div className="compare-text-buttons">
+          <p className="compare-price">
+            {course.providers?.[0]?.price?.toLocaleString()} NOK
+          </p>
+          <p>{course.date || "Date TBD"}</p>
+          <p>{course.hours || "Hours TBD"}</p>
+          <p>{course.provider || "Provider TBD"}</p>
+          <div className="compare-button-group">
+            <button onClick={onRemove}>Remove</button>
+            <button onClick={onAddToCart}>Add to cart</button>
           </div>
-        )}
-      </main>
-    </div>
+        </div>
+      </div>
+      <p className="compare-description">{course.description}</p>
+    </section>
   );
 }
 
