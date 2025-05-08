@@ -294,7 +294,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                   Add to compare
                 </button>
 
-
                 {/* Success message */}
                 {addedCourseId === course.id && (
                   <div className="cart-success-message">Added to cart!</div>

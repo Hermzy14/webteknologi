@@ -77,11 +77,11 @@ function CompareCard({ course, onRemove, onAddToCart }) {
         </div>
         <div className="compare-text-buttons">
           <p className="compare-price">
-            {course.providers?.[0]?.price?.toLocaleString()} NOK
+            {course.providers[0]?.price?.toLocaleString()} NOK
           </p>
-          <p>{course.date || "Date TBD"}</p>
-          <p>{course.hours || "Hours TBD"}</p>
-          <p>{course.provider || "Provider TBD"}</p>
+          <p>{course.startDate || "Date TBD"}</p>
+          <p>{course.hoursPerWeek || "Hours TBD"}</p>
+          <p>{course.providers[0]?.name || "Provider TBD"}</p>
           <div className="compare-button-group">
             <button onClick={onRemove}>Remove</button>
             <button onClick={onAddToCart}>Add to cart</button>
