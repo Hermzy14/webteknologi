@@ -20,13 +20,14 @@ import { CourseCard } from "../components/CourseCard";
 export function Explore({ searchTerm: externalSearchTerm }) {
   const { courses, isLoading } = useCourses();
   const { addToCart } = useCart();
+  const { addToCompare } = useCompare();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(10000);
   const [sortOption, setSortOption] = useState("price-asc");
   const [selectedProviders, setSelectedProviders] = useState({});
   const [addedCourseId, setAddedCourseId] = useState(null);
-  const { addToCompare } = useCompare();
+  const [addedCourseAction, setAddedCourseAction] = useState(null);
 
   // Get search from URL query params
   const location = useLocation();
@@ -162,10 +163,12 @@ export function Explore({ searchTerm: externalSearchTerm }) {
       console.log("Adding to cart:", course.title, "from", provider.name);
       addToCart(course, provider);
       setAddedCourseId(course.id); // Set the ID of the added course
+      setAddedCourseAction("cart"); // Set the action to "cart"
 
-      // Clear the message after 3 seconds
+      // Clear both addedCourseId and addedCourseAction after 3 seconds
       setTimeout(() => {
         setAddedCourseId(null);
+        setAddedCourseAction(null);
       }, 3000);
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -179,6 +182,12 @@ export function Explore({ searchTerm: externalSearchTerm }) {
       const provider = course.providers[providerIndex];
       addToCompare(course, provider);
       setAddedCourseId(course.id);
+      setAddedCourseAction("compare");
+      // Clear both addedCourseId and addedCourseAction after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+        setAddedCourseAction(null);
+      }, 3000);
       console.log("Added to compare:", course.title, "from", provider);
     } catch (error) {
       console.error("Error adding to compare:", error);
@@ -254,6 +263,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
                 onProviderChange={handleProviderChange}
                 selectedProviderIndex={selectedProviders[course.id] || 0}
                 addedItemId={addedCourseId}
+                addedItemAction={addedCourseAction}
               />
             ))
           ) : (

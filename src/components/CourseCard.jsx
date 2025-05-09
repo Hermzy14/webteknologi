@@ -15,6 +15,7 @@ import "../css/card.css";
  * @param {number} props.selectedProviderIndex - Index of selected provider
  * @param {boolean} props.showCompare - Whether to show compare button
  * @param {number|null} props.addedItemId - ID of recently added item (for success message)
+ * @param {string|null} props.addedItemAction - Action type of recently added item (for success message)
  * @returns {JSX.Element} The rendered component
  */
 export function CourseCard({
@@ -26,6 +27,7 @@ export function CourseCard({
   selectedProviderIndex = 0,
   showCompare = true,
   addedItemId = null,
+  addedItemAction = null, // Add this new prop to track the action type
 }) {
   // Support both course structures from Explore and LandingPage
   const isDiscountedCourse = course.discountedPrice !== undefined;
@@ -109,9 +111,13 @@ export function CourseCard({
         </button>
       )}
 
-      {/* Success message */}
+      {/* Modified success message with conditional text */}
       {addedItemId === (isDiscountedCourse ? course.id : course.id) && (
-        <div className="cart-success-message">Added to cart!</div>
+        <div className="cart-success-message">
+          {addedItemAction === "compare"
+            ? "Added to compare!"
+            : "Added to cart!"}
+        </div>
       )}
     </div>
   );
@@ -126,4 +132,5 @@ CourseCard.propTypes = {
   selectedProviderIndex: PropTypes.number,
   showCompare: PropTypes.bool,
   addedItemId: PropTypes.number,
+  addedItemAction: PropTypes.string, // Add this new prop type
 };

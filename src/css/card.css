@@ -91,6 +91,19 @@
   background-color: var(--blue-hover-color);
 }
 
+.add-to-compare-button {
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--neutral-border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.add-to-compare-button:hover {
+  background-color: var(--hover-color);
+}
+
 .cart-success-message {
   font-size: 0.8rem;
   margin-top: 0.5rem;

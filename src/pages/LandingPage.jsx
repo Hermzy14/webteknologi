@@ -28,6 +28,7 @@ function LandingPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [addedCourseId, setAddedCourseId] = useState(null);
+  const [addedCourseAction, setAddedCourseAction] = useState(null);
 
   // Filter courses by category
   const filterCoursesByCategory = (category) => {
@@ -99,10 +100,12 @@ function LandingPage() {
       console.log("Adding to cart:", course.title, "from", provider);
       addToCart(course, provider);
       setAddedCourseId(course.id); // Set the ID of the added course
+      setAddedCourseAction("cart"); // Set the action type
 
-      // Clear the message after 3 seconds
+      // Clear both state variables after 3 seconds
       setTimeout(() => {
         setAddedCourseId(null);
+        setAddedCourseAction(null);
       }, 3000);
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -114,9 +117,12 @@ function LandingPage() {
     try {
       addToCompare(course, provider);
       setAddedCourseId(course.id); // Set the ID of the added course
-      // Clear the message after 3 seconds
+      setAddedCourseAction("compare"); // Set the action type
+
+      // Clear both state variables after 3 seconds
       setTimeout(() => {
         setAddedCourseId(null);
+        setAddedCourseAction(null);
       }, 3000);
     } catch (error) {
       console.error("Error adding to compare:", error);
@@ -290,6 +296,7 @@ function LandingPage() {
                 onAddToCompare={handleAddToCompare}
                 addedItemId={addedCourseId}
                 selectedProviderIndex={0}
+                addedItemAction={addedCourseAction}
               />
             ))
           ) : (
