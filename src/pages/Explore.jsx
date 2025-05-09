@@ -171,8 +171,10 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
-  const handleAddToCompare = (course, provider) => {
+  const handleAddToCompare = (course) => {
     try {
+      const providerIndex = selectedProviders[course.id] || 0;
+      const provider = course.providers[providerIndex];
       addToCompare(course, provider);
       setAddedCourseId(course.id);
       console.log("Added to compare:", course.title);
@@ -290,7 +292,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
 
                 <button
                   className="add-to-compare-button"
-                  onClick={() => handleAddToCompare(course, course.providers[selectedProviders[course.id] || 0] )}
+                  onClick={() => handleAddToCompare(course)}
                 >
                   Add to compare
                 </button>

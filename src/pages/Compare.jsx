@@ -10,7 +10,8 @@ function ComparePage() {
   const { addToCart } = useCart();
 
   const handleAddToCart = (course) => {
-    addToCart(course, course.providers?.[0]); // Adjust provider logic as needed
+    // Use the selectedProvider that was stored when adding to compare
+    addToCart(course, course.selectedProvider);
   };
 
   return (
@@ -60,6 +61,19 @@ function ComparePage() {
 }
 
 function CompareCard({ course, onRemove, onAddToCart }) {
+  // Use the selectedProvider that was stored with the course
+  const provider = course.selectedProvider || course.providers?.[0] || {
+    name: course.providerName,
+    price: course.price,
+    currency: course.currency || "USD",
+    discount: course.discount
+  };
+
+  // Calculate final price
+  const finalPrice = provider.discount > 0 
+    ? provider.price * (1 - provider.discount / 100)
+    : provider.price;
+
   return (
     <section className="compare-card">
       <h2 className="course-title">{course.title}</h2>
@@ -77,11 +91,11 @@ function CompareCard({ course, onRemove, onAddToCart }) {
         </div>
         <div className="compare-text-buttons">
           <p className="compare-price">
-            {course.providers[0]?.price?.toLocaleString()} NOK
+            {finalPrice.toLocaleString()} {provider.currency}
           </p>
           <p>{course.startDate || "Date TBD"}</p>
           <p>{course.hoursPerWeek || "Hours TBD"}</p>
-          <p>{course.providers[0]?.name || "Provider TBD"}</p>
+          <p>{provider.name || "Provider TBD"}</p>
           <div className="compare-button-group">
             <button onClick={onRemove}>Remove</button>
             <button onClick={onAddToCart}>Add to cart</button>

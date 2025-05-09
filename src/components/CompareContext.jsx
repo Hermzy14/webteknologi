@@ -14,13 +14,16 @@ export const CompareProvider = ({ children }) => {
     localStorage.setItem("compareCourses", JSON.stringify(compareItems));
   }, [compareItems]);
 
-  const addToCompare = (course) => {
+  const addToCompare = (course, selectedProvider) => {
     setCompareItems((prev) => {
-      // Prevent adding if already 2 items or course already exists
       if (prev.length >= 2 || prev.find((item) => item.id === course.id)) {
         return prev;
       }
-      return [...prev, course];
+      // Store both course and the selected provider
+      return [...prev, {
+        ...course,
+        selectedProvider: selectedProvider || course.providers?.[0] // Fallback to first provider
+      }];
     });
   };
 
