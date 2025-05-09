@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer.jsx";
 import "./css/global-styles.css";
 import { CourseProvider } from "./components/CourseProvider.jsx";
 import { CartProvider } from "./components/CartContext.jsx";
+import { CompareProvider } from "./components/CompareContext";
 
 /**
  * Component representing the whole application.
@@ -15,13 +16,15 @@ export function App() {
   return (
     <BrowserRouter>
       <CourseProvider>
-        <CartProvider>
-          <div className="app-container">
-            <Header />
-            <MainSection />
-            <Footer />
-          </div>
-        </CartProvider>
+        <CompareProvider>
+          <CartProvider>
+            <div className="app-container">
+              <Header />
+              <MainSection />
+              <Footer />
+            </div>
+          </CartProvider>
+        </CompareProvider>
       </CourseProvider>
     </BrowserRouter>
   );

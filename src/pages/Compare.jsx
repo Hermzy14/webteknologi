@@ -1,123 +1,109 @@
 import React from "react";
 import "../css/global-styles.css";
 import "../css/compare.css";
-import "../css/courseinformation.css";
+import { useCompare } from "../components/CompareContext";
+import { useCart } from "../components/CartContext";
+import { NavLink } from "react-router-dom";
 
 function ComparePage() {
-  // Sample course data - this would typically come from your state or API
-  const courses = [
-    {
-      id: 1,
-      title: "Course X",
-      price: "29 999 - 32 000 NOK",
-      date: "June 3rd - June 28th",
-      hours: "40 hours per week",
-      provider: "Available courses from NTNU and Oracle",
-      description:
-        "Embark on a transformative learning experience with our expert-level online course...",
-      similarCourses: [
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-      ],
-    },
-    {
-      id: 2,
-      title: "Course Y",
-      price: "29 999 - 32 000 NOK",
-      date: "June 3rd - June 28th",
-      hours: "40 hours per week",
-      provider: "Available courses from NTNU and Oracle",
-      description:
-        "Embark on a transformative learning experience with our expert-level online course...",
-      similarCourses: [
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-        { title: "Programming in Java", price: "25 000 NOK", provider: "NTNU" },
-      ],
-    },
-  ];
+  const { compareItems, removeFromCompare } = useCompare();
+  const { addToCart } = useCart();
 
-  const handleRemove = (courseId) => {
-    // Implement remove functionality
-    console.log(`Remove course ${courseId}`);
-  };
-
-  const handleAddToCart = (courseId) => {
-    // Implement add to cart functionality
-    console.log(`Add course ${courseId} to cart`);
+  const handleAddToCart = (course) => {
+    // Use the selectedProvider that was stored when adding to compare
+    addToCart(course, course.selectedProvider);
   };
 
   return (
-    <>
-      {/* Main content */}
-      <main>
-        {/* Compare courses section */}
-        <section>
-          <h1>Compare courses</h1>
-        </section>
+    <main className="compare-page">
+      <h1 className="compare-heading">Compare courses</h1>
 
-        <div className="comparisons">
-          {/* Map through courses to render them */}
-          {courses.map((course) => (
-            <section
-              key={course.id}
-              className={`course ${course.id === 1 ? "x" : "y"}`}
-            >
-              <h2>{course.title}</h2>
-
-              <div className="top">
-                <div className="imageWrapper">
-                  <img
-                    src="rescources/Image-not-found.png"
-                    className="imgNotFound"
-                    alt={course.title}
-                  />
-                </div>
-                <div className="textAndButtons">
-                  <div className="textContainer">
-                    <p className="boldText">{course.price}</p>
-                    <p className="boldText">{course.date}</p>
-                    <p className="boldText">{course.hours}</p>
-                    <p className="smallInfoText">{course.provider}</p>
-                  </div>
-                  {/* Button container */}
-                  <div className="buttonContainer">
-                    <button id="Remove" onClick={() => handleRemove(course.id)}>
-                      Remove
-                    </button>
-                    <button id="Add" onClick={() => handleAddToCart(course.id)}>
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <p>{course.description}</p>
-
-              <div className="similarCourses">
-                <h2>Similar courses</h2>
-                <div className="carouselHolder">
-                  {course.similarCourses.map((similar, index) => (
-                    <section key={index} className="carouselCard">
-                      <a href="/">
-                        <img
-                          src="rescources/Image-not-found.png"
-                          alt={similar.title}
-                        />
-                        <p className="courseText">{similar.title}</p>
-                        <p className="priceText">{similar.price}</p>
-                        <p className="providerText">{similar.provider}</p>
-                      </a>
-                    </section>
-                  ))}
-                </div>
-              </div>
-            </section>
-          ))}
+      {compareItems.length === 0 ? (
+        <div className="compare-empty">
+          <p>You have no courses to compare.</p>
+          <NavLink to="/explore" className="compare-button">
+            Browse Courses
+          </NavLink>
         </div>
-      </main>
-    </>
+      ) : (
+        <div className="compare-courses-wrapper">
+          {compareItems.length === 1 ? (
+            <>
+              <div className="compare-course-card">
+                <CompareCard
+                  course={compareItems[0]}
+                  onRemove={() => removeFromCompare(compareItems[0].id)}
+                  onAddToCart={() => handleAddToCart(compareItems[0])}
+                />
+              </div>
+              <div className="compare-placeholder-card">
+                <p>Select another course to compare.</p>
+                <NavLink to="/explore" className="compare-button">
+                  Find Another Course
+                </NavLink>
+              </div>
+            </>
+          ) : (
+            compareItems.slice(0, 2).map((course) => (
+              <div key={course.id} className="compare-course-card">
+                <CompareCard
+                  course={course}
+                  onRemove={() => removeFromCompare(course.id)}
+                  onAddToCart={() => handleAddToCart(course)}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      )}
+    </main>
+  );
+}
+
+function CompareCard({ course, onRemove, onAddToCart }) {
+  // Use the selectedProvider that was stored with the course
+  const provider = course.selectedProvider || course.providers?.[0] || {
+    name: course.providerName,
+    price: course.price,
+    currency: course.currency || "USD",
+    discount: course.discount
+  };
+
+  // Calculate final price
+  const finalPrice = provider.discount > 0 
+    ? provider.price * (1 - provider.discount / 100)
+    : provider.price;
+
+  return (
+    <section className="compare-card">
+      <h2 className="course-title">{course.title}</h2>
+      <div className="compare-top">
+        <div className="compare-img-wrapper">
+          <img
+            src={
+              course.imagePath
+                ? `/course-images/${course.imagePath}`
+                : "resources/Image-not-found.png"
+            }
+            alt={course.title}
+            className="compare-img"
+          />
+        </div>
+        <div className="compare-text-buttons">
+          <p className="compare-price">
+            {finalPrice.toLocaleString()} {provider.currency}
+          </p>
+          <p>{course.startDate || "Date TBD"}</p>
+          <p>{course.hoursPerWeek || "Hours TBD"}</p>
+          <p>{provider.name || "Provider TBD"}</p>
+          <div className="compare-button-group">
+            <button onClick={onRemove}>Remove</button>
+            <button onClick={onAddToCart}>Add to cart</button>
+          </div>
+        </div>
+      </div>
+      <p className="compare-description">{course.description}</p>
+    </section>
   );
 }
 
