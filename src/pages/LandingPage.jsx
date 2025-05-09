@@ -5,6 +5,8 @@ import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
 import { useCourses } from "../components/CourseProvider";
 import { useCart } from "../components/CartContext";
+import { CourseCard } from "../components/CourseCard";
+import { useCompare } from "../components/CompareContext";
 
 /**
  * Component representing the landing page of the application.
@@ -22,6 +24,7 @@ import { useCart } from "../components/CartContext";
 function LandingPage() {
   const { discountedCourses, isLoading } = useCourses();
   const { addToCart } = useCart();
+  const { addToCompare } = useCompare();
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [addedCourseId, setAddedCourseId] = useState(null);
@@ -103,6 +106,20 @@ function LandingPage() {
       }, 3000);
     } catch (error) {
       console.error("Error adding to cart:", error);
+    }
+  };
+
+  // Handle adding course to compare
+  const handleAddToCompare = (course, provider) => {
+    try {
+      addToCompare(course, provider);
+      setAddedCourseId(course.id); // Set the ID of the added course
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding to compare:", error);
     }
   };
 
@@ -265,45 +282,15 @@ function LandingPage() {
             <p>Loading courses...</p>
           ) : getFilteredCourses().length > 0 ? (
             getFilteredCourses().map((course) => (
-              <div className="card" key={course.id}>
-                <NavLink
-                  className="wrapper-tag"
-                  to={`/courseinformation/${course.courseId}`}
-                >
-                  <div className="image-container">
-                    <img
-                      src={
-                        course.imagePath
-                          ? `/course-images/${course.imagePath}`
-                          : "/course-images/Long white cropped.png"
-                      }
-                      alt={course.title}
-                      className="course-image"
-                    />
-                  </div>
-                  <div className="course-details">
-                    <h3 className="course-title">{course.title}</h3>
-                    <p className="discounted-price">
-                      {formatPrice(course.discountedPrice, course.currency)}
-                    </p>
-                    <p className="course-price">
-                      {formatPrice(course.originalPrice, course.currency)}
-                    </p>
-                    <p className="provider">{course.provider}</p>
-                  </div>
-                </NavLink>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() => handleAddToCart(course, course.provider)}
-                >
-                  Add to cart
-                </button>
-
-                {/* Success message */}
-                {addedCourseId === course.id && (
-                  <div className="cart-success-message">Added to cart!</div>
-                )}
-              </div>
+              <CourseCard
+                key={course.id}
+                course={course}
+                formatPrice={formatPrice}
+                onAddToCart={handleAddToCart}
+                onAddToCompare={handleAddToCompare}
+                addedItemId={addedCourseId}
+                selectedProviderIndex={0}
+              />
             ))
           ) : (
             <p className="no-courses-message">

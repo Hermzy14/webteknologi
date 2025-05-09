@@ -8,6 +8,7 @@ import { Filter } from "../components/Filter";
 import { useCourses } from "../components/CourseProvider";
 import { useCart } from "../components/CartContext";
 import { useCompare } from "../components/CompareContext";
+import { CourseCard } from "../components/CourseCard";
 
 /**
  * This is the Explore page component.
@@ -171,13 +172,14 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
+  // Handle add to compare action
   const handleAddToCompare = (course) => {
     try {
       const providerIndex = selectedProviders[course.id] || 0;
       const provider = course.providers[providerIndex];
       addToCompare(course, provider);
       setAddedCourseId(course.id);
-      console.log("Added to compare:", course.title);
+      console.log("Added to compare:", course.title, "from", provider);
     } catch (error) {
       console.error("Error adding to compare:", error);
     }
@@ -243,65 +245,16 @@ export function Explore({ searchTerm: externalSearchTerm }) {
             <div className="loading">Loading courses...</div>
           ) : filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
-              <div className="card" key={course.id}>
-                <NavLink
-                  className="wrapper-tag"
-                  to={`/courseinformation/${course.id}`}
-                >
-                  <div className="image-container">
-                    <img
-                      src={`/course-images/${course.imagePath}`}
-                      alt={course.title}
-                      className="course-image"
-                    />
-                  </div>
-                  <div className="course-details">
-                    <h3 className="course-title">{course.title}</h3>
-                  </div>
-                </NavLink>
-                <select
-                  className="provider-select"
-                  value={selectedProviders[course.id] || 0}
-                  onChange={(e) =>
-                    handleProviderChange(course.id, parseInt(e.target.value))
-                  }
-                >
-                  {course.providers.map((provider, index) => (
-                    <option key={provider.id} value={index}>
-                      {provider.name}:{" "}
-                      {provider.discount > 0
-                        ? formatPrice(
-                            provider.price * (1 - provider.discount / 100),
-                            provider.currency
-                          )
-                        : formatPrice(provider.price, provider.currency)}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() =>
-                    handleAddToCart(
-                      course,
-                      course.providers[selectedProviders[course.id] || 0]
-                    )
-                  }
-                >
-                  Add to cart
-                </button>
-
-                <button
-                  className="add-to-compare-button"
-                  onClick={() => handleAddToCompare(course)}
-                >
-                  Add to compare
-                </button>
-
-                {/* Success message */}
-                {addedCourseId === course.id && (
-                  <div className="cart-success-message">Added to cart!</div>
-                )}
-              </div>
+              <CourseCard
+                key={course.id}
+                course={course}
+                formatPrice={formatPrice}
+                onAddToCart={handleAddToCart}
+                onAddToCompare={handleAddToCompare}
+                onProviderChange={handleProviderChange}
+                selectedProviderIndex={selectedProviders[course.id] || 0}
+                addedItemId={addedCourseId}
+              />
             ))
           ) : (
             <div className="no-results">
