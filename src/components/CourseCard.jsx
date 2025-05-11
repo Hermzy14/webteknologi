@@ -95,13 +95,6 @@ export function CourseCard({
         </select>
       )}
 
-      <button
-        className="add-to-cart-button"
-        onClick={() => onAddToCart(course, selectedProvider)}
-      >
-        Add to cart
-      </button>
-
       {showCompare && (
         <button
           className="add-to-compare-button"
@@ -110,6 +103,13 @@ export function CourseCard({
           Add to compare
         </button>
       )}
+
+      <button
+        className="add-to-cart-button"
+        onClick={() => onAddToCart(course, selectedProvider)}
+      >
+        Add to cart
+      </button>
 
       {/* Modified success message with conditional text */}
       {addedItemId === (isDiscountedCourse ? course.id : course.id) && (

@@ -121,6 +121,7 @@ export function About() {
           providers, ensuring that you have access to a comprehensive range of
           subjects and skills to fuel your personal and professional growth.
         </p>
+        <br />
         <p>
           Our commitment to quality is unwavering, and we meticulously curate
           our course offerings to guarantee a premium learning experience.
@@ -135,6 +136,7 @@ export function About() {
           experience. Embrace the future of education with Learniverse Connect -
           where knowledge meets opportunity.
         </p>
+        <br />
         <p>
           At Learniverse Connect, we pride ourselves on offering courses that
           not only equip you with valuable knowledge and skills but also pave
@@ -152,6 +154,7 @@ export function About() {
           the assurance that your investment in education is backed by our
           unwavering support.
         </p>
+        <br />
         <p>
           While our courses predominantly take place in the virtual realm, we
           take pride in providing a unique blend of online learning and
