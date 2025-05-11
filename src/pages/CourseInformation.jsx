@@ -80,7 +80,8 @@ export function CourseInformation() {
 
             <div className="imageWrapper">
               <img
-                src={course.imagePath || "src/assets/Image-not-found.png"}
+                src={course.imagePath ? `/course-images/${course.imagePath}` : "/assets/Image-not-found.png"}
+
                 className="imgNotFound2"
                 alt={course.title}
               />
@@ -122,7 +123,7 @@ export function CourseInformation() {
             <section className="courseCarousel">
               <NavLink to="" className="leftArrow" title="left">
                 <img
-                  src="src/assets/leftArrow.PNG"
+                  src="/src/assets/leftArrow.PNG"
                   className="leftArrow"
                   alt="leftArrow"
                 />
@@ -139,10 +140,7 @@ export function CourseInformation() {
                   <section className="carouselCard" key={similarCourse.id}>
                     <NavLink to={`/courseinformation/${similarCourse.id}`}>
                       <img
-                        src={
-                          similarCourse.imagePath ||
-                          "src/assets/Image-not-found.png"
-                        }
+                        src={similarCourse.imagePath ? `/course-images/${similarCourse.imagePath}` : "/assets/Image-not-found.png"}
                         alt={similarCourse.title}
                       />
                       <p className="priceText">
@@ -159,7 +157,7 @@ export function CourseInformation() {
 
               <NavLink to="" className="rightArrow" title="right">
                 <img
-                  src="src/assets/rightArrow.PNG"
+                  src="/src/assets/rightArrow.PNG"
                   className="rightArrow"
                   alt="rightArrow"
                 />
