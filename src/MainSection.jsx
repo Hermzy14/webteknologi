@@ -10,7 +10,6 @@ import Signup from "./pages/Signup.jsx";
 import ProfilePage from "./pages/Profile.jsx";
 import { CourseInformation } from "./pages/CourseInformation.jsx";
 
-
 /**
  * Component representing the main section of the application.
  * It contains the main content and handles the display of the current page.
@@ -30,7 +29,7 @@ export function MainSection() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/courseinformation" element={<CourseInformation/>} />
+        <Route path="/courseinformation/:id" element={<CourseInformation />} />
       </Routes>
     </main>
   );

@@ -11,32 +11,36 @@ import { useEffect, useState } from "react";
  * @constructor
  */
 export function CourseInformation() {
-
-  const { courseId } = useParams();
+  const { id } = useParams();
   const { courses, isLoading } = useCourses();
   const [course, setCourse] = useState(null);
   const [similiarCourses, setSimilarCourses] = useState([]);
 
   useEffect(() => {
-    if (course.length > 0 && courseId) {
-      const foundCourse = courses.find((c) => c.id === courseId);
+    if (courses && courses.length > 0 && id) {
+      const foundCourse = courses.find(
+        (c) => c.id.toString() === id.toString()
+      );
       setCourse(foundCourse);
 
       if (foundCourse) {
-        const similar = courses.filter((c) => c.category.id === foundCourse.category.id !== foundCourse.id
-      )
-      .slice(0, 4);
-      setSimilarCourses(similar);
+        const similar = courses
+          .filter(
+            (c) =>
+              (c.category.id === foundCourse.category.id) !== foundCourse.id
+          )
+          .slice(0, 4);
+        setSimilarCourses(similar);
       }
     }
-  }, [courseId , courses]);
+  }, [id, courses]);
 
   const formatPrice = (price, currency = "NOK") => {
     if (currency === "NOK") {
       return `${Math.round(price).toLocaleString()} NOK`;
     }
     return `${price} ${currency}`;
-  }
+  };
 
   const formatDate = (DateString) => {
     return new Date(DateString).toLocaleDateString();
@@ -46,28 +50,28 @@ export function CourseInformation() {
     return (
       <div className="flex-container">
         <div className="loading">Loading course information... </div>
-        </div>
+      </div>
     );
   }
 
   if (!course) {
     return (
-        <div className="flex-container">
-          <div className="no-results">course not found</div>
-        </div>
+      <div className="flex-container">
+        <div className="no-results">course not found</div>
+      </div>
     );
   }
 
   const prices = course.providers.map((provider) => provider.price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
-  const priceRange = minPrice === maxprice ? formatPrice(minPrice) : `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
-
+  const priceRange =
+    minPrice === maxPrice
+      ? formatPrice(minPrice)
+      : `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
 
   return (
     <div className="flex-container">
-      
-
       {/* Main content */}
       <main id="courseInformationMain">
         <section className="informationPanel">
@@ -196,8 +200,6 @@ export function CourseInformation() {
           {/* TODO: Add functionallity for the buttons, to browse between displayed courses */}
         </section>
       </main>
-
-     
     </div>
   );
 }
