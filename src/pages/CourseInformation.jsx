@@ -1,6 +1,8 @@
 import "../css/courseinformation.css";
 import "../css/global-styles.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import { useCourses } from "../components/CourseProvider";
+import { useEffect, useState } from "react";
 
 /**
  * This is the course information page.
@@ -9,6 +11,59 @@ import { NavLink } from "react-router-dom";
  * @constructor
  */
 export function CourseInformation() {
+
+  const { courseId } = useParams();
+  const { courses, isLoading } = useCourses();
+  const [course, setCourse] = useState(null);
+  const [similiarCourses, setSimilarCourses] = useState([]);
+
+  useEffect(() => {
+    if (course.length > 0 && courseId) {
+      const foundCourse = courses.find((c) => c.id === courseId);
+      setCourse(foundCourse);
+
+      if (foundCourse) {
+        const similar = courses.filter((c) => c.category.id === foundCourse.category.id !== foundCourse.id
+      )
+      .slice(0, 4);
+      setSimilarCourses(similar);
+      }
+    }
+  }, [courseId , courses]);
+
+  const formatPrice = (price, currency = "NOK") => {
+    if (currency === "NOK") {
+      return `${Math.round(price).toLocaleString()} NOK`;
+    }
+    return `${price} ${currency}`;
+  }
+
+  const formatDate = (DateString) => {
+    return new Date(DateString).toLocaleDateString();
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex-container">
+        <div className="loading">Loading course information... </div>
+        </div>
+    );
+  }
+
+  if (!course) {
+    return (
+        <div className="flex-container">
+          <div className="no-results">course not found</div>
+        </div>
+    );
+  }
+
+  const prices = course.providers.map((provider) => provider.price);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  const priceRange = minPrice === maxprice ? formatPrice(minPrice) : `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
+
+
   return (
     <div className="flex-container">
       
