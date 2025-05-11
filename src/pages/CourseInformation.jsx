@@ -18,8 +18,11 @@ export function CourseInformation() {
   const [similarCourses, setSimilarCourses] = useState([]);
 
   useEffect(() => {
-    if (courses.length > 0 && courseId) {
-      const foundCourse = courses.find((c) => c.id === courseId);
+    console.log("ID from URL:", id);
+    console.log("Course data:", courses);
+
+    if (courses.length > 0 && id) {
+      const foundCourse = courses.find((c) => c.id === id);
       setCourse(foundCourse);
 
       if (foundCourse) {
@@ -125,7 +128,7 @@ export function CourseInformation() {
 
               return (
                 <section className="carouselCard" key={similarCourse.id}>
-                  <NavLink to={`/course/${similarCourse.id}`}>
+                  <NavLink to={`/courseinformation/${similarCourse.id}`}>
                   <img src={ similarCourse.imagePath || "src/assets/Image-not-found.png"}
                   alt={similarCourse.title}/>
                   <p className="priceText">{formatPrice(similarMinPrice, currency)}</p>
