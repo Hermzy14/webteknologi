@@ -4,7 +4,7 @@ import "../css/log-sign.css";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export function Login() {
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState({ username: "", password: "" });
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -24,32 +24,34 @@ export function Login() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
+                credentials: "include",
             });
 
             if (response.status === 200) {
+                const data = await response.json();
+                localStorage.setItem("token", data.jwt);
                 alert("Login successful!");
-                navigate("/");
+                navigate("/"); // Redirect to landing page
             } else if (response.status === 401) {
-                alert("Invalid credentials. Please try again.");
+                alert("Invalid username or password.");
             } else {
-                alert("Login failed. Please try again.");
+                alert("Login failed.");
             }
         } catch (error) {
             console.error("Login error:", error);
-            alert("Something went wrong.");
+            alert("Could not connect to server.");
         }
     };
+
     return (
         <div className="container">
-            <div id="image-container">
-            </div>
-
+            <div id="image-container"></div>
             <div className="right-side">
                 <div className="form-container">
                     <div className="tabs">
                         <NavLink
                             to="/login"
-                            className={({isActive}) =>
+                            className={({ isActive }) =>
                                 isActive ? "active-tab tab-link" : "inactive-tab tab-link"
                             }
                         >
@@ -58,20 +60,34 @@ export function Login() {
                         <div className="separator"></div>
                         <NavLink
                             to="/signup"
-                            className={({isActive}) =>
+                            className={({ isActive }) =>
                                 isActive ? "active-tab tab-link" : "inactive-tab tab-link"
                             }
                         >
-                            Register
+                            Sign up
                         </NavLink>
                     </div>
 
-                    <form>
-                        <label htmlFor="email" className="login-label">Email</label>
-                        <input type="email" id="email" name="email" required className="user-input"/>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="username" className="login-label">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            required
+                            className="user-input"
+                            onChange={handleChange}
+                        />
 
                         <label htmlFor="password" className="login-label">Password</label>
-                        <input type="password" id="password" name="password" required className="user-input"/>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            className="user-input"
+                            onChange={handleChange}
+                        />
 
                         <a href="#" className="forgot-password-tag">Forgot password?</a>
                         <button type="submit" id="login-button">Log in</button>
@@ -79,7 +95,6 @@ export function Login() {
                 </div>
             </div>
         </div>
-
     );
 }
 
