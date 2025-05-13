@@ -268,7 +268,7 @@ export function Header({ setSearchTerm }) {
           id="sign-in-btn"
           onClick={handleLinkClick}
         >
-          Sign in
+          Log in
         </NavLink>
         <NavLink
           className="header-link"

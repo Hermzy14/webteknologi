@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/global-styles.css";
 import "../css/log-sign.css";
-import {NavLink} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
+export function Login() {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
 
-export function Login () {
+    const handleChange = (e) => {
+        setFormData((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8080/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.status === 200) {
+                alert("Login successful!");
+                navigate("/");
+            } else if (response.status === 401) {
+                alert("Invalid credentials. Please try again.");
+            } else {
+                alert("Login failed. Please try again.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("Something went wrong.");
+        }
+    };
     return (
         <div className="container">
             <div id="image-container">
@@ -28,7 +62,7 @@ export function Login () {
                                 isActive ? "active-tab tab-link" : "inactive-tab tab-link"
                             }
                         >
-                            Sign up
+                            Register
                         </NavLink>
                     </div>
 

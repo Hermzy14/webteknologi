@@ -79,7 +79,7 @@ export function Signup() {
                                 isActive ? "active-tab tab-link" : "inactive-tab tab-link"
                             }
                         >
-                            Sign up
+                            Register
                         </NavLink>
                     </div>
 
@@ -124,7 +124,7 @@ export function Signup() {
                             onChange={handleChange}
                         />
 
-                        <button type="submit" id="sign-up-button">Sign up</button>
+                        <button type="submit" id="sign-up-button">Register</button>
                     </form>
                 </div>
             </div>
