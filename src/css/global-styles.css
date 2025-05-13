@@ -105,8 +105,6 @@ header {
   background-color: var(--hover-color);
   border-radius: 8px;
 }
-#about {
-}
 
 #sign-in-btn {
   background-color: var(--bg-color);

@@ -27,7 +27,7 @@ export function CourseCard({
   selectedProviderIndex = 0,
   showCompare = true,
   addedItemId = null,
-  addedItemAction = null, // Add this new prop to track the action type
+  addedItemAction = null,
 }) {
   // Support both course structures from Explore and LandingPage
   const isDiscountedCourse = course.discountedPrice !== undefined;
@@ -43,7 +43,7 @@ export function CourseCard({
       }
     : providers[selectedProviderIndex] || {};
 
-  const imagePath = course.imagePath || "default-image.jpg";
+  const imagePath = course.imagePath;
   const courseId = isDiscountedCourse ? course.courseId : course.id;
 
   return (

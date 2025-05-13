@@ -22,7 +22,7 @@ import { useCompare } from "../components/CompareContext";
  * @constructor
  */
 function LandingPage() {
-  const { discountedCourses, isLoading } = useCourses();
+  const { discountedCourses, isLoading, courses } = useCourses();
   const { addToCart } = useCart();
   const { addToCompare } = useCompare();
   const [activeCategory, setActiveCategory] = useState("all");
@@ -129,6 +129,18 @@ function LandingPage() {
     }
   };
 
+  // Load all course images to be displayed in the carousel
+  const loadCourseImages = (category) => {
+    const courseImages = [];
+    courses.forEach((course) => {
+      if (course.imagePath && course.category.name === category) {
+        courseImages.push(course.imagePath);
+      }
+    });
+    // Limit to 4 images for the grid
+    return courseImages.slice(0, 4);
+  };
+
   return (
     <main id="index-main">
       {/* Hero section */}
@@ -168,7 +180,17 @@ function LandingPage() {
               data-index={index}
               key={category}
             >
-              <div className="carousel-image"></div>
+              <div className="carousel-image-wrapper">
+                {/* Load course images for the carousel */}
+                {loadCourseImages(category).map((imagePath, idx) => (
+                  <img
+                    key={idx}
+                    src={`/course-images/${imagePath}`}
+                    alt={`Course image ${idx + 1}`}
+                    className="carousel-image"
+                  />
+                ))}
+              </div>
               <div id="carousel-content">
                 <h2>Looking for courses on {category}?</h2>
                 <p>
