@@ -6,6 +6,7 @@ import "./css/global-styles.css";
 import { CourseProvider } from "./components/CourseProvider.jsx";
 import { CartProvider } from "./components/CartContext.jsx";
 import { CompareProvider } from "./components/CompareContext";
+import { AuthProvider } from "./components/AuthContext.jsx";
 
 /**
  * Component representing the whole application.
@@ -14,18 +15,20 @@ import { CompareProvider } from "./components/CompareContext";
  */
 export function App() {
   return (
-    <BrowserRouter>
-      <CourseProvider>
-        <CompareProvider>
-          <CartProvider>
-            <div className="app-container">
-              <Header />
-              <MainSection />
-              <Footer />
-            </div>
-          </CartProvider>
-        </CompareProvider>
-      </CourseProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <CourseProvider>
+          <CompareProvider>
+            <CartProvider>
+              <div className="app-container">
+                <Header />
+                <MainSection />
+                <Footer />
+              </div>
+            </CartProvider>
+          </CompareProvider>
+        </CourseProvider>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
