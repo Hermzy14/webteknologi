@@ -284,45 +284,48 @@ export function Header({ setSearchTerm }) {
           About
         </NavLink>
 
-        {/* Check if user is logged in, and show link to profile page for all logged in users, as well as a log out button */}
+        {/* Show profile link only if user is logged in */}
         {loggedIn ? (
-          <>
-            <NavLink
-              className="header-link"
-              to="/profile"
-              title="Profile"
-              id="profile"
-              onClick={handleLinkClick}
-            >
-              Profile
-            </NavLink>
+          <NavLink
+            className="header-link"
+            to="/profile"
+            title="Profile"
+            id="profile"
+            onClick={handleLinkClick}
+          >
+            Profile
+          </NavLink>
+        ) : (
+          ""
+        )}
 
-            {/* Show admin link only if user is an admin */}
-            {isAdmin && (
-              <NavLink
-                className="header-link"
-                to="/admin"
-                title="Admin"
-                id="admin-btn"
-                onClick={handleLinkClick}
-              >
-                Admin
-              </NavLink>
-            )}
+        {/* Show admin link only if user is an admin */}
+        {isAdmin && (
+          <NavLink
+            className="header-link"
+            to="/admin"
+            title="Admin"
+            id="admin-btn"
+            onClick={handleLinkClick}
+          >
+            Admin
+          </NavLink>
+        )}
 
-            <NavLink
-              className="header-link"
-              to="/login"
-              title="Log out"
-              id="logout"
-              onClick={() => {
-                handleLinkClick();
-                handleLogout();
-              }}
-            >
-              Log out
-            </NavLink>
-          </>
+        {/* Check if user is logged in, and show log out button if they are */}
+        {loggedIn ? (
+          <NavLink
+            className="header-link"
+            to="/login"
+            title="Log out"
+            id="logout-btn"
+            onClick={() => {
+              handleLinkClick();
+              handleLogout();
+            }}
+          >
+            Log out
+          </NavLink>
         ) : (
           <>
             <NavLink

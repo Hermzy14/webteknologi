@@ -106,13 +106,13 @@ header {
   border-radius: 8px;
 }
 #about {
-  margin-right: 32px;
 }
 
 #sign-in-btn {
-  background-color: var(--neutral-bg-color);
+  background-color: var(--bg-color);
   border: 1px solid var(--neutral-border-color);
   border-radius: 8px;
+  margin-left: 2rem;
 }
 #sign-in-btn:hover {
   background-color: var(--hover-color);
@@ -126,6 +126,16 @@ header {
 }
 #register-btn:hover {
   background-color: var(--blue-hover-color);
+}
+
+#logout-btn {
+  background-color: var(--bg-color);
+  border: 1px solid var(--neutral-border-color);
+  border-radius: 8px;
+  margin-left: 2rem;
+}
+#logout-btn:hover {
+  background-color: var(--hover-color);
 }
 
 #search-container {
@@ -211,6 +221,10 @@ footer .wrapper .inner-wrapper {
     width: 100%;
   }
 
+  #search-container {
+    width: 60%;
+  }
+
   #search-bar {
     width: 100%;
   }
@@ -254,7 +268,8 @@ footer .wrapper .inner-wrapper {
   .header-link,
   #about,
   #sign-in-btn,
-  #register-btn {
+  #register-btn,
+  #logout-btn {
     margin: 0 1rem;
   }
 
@@ -262,8 +277,14 @@ footer .wrapper .inner-wrapper {
     margin-top: 1rem;
   }
 
-  #register-btn {
+  #register-btn,
+  #logout-btn {
     margin-bottom: 1rem;
+  }
+
+  #sign-in-btn,
+  #logout-btn {
+    margin-top: 2rem;
   }
 
   /* Footer */
