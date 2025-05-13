@@ -72,6 +72,10 @@ export function CourseProvider({ children }) {
             category: course.category.name,
             discount: provider.discount,
             imagePath: course.imagePath,
+            description: course.description,
+            startDate: course.startDate,
+            hoursPerWeek: course.hoursPerWeek,
+            endDate: course.endDate,
           });
         }
       });

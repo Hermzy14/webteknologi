@@ -78,17 +78,29 @@
   background-color: var(--hover-color);
 }
 
-.add-to-cart-button {
-  background-color: var(--primary-color);
+.add-to-cart-button,
+.add-to-compare-button {
   border: 1px solid var(--neutral-border-color);
   border-radius: 8px;
   padding: 0.5rem;
   margin-top: 0.5rem;
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.add-to-cart-button {
+  background-color: var(--primary-color);
 }
 .add-to-cart-button:hover {
   background-color: var(--blue-hover-color);
+}
+
+.add-to-compare-button {
+  background-color: var(--primary-bg-color);
+}
+.add-to-compare-button:hover {
+  background-color: var(--hover-color);
 }
 
 .cart-success-message {

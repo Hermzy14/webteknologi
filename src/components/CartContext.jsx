@@ -44,7 +44,7 @@ export function CartProvider({ children }) {
     // Calculate price with discount
     const finalPrice =
       provider.discount > 0
-        ? provider.price * (1 - provider.discount / 100)
+        ? Math.round(provider.price * (1 - provider.discount / 100))
         : provider.price;
 
     const newItem = {
