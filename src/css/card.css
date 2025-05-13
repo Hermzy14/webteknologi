@@ -52,7 +52,7 @@
 
 .course-price {
   font-size: 14px;
-  color: #999;
+  color: var(--neutral-border-color);
   font-weight: normal;
   text-decoration: line-through;
   margin: 0 0 0 8px;

@@ -189,6 +189,10 @@
   display: none;
 }
 
+.mobile-filter-label {
+  display: none;
+}
+
 .filter-nav {
   display: flex;
   gap: 1rem;
@@ -274,6 +278,11 @@
 
   #filter-nav {
     display: none;
+  }
+
+  .mobile-filter-label {
+    display: block;
+    margin: 0.5rem 0 0.3rem 0;
   }
 
   #filter-select {
