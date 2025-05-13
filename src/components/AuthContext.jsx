@@ -1,6 +1,8 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
+import {
+  getAuthenticatedUser,
+  deleteAuthorizationCookies,
+} from "../tools/authentication";
 
 // Create context
 const AuthContext = createContext(null);

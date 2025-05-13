@@ -1,3 +1,6 @@
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+
 /**
  * ProtectedRoute component to protect routes based on authentication and role.
  *

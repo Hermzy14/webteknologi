@@ -9,6 +9,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import ProfilePage from "./pages/Profile.jsx";
 import { CourseInformation } from "./pages/CourseInformation.jsx";
+import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
 
 /**
  * Component representing the main section of the application.
@@ -27,8 +28,19 @@ export function MainSection() {
         <Route path="/login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/cart" element={<ShoppingCart />} />
-        <Route path="/admin" element={<Admin />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute requireAdmin={true}>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/profile" element={<ProfilePage />} />
+
         <Route path="/courseinformation/:id" element={<CourseInformation />} />
       </Routes>
     </main>

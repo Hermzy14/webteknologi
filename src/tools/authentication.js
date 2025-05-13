@@ -27,7 +27,10 @@ export function getAuthenticatedUser() {
  * @returns {boolean} True if the user is an admin, false otherwise.
  */
 export function isAdmin(user) {
-  return user && user.roles && user.roles.includes("ADMIN");
+  if (!user || !user.role) return false;
+  return user.role.some(
+    (role) => typeof role === "string" && role.toUpperCase() === "ADMIN"
+  );
 }
 
 /**
@@ -49,11 +52,7 @@ export async function sendAuthenticationRequest(
     password: password,
   };
   try {
-    const jwtResponse = await asyncApiRequest(
-      "POST",
-      "/authenticate",
-      postData
-    );
+    const jwtResponse = await asyncApiRequest("/users/login", "POST", postData);
     if (jwtResponse && jwtResponse.jwt) {
       setCookie("jwt", jwtResponse.jwt);
       const userData = parseJwtUser(jwtResponse.jwt);
@@ -101,7 +100,7 @@ function parseJwtUser(jwtString) {
   if (jwtObject) {
     user = {
       username: jwtObject.sub,
-      roles: jwtObject.roles.map((r) => r.authority),
+      roles: jwtObject.role.map((r) => r.authority),
     };
   }
   return user;

@@ -1,3 +1,5 @@
+import { getCookie } from "./cookies";
+
 // Import API URL from environment variables
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,58 +11,59 @@ const API_URL = import.meta.env.VITE_API_URL;
  * @param {object} requestBody - The body of the request.
  * @returns {Promise<JSON>} - The response from the API.
  */
-export async function asyncApiRequest(endpoint, method, requestBody) {
+export async function asyncApiRequest(endpoint, method = "GET", body = null) {
   const fullUrl = API_URL + endpoint;
-  let body = null;
-  let headers = {};
+  const headers = {
+    "Content-Type": "application/json",
+  };
 
-  if (method.toLowerCase() !== "get" && requestBody) {
-    headers["Content-Type"] = "application/json";
-    body = JSON.stringify(requestBody);
+  // Add JWT token if available
+  const jwt = getCookie("jwt");
+  if (jwt) {
+    headers["Authorization"] = `Bearer ${jwt}`;
   }
 
-  try {
-    const response = await fetch(fullUrl, {
-      method: method,
-      mode: "cors",
-      headers: headers,
-      body: body,
-    });
+  const options = {
+    method,
+    headers,
+    credentials: "include",
+  };
 
-    // Check if response is ok (status in the range 200-299)
-    if (!response.ok) {
-      // Try to parse error response as JSON first
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || `Server returned ${response.status}`
-        );
-      } else {
-        // If not JSON, get text
-        const errorText = await response.text();
-        throw new Error(errorText || `Server returned ${response.status}`);
-      }
-    }
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
 
-    // Handle empty responses
+  const response = await fetch(fullUrl, options);
+
+  if (!response.ok) {
+    // Try to parse error response as JSON first
     const contentType = response.headers.get("content-type");
-    if (response.status === 204 || !contentType) {
-      return { success: true };
-    }
-
-    // Parse JSON responses
     if (contentType && contentType.includes("application/json")) {
-      return await response.json();
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || `Server returned ${response.status}`
+      );
+    } else {
+      // If not JSON, get text
+      const errorText = await response.text();
+      throw new Error(errorText || `Server returned ${response.status}`);
     }
-
-    // For non-JSON responses
-    const textResponse = await response.text();
-    return { data: textResponse };
-  } catch (error) {
-    console.error("API Request error:", error);
-    throw error;
   }
+
+  // Handle empty responses
+  const contentType = response.headers.get("content-type");
+  if (response.status === 204 || !contentType) {
+    return { success: true };
+  }
+
+  // Parse JSON responses
+  if (contentType && contentType.includes("application/json")) {
+    return await response.json();
+  }
+
+  // For non-JSON responses
+  const textResponse = await response.text();
+  return { data: textResponse };
 }
 
 /**
