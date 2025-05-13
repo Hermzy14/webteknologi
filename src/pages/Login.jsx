@@ -3,8 +3,10 @@ import "../css/global-styles.css";
 import "../css/log-sign.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { sendAuthenticationRequest } from "../tools/authentication";
+import { useAuth } from "../components/AuthContext";
 
 export function Login() {
+  const { refreshUser } = useAuth();
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,6 +30,7 @@ export function Login() {
       (userData) => {
         // Success callback
         setIsLoading(false);
+        refreshUser();
         alert("Login successful!");
         navigate("/"); // Redirect to landing page
       },

@@ -12,7 +12,6 @@ import { useState } from "react";
  * @returns {JSX.Element} The rendered component.
  * @constructor
  */
-// TODO: Implement functionality to make sure only admins can access this page
 export function Admin() {
   const { allCourses, isLoading, refreshCourses } = useCourses();
   const [updatingCourses, setUpdatingCourses] = useState({});

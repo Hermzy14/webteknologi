@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "./CartContext";
 import { useCourses } from "./CourseProvider";
+import { useAuth } from "./AuthContext";
 
 /**
  * Header component for the application.
@@ -21,6 +22,9 @@ import { useCourses } from "./CourseProvider";
 export function Header({ setSearchTerm }) {
   const { getCartCount } = useCart();
   const { courses } = useCourses();
+  const { currentUser, logout } = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -171,6 +175,24 @@ export function Header({ setSearchTerm }) {
     nav.classList.remove("active");
   };
 
+  // Check if the user is logged in
+  useEffect(() => {
+    if (currentUser) {
+      setLoggedIn(true);
+      setIsAdmin(currentUser.roles && currentUser.roles.includes("ADMIN"));
+    } else {
+      setLoggedIn(false);
+      setIsAdmin(false);
+    }
+  }, [currentUser]);
+
+  // Handle logging out
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <header>
       <NavLink to="/" title="Home" id="index-link" onClick={handleLinkClick}>
@@ -261,24 +283,68 @@ export function Header({ setSearchTerm }) {
         >
           About
         </NavLink>
-        <NavLink
-          className="header-link"
-          to="/login"
-          title="Sign in"
-          id="sign-in-btn"
-          onClick={handleLinkClick}
-        >
-          Log in
-        </NavLink>
-        <NavLink
-          className="header-link"
-          to="/signup"
-          title="Register"
-          id="register-btn"
-          onClick={handleLinkClick}
-        >
-          Register
-        </NavLink>
+
+        {/* Check if user is logged in, and show link to profile page for all logged in users, as well as a log out button */}
+        {loggedIn ? (
+          <>
+            <NavLink
+              className="header-link"
+              to="/profile"
+              title="Profile"
+              id="profile"
+              onClick={handleLinkClick}
+            >
+              Profile
+            </NavLink>
+
+            {/* Show admin link only if user is an admin */}
+            {isAdmin && (
+              <NavLink
+                className="header-link"
+                to="/admin"
+                title="Admin"
+                id="admin-btn"
+                onClick={handleLinkClick}
+              >
+                Admin
+              </NavLink>
+            )}
+
+            <NavLink
+              className="header-link"
+              to="/login"
+              title="Log out"
+              id="logout"
+              onClick={() => {
+                handleLinkClick();
+                handleLogout();
+              }}
+            >
+              Log out
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink
+              className="header-link"
+              to="/login"
+              title="Sign in"
+              id="sign-in-btn"
+              onClick={handleLinkClick}
+            >
+              Log in
+            </NavLink>
+            <NavLink
+              className="header-link"
+              to="/signup"
+              title="Register"
+              id="register-btn"
+              onClick={handleLinkClick}
+            >
+              Register
+            </NavLink>
+          </>
+        )}
       </nav>
     </header>
   );
