@@ -209,7 +209,11 @@ export function Explore({ searchTerm: externalSearchTerm }) {
       <div className="main-content">
         <section id="result-and-sort">
           <div className="mobile-filter-result-wrapper">
-            <button id="filter-button" onClick={handleFilterToggle}>
+            <button
+              id="filter-button"
+              onClick={handleFilterToggle}
+              aria-label="Filter courses"
+            >
               <FontAwesomeIcon icon={faSliders} />
             </button>
             {searchTerm ? (
