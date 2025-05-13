@@ -257,6 +257,9 @@ function LandingPage() {
           </nav>
 
           {/* Mobile select menu */}
+          <label htmlFor="filter-select" className="mobile-filter-label">
+            Filter by category:
+          </label>
           <select
             id="filter-select"
             onChange={handleFilterSelectChange}

@@ -52,7 +52,7 @@
 
 .course-price {
   font-size: 14px;
-  color: #999;
+  color: var(--neutral-border-color);
   font-weight: normal;
   text-decoration: line-through;
   margin: 0 0 0 8px;
@@ -65,6 +65,11 @@
   margin: 8px 0 0 0;
 }
 
+.provider-label {
+  font-size: 14px;
+  color: var(--neutral-border-color);
+}
+
 .provider-select {
   width: 100%;
   padding: 0.5rem;
@@ -73,6 +78,7 @@
   background-color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+  margin-top: 0.5rem;
 }
 .provider-select:hover {
   background-color: var(--hover-color);

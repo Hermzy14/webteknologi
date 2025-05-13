@@ -99,6 +99,9 @@ export function Filter({
           <span>0 USD</span>
           <span id={`${id}-max-price`}>{maxPrice.toLocaleString()} USD</span>
         </div>
+        <label htmlFor={`${id}-price-range`} className="price-slider-label">
+          Select max price:
+        </label>
         <input
           type="range"
           min="0"
