@@ -88,9 +88,13 @@ main {
   margin-bottom: 10px;
 }
 
+.price-slider-label {
+  font-size: 14px;
+  color: var(--neutral-border-color);
+}
+
 .price-slider {
   width: 100%;
-  margin-top: 10px;
 }
 
 /* Sorting */

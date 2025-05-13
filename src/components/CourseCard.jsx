@@ -74,25 +74,31 @@ export function CourseCard({
       </NavLink>
 
       {!isDiscountedCourse && providers.length > 0 && (
-        <select
-          className="provider-select"
-          value={selectedProviderIndex}
-          onChange={(e) =>
-            onProviderChange(course.id, parseInt(e.target.value))
-          }
-        >
-          {providers.map((provider, index) => (
-            <option key={provider.id} value={index}>
-              {provider.name}:{" "}
-              {provider.discount > 0
-                ? formatPrice(
-                    provider.price * (1 - provider.discount / 100),
-                    provider.currency
-                  )
-                : formatPrice(provider.price, provider.currency)}
-            </option>
-          ))}
-        </select>
+        <>
+          <label className="provider-label" htmlFor="provider-select">
+            Select a provider:
+          </label>
+          <select
+            className="provider-select"
+            value={selectedProviderIndex}
+            onChange={(e) =>
+              onProviderChange(course.id, parseInt(e.target.value))
+            }
+            id="provider-select"
+          >
+            {providers.map((provider, index) => (
+              <option key={provider.id} value={index}>
+                {provider.name}:{" "}
+                {provider.discount > 0
+                  ? formatPrice(
+                      provider.price * (1 - provider.discount / 100),
+                      provider.currency
+                    )
+                  : formatPrice(provider.price, provider.currency)}
+              </option>
+            ))}
+          </select>
+        </>
       )}
 
       {showCompare && (
