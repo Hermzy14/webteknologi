@@ -2,6 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../css/card.css";
+import { useAuth } from "./AuthContext";
+import { asyncApiRequest } from "../tools/requests";
 
 /**
  * Reusable course card component for displaying course information.
@@ -29,6 +31,9 @@ export function CourseCard({
   addedItemId = null,
   addedItemAction = null,
 }) {
+  const { currentUser } = useAuth();
+  const [isFavorite, setIsFavorite] = useState(false);
+
   // Support both course structures from Explore and LandingPage
   const isDiscountedCourse = course.discountedPrice !== undefined;
 
@@ -46,8 +51,48 @@ export function CourseCard({
   const imagePath = course.imagePath;
   const courseId = isDiscountedCourse ? course.courseId : course.id;
 
+  // Function to handle adding to favorites
+  const handleAddToFavorites = () => {
+    if (!currentUser) {
+      alert("Please log in to add to favorites.");
+      return;
+    }
+
+    console.log("Course object:", course);
+    console.log("Is discounted course:", isDiscountedCourse);
+    console.log("course.courseId:", course.courseId);
+    console.log("course.id:", course.id);
+    console.log("Calculated courseId:", courseId);
+
+    asyncApiRequest(
+      `/users/${currentUser.username}/favorites/${courseId}`,
+      "POST"
+    )
+      .then(() => {
+        setIsFavorite(!isFavorite);
+        alert(
+          isFavorite
+            ? "Removed from favorites!"
+            : "Added to favorites successfully!"
+        );
+      })
+      .catch((error) => {
+        console.error("Error adding to favorites:", error);
+        alert("Failed to add to favorites.");
+      });
+  };
+
   return (
     <div className="card">
+      {/* Add to favorites button */}
+      {currentUser && (
+        <button
+          className="add-to-favorites-button"
+          onClick={handleAddToFavorites}
+        >
+          stjerne
+        </button>
+      )}
       <NavLink className="wrapper-tag" to={`/courseinformation/${courseId}`}>
         <div className="image-container">
           <img
