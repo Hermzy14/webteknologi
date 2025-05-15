@@ -14,8 +14,65 @@
   box-shadow: 0 0 8px 2px var(--hover-color);
 }
 
+.favorite-button-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.add-to-favorites-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  border: 1px solid var(--primary-border-color);
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+.add-to-favorites-button:hover {
+  background-color: var(--hover-color);
+}
+
 .add-to-favorites-button.active {
   background-color: var(--primary-color);
+  border: 1px solid var(--neutral-border-color);
+}
+.add-to-favorites-button.active:hover {
+  background-color: var(--blue-hover-color);
+}
+
+.favorite-message {
+  border-radius: 8px;
+  margin-left: 8px;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  animation: slideInRight 0.3s ease-out forwards;
+}
+.favorite-message-add {
+  background-color: var(--primary-color);
+  border: 1px solid var(--neutral-border-color);
+}
+.favorite-message-remove {
+  background-color: white;
+  border: 1px solid var(--primary-border-color);
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .image-container {

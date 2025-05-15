@@ -43,10 +43,16 @@ export function FavoritesProvider({ children }) {
         `/users/${currentUser.username}/favorites/${courseId}`,
         "POST"
       );
-      setFavorites([...favorites, { id: courseId }]);
+      setFavorites([...favorites, { courseId }]);
       return true;
     } catch (error) {
       console.error("Error adding to favorites:", error);
+      if (error.message.includes("409")) {
+        // It's already a favorite, so ensure it's in our local state
+        if (!favorites.some((fav) => fav.courseId === courseId)) {
+          setFavorites([...favorites, { courseId }]);
+        }
+      }
       return false;
     }
   };
@@ -60,7 +66,7 @@ export function FavoritesProvider({ children }) {
         `/users/${currentUser.username}/favorites/${courseId}`,
         "DELETE"
       );
-      setFavorites(favorites.filter((fav) => fav.id !== courseId));
+      setFavorites(favorites.filter((fav) => fav.courseId !== courseId));
       return true;
     } catch (error) {
       console.error("Error removing from favorites:", error);

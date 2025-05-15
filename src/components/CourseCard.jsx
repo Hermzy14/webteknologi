@@ -35,6 +35,8 @@ export function CourseCard({
   const { currentUser } = useAuth();
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [favMessage, setFavMessage] = useState(null);
+  const [msgType, setMsgType] = useState(null);
 
   // Support both course structures from Explore and LandingPage
   const isDiscountedCourse = course.discountedPrice !== undefined;
@@ -55,8 +57,10 @@ export function CourseCard({
 
   useEffect(() => {
     if (favorites && Array.isArray(favorites) && favorites.length > 0) {
-      const isFav = favorites.some((fav) => fav.id === courseId);
+      const isFav = favorites.some((fav) => fav.courseId === courseId);
       setIsFavorite(isFav);
+    } else {
+      setIsFavorite(false);
     }
   }, [favorites, courseId]);
 
@@ -76,8 +80,19 @@ export function CourseCard({
       return;
     }
 
+    setIsFavorite(false);
+    setFavMessage("Removed from favorites");
+    setMsgType("remove");
+
     removeFromFavorites(courseId).then((success) => {
-      if (success) setIsFavorite(false);
+      if (!success) {
+        setIsFavorite(true);
+      }
+
+      setTimeout(() => {
+        setFavMessage(null);
+        setMsgType(null);
+      }, 3000);
     });
   };
 
@@ -88,8 +103,24 @@ export function CourseCard({
       return;
     }
 
+    // Don't set state until we know the request succeeded
+    setFavMessage("Adding to favorites...");
+    setMsgType("add");
+
     addToFavorites(courseId).then((success) => {
-      if (success) setIsFavorite(true);
+      if (success) {
+        setIsFavorite(true);
+        setFavMessage("Added to favorites");
+      } else {
+        // The server already has this as a favorite, so we should update our local state
+        setIsFavorite(true);
+        setFavMessage("Already in favorites");
+      }
+
+      setTimeout(() => {
+        setFavMessage(null);
+        setMsgType(null);
+      }, 3000);
     });
   };
 
@@ -97,12 +128,25 @@ export function CourseCard({
     <div className="card">
       {/* Add to favorites button */}
       {currentUser && (
-        <button
-          className={`add-to-favorites-button ${isFavorite ? "active" : ""}`}
-          onClick={handleFavoriteButtonClick}
-        >
-          stjerne
-        </button>
+        <div className="favorite-button-container">
+          <button
+            className={`add-to-favorites-button ${isFavorite ? "active" : ""}`}
+            onClick={handleFavoriteButtonClick}
+          >
+            {isFavorite ? "★" : "☆"}
+          </button>
+          {favMessage && (
+            <span
+              className={`favorite-message ${
+                msgType === "add"
+                  ? "favorite-message-add"
+                  : "favorite-message-remove"
+              }`}
+            >
+              {favMessage}
+            </span>
+          )}
+        </div>
       )}
       <NavLink className="wrapper-tag" to={`/courseinformation/${courseId}`}>
         <div className="image-container">
