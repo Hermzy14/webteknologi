@@ -14,7 +14,7 @@ export function useCart() {
 
 // Cart provider component
 export function CartProvider({ children }) {
-  // Initialize cart from localStorage or empty array
+  // Load cart from localStorage
   const [cartItems, setCartItems] = useState(() => {
     try {
       const savedCart = localStorage.getItem("cart");
@@ -25,7 +25,18 @@ export function CartProvider({ children }) {
     }
   });
 
-  // Save cart to localStorage whenever it changes
+  // Load bought courses from localStorage
+  const [boughtCourses, setBoughtCourses] = useState(() => {
+    try {
+      const savedBought = localStorage.getItem("boughtCourses");
+      return savedBought ? JSON.parse(savedBought) : [];
+    } catch (error) {
+      console.error("Error loading bought courses from localStorage:", error);
+      return [];
+    }
+  });
+
+  // Save cart to localStorage when it changes
   useEffect(() => {
     try {
       localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -34,6 +45,15 @@ export function CartProvider({ children }) {
     }
   }, [cartItems]);
 
+  // Save bought courses to localStorage when they change
+  useEffect(() => {
+    try {
+      localStorage.setItem("boughtCourses", JSON.stringify(boughtCourses));
+    } catch (error) {
+      console.error("Error saving bought courses to localStorage:", error);
+    }
+  }, [boughtCourses]);
+
   // Add item to cart
   const addToCart = (course, provider) => {
     if (!course || !provider) {
@@ -41,7 +61,6 @@ export function CartProvider({ children }) {
       return;
     }
 
-    // Calculate price with discount
     const finalPrice =
       provider.discount > 0
         ? Math.round(provider.price * (1 - provider.discount / 100))
@@ -66,28 +85,36 @@ export function CartProvider({ children }) {
     setCartItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 
-  // Clear the entire cart
+  // Clear the cart
   const clearCart = () => {
     setCartItems([]);
   };
 
-  // Calculate total price of items in cart
+  // Checkout: move all cart items to boughtCourses
+  const checkout = () => {
+    setBoughtCourses((prev) => [...prev, ...cartItems]);
+    setCartItems([]);
+  };
+
+  // Get total price
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
 
-  // Get number of items in cart
+  // Get item count
   const getCartCount = () => {
     return cartItems.length;
   };
 
   const value = {
     cartItems,
+    boughtCourses,
     addToCart,
     removeFromCart,
     clearCart,
     getCartTotal,
     getCartCount,
+    checkout,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
