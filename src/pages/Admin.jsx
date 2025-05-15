@@ -58,26 +58,26 @@ export function Admin() {
       <h1>Admin Page</h1>
       <p>Manage courses and their visibility.</p>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div id="error-message">{error}</div>}
 
       {isLoading && <p>Loading courses...</p>}
       {!isLoading && allCourses.length === 0 && <p>No courses available.</p>}
       {!isLoading && allCourses.length > 0 && (
-        <ul className="course-list">
+        <ul id="course-list">
           {allCourses.map((course) => (
-            <li key={course.id} className="course-item">
-              <div className="course-icon">
+            <li key={course.id} id="course-item">
+              <div id="course-icon">
                 <FontAwesomeIcon icon={course.isVisible ? faEye : faEyeSlash} />
               </div>
               <h2>{course.title}</h2>
               <p>{course.description}</p>
-              <span className="visibility-text">
+              <span id="visibility-text">
                 {course.isVisible
                   ? "Course is currently visible"
                   : "Course is currently hidden"}
               </span>
               <button
-                className="visibility-button"
+                id="visibility-button"
                 onClick={() => toggleVisibility(course.id)}
                 disabled={updatingCourses[course.id]}
                 aria-label={`Toggle visibility for ${course.title}`}
