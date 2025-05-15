@@ -3,14 +3,33 @@ import "../css/global-styles.css";
 import "../css/profile.css";
 import { useAuth } from "../components/AuthContext"; // adjust path if needed
 import { useCart } from "../components/CartContext";
+import { useFavorites } from "../components/FavoritesProvider";
+import { useCourses } from "../components/CourseProvider";
+import { NavLink } from "react-router-dom";
 
 function ProfilePage() {
   const { currentUser } = useAuth();
   const { boughtCourses } = useCart();
+  const { favorites, removeFromFavorites } = useFavorites();
+  const { courses, isLoading } = useCourses();
+
+  // Function to handle removing a course from favorites
+  const handleRemoveFromFavorites = (courseId) => {
+    if (!currentUser) {
+      alert("Please log in to remove from favorites.");
+      return;
+    }
+
+    removeFromFavorites(courseId);
+  };
 
   return (
     <main id="Profile">
-      <h1>{currentUser?.username ? `${currentUser.username}'s Profile` : "Profile"}</h1>
+      <h1>
+        {currentUser?.username
+          ? `${currentUser.username}'s Profile`
+          : "Profile"}
+      </h1>
 
       <section id="bought-courses">
         <h2>Bought Courses</h2>
@@ -19,19 +38,72 @@ function ProfilePage() {
         ) : (
           <div className="courses-list">
             {boughtCourses.map((course) => (
-              <div key={course.id} className="course-item">
+              <NavLink
+                to={`/courseinformation/${course.courseId}`}
+                key={course.id}
+                className="course-item"
+              >
                 <img
                   src={`/course-images/${course.imagePath}`}
                   alt={course.title}
                   className="course-image-cart"
                 />
                 <div className="item-details">
-                <h3>{course.title}</h3>
-                <p>{course.providerName}</p>
-                <p>{course.price} {course.currency}</p>
+                  <h3>{course.title}</h3>
+                  <p>{course.providerName}</p>
+                  <p>
+                    {course.price} {course.currency}
+                  </p>
                 </div>
-              </div>
+              </NavLink>
             ))}
+          </div>
+        )}
+      </section>
+
+      <section id="favorite-courses">
+        <h2>Favorite courses</h2>
+        {favorites.length === 0 ? (
+          <p>No favorite courses yet.</p>
+        ) : (
+          <div className="courses-list">
+            {favorites.map((course) => {
+              const courseDetails = courses.find(
+                (c) => c.id === course.courseId
+              );
+
+              // Skip rendering this favorite if courseDetails is undefined
+              if (isLoading) {
+                return <p>Loading course...</p>;
+              }
+
+              return (
+                <div className="course-item">
+                  <button
+                    onClick={() => handleRemoveFromFavorites(courseDetails.id)}
+                  >
+                    Remove from favorites
+                  </button>
+                  <NavLink
+                    to={`/courseinformation/${courseDetails.id}`}
+                    key={courseDetails.id}
+                  >
+                    <img
+                      src={`/course-images/${courseDetails.imagePath}`}
+                      alt={courseDetails.title}
+                      className="course-image-cart"
+                    />
+                    <div className="item-details">
+                      <h3>{courseDetails.title}</h3>
+                      <p>{courseDetails.providerName}</p>
+                      <p>
+                        {courseDetails.price} {courseDetails.currency}
+                      </p>
+                    </div>
+                  </NavLink>
+                </div>
+              );
+            })}
           </div>
         )}
       </section>

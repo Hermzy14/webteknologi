@@ -39,7 +39,14 @@ export function MainSection() {
           }
         />
 
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/courseinformation/:id" element={<CourseInformation />} />
       </Routes>
