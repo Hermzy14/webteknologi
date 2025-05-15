@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import "../css/card.css";
 import { useAuth } from "./AuthContext";
 import { asyncApiRequest } from "../tools/requests";
+import { useFavorites } from "./FavoritesProvider";
 
 /**
  * Reusable course card component for displaying course information.
  *
  * @param {Object} props - Component props
  * @param {Object} props.course - Course data
- * @param {Object} props.favorites - User's favorite courses
  * @param {Function} props.formatPrice - Function to format price
  * @param {Function} props.onAddToCart - Function to handle adding to cart
  * @param {Function} props.onAddToCompare - Function to handle adding to compare
@@ -23,7 +23,6 @@ import { asyncApiRequest } from "../tools/requests";
  */
 export function CourseCard({
   course,
-  favorites,
   formatPrice,
   onAddToCart,
   onAddToCompare,
@@ -34,6 +33,7 @@ export function CourseCard({
   addedItemAction = null,
 }) {
   const { currentUser } = useAuth();
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Support both course structures from Explore and LandingPage
@@ -76,17 +76,9 @@ export function CourseCard({
       return;
     }
 
-    asyncApiRequest(
-      `/users/${currentUser.username}/favorites/${courseId}`,
-      "DELETE"
-    )
-      .then(() => {
-        setIsFavorite(!isFavorite);
-      })
-      .catch((error) => {
-        console.error("Error removing from favorites:", error);
-        alert("Failed to remove from favorites.");
-      });
+    removeFromFavorites(courseId).then((success) => {
+      if (success) setIsFavorite(false);
+    });
   };
 
   // Function to handle adding to favorites
@@ -96,17 +88,9 @@ export function CourseCard({
       return;
     }
 
-    asyncApiRequest(
-      `/users/${currentUser.username}/favorites/${courseId}`,
-      "POST"
-    )
-      .then(() => {
-        setIsFavorite(!isFavorite);
-      })
-      .catch((error) => {
-        console.error("Error adding to favorites:", error);
-        alert("Failed to add to favorites.");
-      });
+    addToFavorites(courseId).then((success) => {
+      if (success) setIsFavorite(true);
+    });
   };
 
   return (

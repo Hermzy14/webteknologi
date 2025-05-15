@@ -1,7 +1,7 @@
 import "../css/global-styles.css";
 import "../css/explore.css";
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Filter } from "../components/Filter";
@@ -10,7 +10,6 @@ import { useCart } from "../components/CartContext";
 import { useCompare } from "../components/CompareContext";
 import { CourseCard } from "../components/CourseCard";
 import { useAuth } from "../components/AuthContext";
-import { asyncApiRequest } from "../tools/requests";
 
 /**
  * This is the Explore page component.
@@ -31,8 +30,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const [selectedProviders, setSelectedProviders] = useState({});
   const [addedCourseId, setAddedCourseId] = useState(null);
   const [addedCourseAction, setAddedCourseAction] = useState(null);
-  const [favorites, setFavorites] = useState([]);
-  const [isLoadingFavorites, setIsLoadingFavorites] = useState(true);
 
   // Get search from URL query params
   const location = useLocation();
@@ -199,24 +196,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
-  // Fetch favorites for the current user
-  useEffect(() => {
-    if (currentUser) {
-      setIsLoadingFavorites(true);
-      asyncApiRequest(`/users/${currentUser.username}/favorites`, "GET")
-        .then((response) => {
-          setFavorites(response);
-          setIsLoadingFavorites(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching favorites:", error);
-          setIsLoadingFavorites(false);
-        });
-    } else {
-      setIsLoadingFavorites(false);
-    }
-  }, [currentUser]); // Only reload when user changes
-
   return (
     <main>
       {/* Side panel for filtering */}
@@ -279,12 +258,11 @@ export function Explore({ searchTerm: externalSearchTerm }) {
         <section id="courses">
           {isLoading ? (
             <div className="loading">Loading courses...</div>
-          ) : !isLoadingFavorites && filteredCourses.length > 0 ? (
+          ) : filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
               <CourseCard
                 key={course.id || course.courseId}
                 course={course}
-                favorites={favorites}
                 formatPrice={formatPrice}
                 onAddToCart={handleAddToCart}
                 onAddToCompare={handleAddToCompare}

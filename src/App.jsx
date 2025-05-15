@@ -7,6 +7,7 @@ import { CourseProvider } from "./components/CourseProvider.jsx";
 import { CartProvider } from "./components/CartContext.jsx";
 import { CompareProvider } from "./components/CompareContext";
 import { AuthProvider } from "./components/AuthContext.jsx";
+import { FavoritesProvider } from "./components/FavoritesProvider.jsx";
 
 /**
  * Component representing the whole application.
@@ -17,17 +18,19 @@ export function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <CourseProvider>
-          <CompareProvider>
-            <CartProvider>
-              <div className="app-container">
-                <Header />
-                <MainSection />
-                <Footer />
-              </div>
-            </CartProvider>
-          </CompareProvider>
-        </CourseProvider>
+        <FavoritesProvider>
+          <CourseProvider>
+            <CompareProvider>
+              <CartProvider>
+                <div className="app-container">
+                  <Header />
+                  <MainSection />
+                  <Footer />
+                </div>
+              </CartProvider>
+            </CompareProvider>
+          </CourseProvider>
+        </FavoritesProvider>
       </BrowserRouter>
     </AuthProvider>
   );
