@@ -14,6 +14,10 @@
   box-shadow: 0 0 8px 2px var(--hover-color);
 }
 
+.add-to-favorites-button.active {
+  background-color: var(--primary-color);
+}
+
 .image-container {
   width: 100%;
   height: 250px;
