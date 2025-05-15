@@ -22,6 +22,7 @@ export function CourseInformation() {
   const [similarCourses, setSimilarCourses] = useState([]);
   const [addedCourseId, setAddedCourseId] = useState(null);
   const [addedCourseAction, setAddedCourseAction] = useState(null);
+  const [selectedProviders, setSelectedProviders] = useState({});
 
   useEffect(() => {
     if (courses && courses.length > 0 && id) {
@@ -38,6 +39,14 @@ export function CourseInformation() {
               c.id !== foundCourse.id
           )
           .slice(0, 4);
+
+        // Initialize selected providers for similar courses
+        const initialProviders = {};
+        similar.forEach((c) => {
+          initialProviders[c.id] = 0; // Default to first provider (index 0)
+        });
+
+        setSelectedProviders(initialProviders);
         setSimilarCourses(similar);
       }
     }
@@ -52,6 +61,14 @@ export function CourseInformation() {
 
   const formatDate = (DateString) => {
     return new Date(DateString).toLocaleDateString();
+  };
+
+  // Handle provider change for similar courses
+  const handleProviderChange = (courseId, providerIndex) => {
+    setSelectedProviders((prev) => ({
+      ...prev,
+      [courseId]: providerIndex,
+    }));
   };
 
   // Handle add to cart
@@ -178,6 +195,10 @@ export function CourseInformation() {
                   formatPrice={formatPrice}
                   onAddToCart={handleAddToCart}
                   onAddToCompare={handleAddToCompare}
+                  onProviderChange={handleProviderChange}
+                  selectedProviderIndex={
+                    selectedProviders[similarCourse.id] || 0
+                  }
                   addedItemId={addedCourseId}
                   addedItemAction={addedCourseAction}
                 />
