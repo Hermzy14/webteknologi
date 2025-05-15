@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getCookie } from "../tools/cookies";
 import { asyncApiRequest } from "../tools/requests";
+import { useAuth } from "./AuthContext"; // Add this import
 
 // Create the cart context
 const CartContext = createContext(null);
@@ -16,6 +17,7 @@ export function useCart() {
 
 // Cart provider component
 export function CartProvider({ children }) {
+  const { currentUser } = useAuth(); // Get currentUser from auth context
   // Load cart from localStorage
   const [cartItems, setCartItems] = useState(() => {
     try {
@@ -27,16 +29,58 @@ export function CartProvider({ children }) {
     }
   });
 
-  // Load bought courses from localStorage
-  const [boughtCourses, setBoughtCourses] = useState(() => {
-    try {
-      const savedBought = localStorage.getItem("boughtCourses");
-      return savedBought ? JSON.parse(savedBought) : [];
-    } catch (error) {
-      console.error("Error loading bought courses from localStorage:", error);
-      return [];
+  // State for bought courses - initialize as empty array
+  const [boughtCourses, setBoughtCourses] = useState([]);
+  const [isLoadingBoughtCourses, setIsLoadingBoughtCourses] = useState(false);
+  // Add a version state to force refreshes when needed
+  const [purchaseVersion, setPurchaseVersion] = useState(0);
+
+  // Function to fetch bought courses from API
+  const fetchBoughtCourses = async () => {
+    if (!currentUser) {
+      console.log("User not logged in, can't fetch bought courses");
+      setBoughtCourses([]);
+      return;
     }
-  });
+
+    setIsLoadingBoughtCourses(true);
+    try {
+      const userOrders = await asyncApiRequest(
+        `/orders/${currentUser.username}`,
+        "GET"
+      );
+
+      if (userOrders && Array.isArray(userOrders)) {
+        const formattedCourses = userOrders.map((order) => ({
+          id: order.id,
+          courseId: order.course.id,
+          title: order.course.title,
+          price: order.price,
+          discount: order.discount || 0,
+          imagePath: order.course.imagePath,
+          purchaseDate: order.orderDate,
+        }));
+
+        setBoughtCourses(formattedCourses);
+      } else {
+        setBoughtCourses([]);
+      }
+    } catch (error) {
+      console.error("Error fetching bought courses:", error);
+      setBoughtCourses([]);
+    } finally {
+      setIsLoadingBoughtCourses(false);
+    }
+  };
+
+  // Fetch bought courses when user changes OR when purchaseVersion changes
+  useEffect(() => {
+    if (currentUser) {
+      fetchBoughtCourses();
+    } else {
+      setBoughtCourses([]);
+    }
+  }, [currentUser, purchaseVersion]);
 
   // Save cart to localStorage when it changes
   useEffect(() => {
@@ -46,15 +90,6 @@ export function CartProvider({ children }) {
       console.error("Error saving cart to localStorage:", error);
     }
   }, [cartItems]);
-
-  // Save bought courses to localStorage when they change
-  useEffect(() => {
-    try {
-      localStorage.setItem("boughtCourses", JSON.stringify(boughtCourses));
-    } catch (error) {
-      console.error("Error saving bought courses to localStorage:", error);
-    }
-  }, [boughtCourses]);
 
   // Add item to cart
   const addToCart = (course, provider) => {
@@ -130,7 +165,6 @@ export function CartProvider({ children }) {
           course: {
             id: item.courseId,
           },
-          // Don't send user - backend will determine from JWT
         };
 
         // Send order to backend
@@ -144,8 +178,8 @@ export function CartProvider({ children }) {
       const allSuccessful = results.every((result) => result);
 
       if (allSuccessful) {
-        setBoughtCourses((prev) => [...prev, ...cartItems]);
         setCartItems([]);
+        setPurchaseVersion((prev) => prev + 1);
         return { success: true, message: "Orders placed successfully" };
       } else {
         throw new Error("Some orders failed to process");
@@ -172,12 +206,14 @@ export function CartProvider({ children }) {
   const value = {
     cartItems,
     boughtCourses,
+    isLoadingBoughtCourses,
     addToCart,
     removeFromCart,
     clearCart,
     getCartTotal,
     getCartCount,
     checkout,
+    refreshBoughtCourses: () => setPurchaseVersion((prev) => prev + 1),
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
