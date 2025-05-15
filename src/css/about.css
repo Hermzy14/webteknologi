@@ -5,9 +5,10 @@
 }
 
 #hero-content-wrapper-about {
-  width: 60%;
+  box-shadow: inset 0 0 0 100vmax rgba(255, 255, 255, 0.61);
+  width: 70%;
+  padding: 2rem;
   margin: 0 auto;
-  padding: 2.2rem 0;
 }
 
 /* About us section */
