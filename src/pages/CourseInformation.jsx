@@ -3,6 +3,9 @@ import "../css/global-styles.css";
 import { NavLink, useParams } from "react-router-dom";
 import { useCourses } from "../components/CourseProvider";
 import { useEffect, useState } from "react";
+import { CourseCard } from "../components/CourseCard";
+import { useCart } from "../components/CartContext";
+import { useCompare } from "../components/CompareContext";
 
 /**
  * This is the course information page.
@@ -13,8 +16,12 @@ import { useEffect, useState } from "react";
 export function CourseInformation() {
   const { id } = useParams();
   const { courses, isLoading } = useCourses();
+  const { addToCart } = useCart();
+  const { addToCompare } = useCompare();
   const [course, setCourse] = useState(null);
   const [similarCourses, setSimilarCourses] = useState([]);
+  const [addedCourseId, setAddedCourseId] = useState(null);
+  const [addedCourseAction, setAddedCourseAction] = useState(null);
 
   useEffect(() => {
     if (courses && courses.length > 0 && id) {
@@ -45,6 +52,40 @@ export function CourseInformation() {
 
   const formatDate = (DateString) => {
     return new Date(DateString).toLocaleDateString();
+  };
+
+  // Handle add to cart
+  const handleAddToCart = (course, provider) => {
+    try {
+      addToCart(course, provider);
+      setAddedCourseId(course.id);
+      setAddedCourseAction("cart");
+
+      // Clear the state after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+        setAddedCourseAction(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
+  // Handle adding course to compare
+  const handleAddToCompare = (course, provider) => {
+    try {
+      addToCompare(course, provider);
+      setAddedCourseId(course.id);
+      setAddedCourseAction("compare");
+
+      // Clear the state after 3 seconds
+      setTimeout(() => {
+        setAddedCourseId(null);
+        setAddedCourseAction(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error adding to compare:", error);
+    }
   };
 
   if (isLoading) {
@@ -80,8 +121,11 @@ export function CourseInformation() {
 
             <div className="imageWrapper">
               <img
-                src={course.imagePath ? `/course-images/${course.imagePath}` : "/assets/Image-not-found.png"}
-
+                src={
+                  course.imagePath
+                    ? `/course-images/${course.imagePath}`
+                    : "/assets/Image-not-found.png"
+                }
                 className="imgNotFound2"
                 alt={course.title}
               />
@@ -103,68 +147,42 @@ export function CourseInformation() {
 
             <p>{course.description}</p>
 
-            <NavLink to="/compare">
-              <button type="button" className="compareButton">
-                Compare to other courses
-              </button>
-            </NavLink>
+            <button
+              type="button"
+              className="compareButton"
+              onClick={() => handleAddToCompare(course, course.providers[0])}
+            >
+              Compare to other courses
+            </button>
 
-            <NavLink to="">
-              <button type="button" className="addToCartButton">
-                Add to cart
-              </button>
-            </NavLink>
+            <button
+              type="button"
+              className="addToCartButton"
+              onClick={() => handleAddToCart(course, course.providers[0])}
+            >
+              Add to cart
+            </button>
           </section>
         </section>
 
         {similarCourses.length > 0 && (
-          <section className="courseCarouselParent">
-            <h2> Similar courses </h2>
-            <section className="courseCarousel">
-              <NavLink to="" className="leftArrow" title="left">
-                <img
-                  src="/src/assets/leftArrow.PNG"
-                  className="leftArrow"
-                  alt="leftArrow"
+          <section id="discounted" className="courseCarouselParent">
+            <div className="navigation-title-wrapper">
+              <h2 id="discounted-title">Similar courses</h2>
+            </div>
+            <div className="card-wrapper">
+              {similarCourses.map((similarCourse) => (
+                <CourseCard
+                  key={similarCourse.id || similarCourse.courseId}
+                  course={similarCourse}
+                  formatPrice={formatPrice}
+                  onAddToCart={handleAddToCart}
+                  onAddToCompare={handleAddToCompare}
+                  addedItemId={addedCourseId}
+                  addedItemAction={addedCourseAction}
                 />
-              </NavLink>
-
-              {similarCourses.map((similarCourse) => {
-                const similarPrices = similarCourse.providers.map(
-                  (p) => p.price
-                );
-                const similarMinPrice = Math.min(...similarPrices);
-                const currency = similarCourse.providers[0]?.currency || "NOK";
-
-                return (
-                  <section className="carouselCard" key={similarCourse.id}>
-                    <NavLink to={`/courseinformation/${similarCourse.id}`}>
-                      <img
-                        src={similarCourse.imagePath ? `/course-images/${similarCourse.imagePath}` : "/assets/Image-not-found.png"}
-                        alt={similarCourse.title}
-                      />
-                      <p className="priceText">
-                        {formatPrice(similarMinPrice, currency)}
-                      </p>
-                      <p className="providerText">
-                        {similarCourse.providers[0]?.name}
-                        {similarCourse.providers.length > 1 ? " + more " : ""}
-                      </p>
-                    </NavLink>
-                  </section>
-                );
-              })}
-
-              <NavLink to="" className="rightArrow" title="right">
-                <img
-                  src="/src/assets/rightArrow.PNG"
-                  className="rightArrow"
-                  alt="rightArrow"
-                />
-              </NavLink>
-            </section>
-
-            {/* TODO: Add functionallity for the buttons, to browse between displayed courses */}
+              ))}
+            </div>
           </section>
         )}
       </main>
