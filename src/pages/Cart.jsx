@@ -4,7 +4,7 @@ import "../css/cart.css";
 import { useCart } from "../components/CartContext";
 
 function ShoppingCart() {
-  const { cartItems, getCartCount, clearCart, removeFromCart, getCartTotal } = useCart();
+  const { cartItems, getCartCount, clearCart, removeFromCart, getCartTotal, checkout } = useCart();
 
   return (
     <>
@@ -49,12 +49,22 @@ function ShoppingCart() {
                 <p className="total-price">
                   Total: {getCartTotal()} {cartItems[0]?.currency}
                 </p>
+                <div className="cart-buttons">
                 <button 
                   className="clear-btn"
                   onClick={clearCart}
                 >
                   Clear Cart
                 </button>
+
+                <button
+                  className="checkout-btn"
+                  onClick = {checkout}
+                  >
+                  Checkout
+                </button>
+                </div>
+                
               </div>
             </>
           )}
