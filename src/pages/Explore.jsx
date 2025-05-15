@@ -9,6 +9,8 @@ import { useCourses } from "../components/CourseProvider";
 import { useCart } from "../components/CartContext";
 import { useCompare } from "../components/CompareContext";
 import { CourseCard } from "../components/CourseCard";
+import { useAuth } from "../components/AuthContext";
+import { asyncApiRequest } from "../tools/requests";
 
 /**
  * This is the Explore page component.
@@ -21,6 +23,7 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const { courses, isLoading } = useCourses();
   const { addToCart } = useCart();
   const { addToCompare } = useCompare();
+  const { currentUser } = useAuth();
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [activeCategories, setActiveCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(10000);
@@ -28,6 +31,8 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   const [selectedProviders, setSelectedProviders] = useState({});
   const [addedCourseId, setAddedCourseId] = useState(null);
   const [addedCourseAction, setAddedCourseAction] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  const [isLoadingFavorites, setIsLoadingFavorites] = useState(true);
 
   // Get search from URL query params
   const location = useLocation();
@@ -194,6 +199,24 @@ export function Explore({ searchTerm: externalSearchTerm }) {
     }
   };
 
+  // Fetch favorites for the current user
+  useEffect(() => {
+    if (currentUser) {
+      setIsLoadingFavorites(true);
+      asyncApiRequest(`/users/${currentUser.username}/favorites`, "GET")
+        .then((response) => {
+          setFavorites(response);
+          setIsLoadingFavorites(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching favorites:", error);
+          setIsLoadingFavorites(false);
+        });
+    } else {
+      setIsLoadingFavorites(false);
+    }
+  }, [currentUser]); // Only reload when user changes
+
   return (
     <main>
       {/* Side panel for filtering */}
@@ -256,11 +279,12 @@ export function Explore({ searchTerm: externalSearchTerm }) {
         <section id="courses">
           {isLoading ? (
             <div className="loading">Loading courses...</div>
-          ) : filteredCourses.length > 0 ? (
+          ) : !isLoadingFavorites && filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
               <CourseCard
-                key={course.id}
+                key={course.id || course.courseId}
                 course={course}
+                favorites={favorites}
                 formatPrice={formatPrice}
                 onAddToCart={handleAddToCart}
                 onAddToCompare={handleAddToCompare}

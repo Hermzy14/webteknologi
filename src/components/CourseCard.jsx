@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../css/card.css";
@@ -10,6 +10,7 @@ import { asyncApiRequest } from "../tools/requests";
  *
  * @param {Object} props - Component props
  * @param {Object} props.course - Course data
+ * @param {Object} props.favorites - User's favorite courses
  * @param {Function} props.formatPrice - Function to format price
  * @param {Function} props.onAddToCart - Function to handle adding to cart
  * @param {Function} props.onAddToCompare - Function to handle adding to compare
@@ -22,6 +23,7 @@ import { asyncApiRequest } from "../tools/requests";
  */
 export function CourseCard({
   course,
+  favorites,
   formatPrice,
   onAddToCart,
   onAddToCompare,
@@ -51,6 +53,42 @@ export function CourseCard({
   const imagePath = course.imagePath;
   const courseId = isDiscountedCourse ? course.courseId : course.id;
 
+  useEffect(() => {
+    if (favorites && Array.isArray(favorites) && favorites.length > 0) {
+      const isFav = favorites.some((fav) => fav.id === courseId);
+      setIsFavorite(isFav);
+    }
+  }, [favorites, courseId]);
+
+  // Function to handle favorite button click
+  const handleFavoriteButtonClick = () => {
+    if (isFavorite) {
+      handleRemoveFromFavorites();
+    } else {
+      handleAddToFavorites();
+    }
+  };
+
+  // Function to handle removing from favorites
+  const handleRemoveFromFavorites = () => {
+    if (!currentUser) {
+      alert("Please log in to remove from favorites.");
+      return;
+    }
+
+    asyncApiRequest(
+      `/users/${currentUser.username}/favorites/${courseId}`,
+      "DELETE"
+    )
+      .then(() => {
+        setIsFavorite(!isFavorite);
+      })
+      .catch((error) => {
+        console.error("Error removing from favorites:", error);
+        alert("Failed to remove from favorites.");
+      });
+  };
+
   // Function to handle adding to favorites
   const handleAddToFavorites = () => {
     if (!currentUser) {
@@ -58,23 +96,12 @@ export function CourseCard({
       return;
     }
 
-    console.log("Course object:", course);
-    console.log("Is discounted course:", isDiscountedCourse);
-    console.log("course.courseId:", course.courseId);
-    console.log("course.id:", course.id);
-    console.log("Calculated courseId:", courseId);
-
     asyncApiRequest(
       `/users/${currentUser.username}/favorites/${courseId}`,
       "POST"
     )
       .then(() => {
         setIsFavorite(!isFavorite);
-        alert(
-          isFavorite
-            ? "Removed from favorites!"
-            : "Added to favorites successfully!"
-        );
       })
       .catch((error) => {
         console.error("Error adding to favorites:", error);
@@ -87,8 +114,8 @@ export function CourseCard({
       {/* Add to favorites button */}
       {currentUser && (
         <button
-          className="add-to-favorites-button"
-          onClick={handleAddToFavorites}
+          className={`add-to-favorites-button ${isFavorite ? "active" : ""}`}
+          onClick={handleFavoriteButtonClick}
         >
           stjerne
         </button>
