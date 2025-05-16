@@ -1,9 +1,9 @@
-import "../css/profile.css";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import { useCart } from "../components/CartContext";
-import { useFavorites } from "../components/FavoritesProvider";
 import { useCourses } from "../components/CourseProvider";
-import { NavLink } from "react-router-dom";
+import { useFavorites } from "../components/FavoritesProvider";
+import "../css/profile.css";
 
 function ProfilePage() {
   const { currentUser } = useAuth();
@@ -70,17 +70,19 @@ function ProfilePage() {
                 (c) => c.id === course.courseId
               );
 
+              console.log(courseDetails);
+
               // Skip rendering this favorite if courseDetails is undefined
               if (isLoading) {
                 return <p>Loading course...</p>;
               }
 
               return (
-                <div className="course-item">
-                  
+                <div className="courses-list">
                   <NavLink
                     to={`/courseinformation/${courseDetails.id}`}
                     key={courseDetails.id}
+                    className="course-item"
                   >
                     <img
                       src={`/course-images/${courseDetails.imagePath}`}
@@ -89,14 +91,16 @@ function ProfilePage() {
                     />
                     <div className="item-details">
                       <h3>{courseDetails.title}</h3>
-                      <p>{courseDetails.providerName}</p>
-                      <p>
-                        {courseDetails.price} {courseDetails.currency}
-                      </p>
+                      {courseDetails.providers.map((p) => (
+                        <p key={p.id} className="provider-info">
+                          {p.name}: {p.price} {p.currency}
+                        </p>
+                      ))}
                     </div>
                   </NavLink>
 
-                  <button className="remove-favorite-btn"
+                  <button
+                    className="remove-favorite-btn"
                     onClick={() => handleRemoveFromFavorites(courseDetails.id)}
                   >
                     Remove from favorites
