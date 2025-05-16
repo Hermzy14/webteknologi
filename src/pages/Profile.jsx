@@ -97,14 +97,15 @@ function ProfilePage() {
                         </p>
                       ))}
                     </div>
-                  </NavLink>
 
-                  <button
+                    <button
                     className="remove-favorite-btn"
                     onClick={() => handleRemoveFromFavorites(courseDetails.id)}
                   >
                     Remove from favorites
                   </button>
+                    
+                  </NavLink>
                 </div>
               );
             })}
