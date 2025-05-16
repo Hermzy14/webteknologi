@@ -1,7 +1,5 @@
-import React from "react";
-import "../css/global-styles.css";
 import "../css/profile.css";
-import { useAuth } from "../components/AuthContext"; // adjust path if needed
+import { useAuth } from "../components/AuthContext";
 import { useCart } from "../components/CartContext";
 import { useFavorites } from "../components/FavoritesProvider";
 import { useCourses } from "../components/CourseProvider";
@@ -79,11 +77,7 @@ function ProfilePage() {
 
               return (
                 <div className="course-item">
-                  <button
-                    onClick={() => handleRemoveFromFavorites(courseDetails.id)}
-                  >
-                    Remove from favorites
-                  </button>
+                  
                   <NavLink
                     to={`/courseinformation/${courseDetails.id}`}
                     key={courseDetails.id}
@@ -101,6 +95,12 @@ function ProfilePage() {
                       </p>
                     </div>
                   </NavLink>
+
+                  <button className="remove-favorite-btn"
+                    onClick={() => handleRemoveFromFavorites(courseDetails.id)}
+                  >
+                    Remove from favorites
+                  </button>
                 </div>
               );
             })}

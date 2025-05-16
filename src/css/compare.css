@@ -62,7 +62,7 @@
   
   .compare-img-wrapper {
     width: 100%;
-    height: 180px; /* Set a consistent height */
+    height: 180px; 
     overflow: hidden;
     border-radius: 10px;
     margin-bottom: 1rem;
@@ -74,7 +74,7 @@
   .compare-img {
     max-height: 100%;
     max-width: 100%;
-    object-fit: contain; /* Ensure the image scales proportionally */
+    object-fit: contain;
   }
   
   .compare-price {
@@ -98,9 +98,9 @@
     transition: background 0.2s ease;
   }
   
-  /* Specific button colors */
+  
   .compare-button-group button:first-child {
-    background-color: #e74c3c; /* Red */
+    background-color: #e74c3c;
     color: white;
   }
   
@@ -109,11 +109,32 @@
   }
   
   .compare-button-group button:last-child {
-    background-color: #3498db; /* Blue */
+    background-color: #3498db;
     color: white;
   }
   
   .compare-button-group button:last-child:hover {
     background-color: #2980b9;
+  }
+  
+  /* Styles for phone */
+  @media (max-width: 768px) {
+    .compare-course-card,
+    .compare-placeholder-card {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  
+    .compare-img-wrapper {
+      height: 150px; 
+    }
+  
+    .compare-price {
+      font-size: 1rem;
+    }
+  
+    .compare-button-group button {
+      font-size: 0.8rem;
+    }
   }
   
