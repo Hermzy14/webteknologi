@@ -134,3 +134,39 @@
     color: black;
 }
 
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    #image-container {
+        display: none;
+    }
+
+    .right-side {
+        flex: none;
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+    }
+
+    .form-container {
+        width: 90%;
+        max-width: 350px;
+        transform: none;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+
+    .tabs {
+        gap: 10px;
+    }
+
+    .tabs h2 {
+        font-size: 20px;
+    }
+}
+
+
