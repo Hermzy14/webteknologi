@@ -138,8 +138,6 @@
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        height: auto;
-        min-height: 100vh;
     }
 
     #image-container {
