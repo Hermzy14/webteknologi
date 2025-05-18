@@ -38,7 +38,7 @@ export function Login() {
         // Error callback
         setIsLoading(false);
         setError(errorMessage);
-        alert("Login failed: " + errorMessage);
+        alert("Login failed: Username or password is incorrect ");
       }
     );
   };
@@ -64,7 +64,7 @@ export function Login() {
                 isActive ? "active-tab tab-link" : "inactive-tab tab-link"
               }
             >
-              Sign up
+              Register
             </NavLink>
           </div>
 
