@@ -70,11 +70,14 @@ function ProfilePage() {
                 (c) => c.id === course.courseId
               );
 
-              console.log(courseDetails);
-
-              // Skip rendering this favorite if courseDetails is undefined
+              // Check if courseDetails is loading
               if (isLoading) {
-                return <p>Loading course...</p>;
+                return <p key={course.courseId}>Loading course...</p>;
+              }
+
+              // Check if courseDetails exists
+              if (!courseDetails) {
+                return;
               }
 
               return (
@@ -99,12 +102,13 @@ function ProfilePage() {
                     </div>
 
                     <button
-                    className="remove-favorite-btn"
-                    onClick={() => handleRemoveFromFavorites(courseDetails.id)}
-                  >
-                    Remove from favorites
-                  </button>
-                    
+                      className="remove-favorite-btn"
+                      onClick={() =>
+                        handleRemoveFromFavorites(courseDetails.id)
+                      }
+                    >
+                      Remove from favorites
+                    </button>
                   </NavLink>
                 </div>
               );
