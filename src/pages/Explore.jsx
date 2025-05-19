@@ -162,7 +162,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
   // Handle add to cart action
   const handleAddToCart = (course, provider) => {
     try {
-      console.log("Adding to cart:", course.title, "from", provider.name);
       addToCart(course, provider);
       setAddedCourseId(course.id); // Set the ID of the added course
       setAddedCourseAction("cart"); // Set the action to "cart"
@@ -190,7 +189,6 @@ export function Explore({ searchTerm: externalSearchTerm }) {
         setAddedCourseId(null);
         setAddedCourseAction(null);
       }, 3000);
-      console.log("Added to compare:", course.title, "from", provider);
     } catch (error) {
       console.error("Error adding to compare:", error);
     }

@@ -97,7 +97,6 @@ function LandingPage() {
   // Handle adding course to cart
   const handleAddToCart = (course, provider) => {
     try {
-      console.log("Adding to cart:", course.title, "from", provider);
       addToCart(course, provider);
       setAddedCourseId(course.id); // Set the ID of the added course
       setAddedCourseAction("cart"); // Set the action type

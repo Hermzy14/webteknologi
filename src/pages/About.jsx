@@ -73,7 +73,6 @@ export function About() {
       email: event.target.email.value,
       message: event.target.message.value,
     };
-    console.log(data);
     // Send a POST request to the server
     try {
       asyncApiRequest("/messages", "POST", data)

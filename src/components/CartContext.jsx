@@ -38,7 +38,6 @@ export function CartProvider({ children }) {
   // Function to fetch bought courses from API
   const fetchBoughtCourses = async () => {
     if (!currentUser) {
-      console.log("User not logged in, can't fetch bought courses");
       setBoughtCourses([]);
       return;
     }
@@ -157,7 +156,6 @@ export function CartProvider({ children }) {
       // Process each cart item as a separate order
       const orderPromises = cartItems.map(async (item) => {
         // Create order object to match backend entity
-        console.log("Creating order for item:", item);
         const order = {
           orderDate: new Date().toISOString().split("T")[0],
           price: item.price,
