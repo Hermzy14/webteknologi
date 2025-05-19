@@ -8,7 +8,7 @@
 
 ### Does the company have a color scheme?
 
-- Mainly black, white, with blush pink as main color.
+- Mainly black, white, with Light Blue as main color.
 
 ### Which colors are suggested by the theme of the site?
 
@@ -20,7 +20,11 @@
 
 ### Pick an accent color (optional)
 
-- TBD - Most likely another shade of the blue color.
+- Slate grey #6B7E92
+- Powder Blue #aecded
+- Cplumbia blue #b9d4ef
+- Hawks Blue #d6e4ef
+- Red #d9534f
 
 ## Hierarchy and layout:
 
@@ -49,7 +53,6 @@
 ### Gather the available images
 
 - Images for the courses are provided in description of the task.
-- Other images are TBD.
 
 ### Will there be text on images or aside images?
 
@@ -68,10 +71,15 @@
 ### Will we use icons and for what?
 
 - We will use icons for logo and navigation elements.
+- We use icon for cart
+- We use icon for Profile
+- We use for mail, phone and address on the about page
+- Course cards uses start for favourite
+- For phone we use icon for filter
 
 ### Colored or black-and-white/greyscale icons?
 
-- Black and white default? Colored with main color when hovering and selected (TBD)
+- Mainly black, white and grey scale.
 
 ## Typography:
 
@@ -91,7 +99,7 @@
 
 ### How rounded should be the edges, according to the theme?
 
-- Bit rounded
+- 8 pixels for rounding.
 
 ## Shadows:
 
