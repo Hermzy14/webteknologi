@@ -74,7 +74,7 @@ export async function asyncApiRequest(endpoint, method = "GET", body = null) {
  */
 function handleErrors(response) {
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`); //TODO: Create custom error
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
   return response;
 }
