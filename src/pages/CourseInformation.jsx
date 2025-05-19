@@ -52,9 +52,9 @@ export function CourseInformation() {
     }
   }, [id, courses]);
 
-  const formatPrice = (price, currency = "NOK") => {
-    if (currency === "NOK") {
-      return `${Math.round(price).toLocaleString()} NOK`;
+  const formatPrice = (price, currency = "USD") => {
+    if (currency === "USD") {
+      return `${Math.round(price).toLocaleString()} USD`;
     }
     return `${price} ${currency}`;
   };
