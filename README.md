@@ -87,7 +87,7 @@ npm run dev
 ![About page hero and about text](/screenshots/about-page-1.png)
 ![Contact form and other ways to contact](/screenshots/about-page-2.png)
 
-### Loging and register pages
+### Login and register pages
 
 ![Login page](/screenshots/login.png)
 ![Register page](/screenshots/register.png)
