@@ -12,7 +12,7 @@
 
 ### Which colors are suggested by the theme of the site?
 
-- The colors that will be suggested are pink, black and white.
+- The colors that will be suggested are blue, black and white.
 
 ### Pick the main color
 
