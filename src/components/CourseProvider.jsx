@@ -62,7 +62,7 @@ export function CourseProvider({ children }) {
           const discountedPrice = originalPrice * (1 - provider.discount / 100);
           // Add the discounted course to the list
           discounted.push({
-            id: `${course.id}-${provider.id}`,
+            id: course.id,
             courseId: course.id,
             title: course.title,
             originalPrice: originalPrice,
