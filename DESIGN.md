@@ -40,9 +40,8 @@
 ### What sections will there be on the page?
 
 1. Header (same for all pages)
-2. Landing page (different from page to page)
-3. Other information and stuff (different from page to page)
-4. Footer (same for all pages)
+2. Main section (different from page to page, for example a course grid and filters on explore page, or text and contact form on about page)
+3. Footer (same for all pages)
 
 ### What layout(s) will you use for the sections?
 

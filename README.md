@@ -56,3 +56,46 @@ npm run dev
 ```
 
 4. The application will be available at http://localhost:5173 (or another port if 5173 is in use)
+
+## Screenshots
+
+### Landing page
+
+![Header, hero section and category carousel](/screenshots/landing-page-1.png)
+![Discounted section landing page and footer](/screenshots/landing-page-2.png)
+
+### Course information page
+
+![Course information page](/screenshots/course-info.png)
+
+### Explore page
+
+![Explore page](/screenshots/explore-page.png)
+
+### Cart page
+
+![Empty cart](/screenshots/empty-cart.png)
+![Cart with courses](/screenshots/cart-with-courses.png)
+
+### Compare page
+
+![Empty compare page](/screenshots/empty-compare.png)
+![Compare page with courses](/screenshots/compare-page.png)
+
+### About page
+
+![About page hero and about text](/screenshots/about-page-1.png)
+![Contact form and other ways to contact](/screenshots/about-page-2.png)
+
+### Loging and register pages
+
+![Login page](/screenshots/login.png)
+![Register page](/screenshots/register.png)
+
+### Profile page
+
+![Profile page](/screenshots/profile.png)
+
+### Admin page
+
+![Admin page](/screenshots/admin.png)
