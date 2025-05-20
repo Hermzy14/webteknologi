@@ -3,6 +3,7 @@ import "../css/global-styles.css";
 import "../css/cart.css";
 import { useCart } from "../components/CartContext";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function ShoppingCart() {
   const {
@@ -47,9 +48,9 @@ function ShoppingCart() {
           {cartItems.length === 0 ? (
             <div className="empty-cart">
               <h4>Your cart is empty</h4>
-              <a href="/explore" className="cart-btn" title="Keep shopping">
+              <NavLink to="/explore" className="cart-btn" title="Keep shopping">
                 Keep shopping
-              </a>
+              </NavLink>
             </div>
           ) : (
             <>
