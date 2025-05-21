@@ -82,24 +82,26 @@ function ProfilePage() {
 
               return (
                 <div className="courses-list">
-                  <NavLink
-                    to={`/courseinformation/${courseDetails.id}`}
-                    key={courseDetails.id}
-                    className="course-item"
-                  >
-                    <img
-                      src={`/course-images/${courseDetails.imagePath}`}
-                      alt={courseDetails.title}
-                      className="course-image-cart"
-                    />
-                    <div className="item-details">
-                      <h3>{courseDetails.title}</h3>
-                      {courseDetails.providers.map((p) => (
-                        <p key={p.id} className="provider-info">
-                          {p.name}: {p.price} {p.currency}
-                        </p>
-                      ))}
-                    </div>
+                  <div className="favorite-course-item">
+                    <NavLink
+                      to={`/courseinformation/${courseDetails.id}`}
+                      key={courseDetails.id}
+                      className="course-link"
+                    >
+                      <img
+                        src={`/course-images/${courseDetails.imagePath}`}
+                        alt={courseDetails.title}
+                        className="course-image-cart"
+                      />
+                      <div className="item-details">
+                        <h3>{courseDetails.title}</h3>
+                        {courseDetails.providers.map((p) => (
+                          <p key={p.id} className="provider-info">
+                            {p.name}: {p.price} {p.currency}
+                          </p>
+                        ))}
+                      </div>
+                    </NavLink>
 
                     <button
                       className="remove-favorite-btn"
@@ -109,7 +111,7 @@ function ProfilePage() {
                     >
                       Remove from favorites
                     </button>
-                  </NavLink>
+                  </div>
                 </div>
               );
             })}

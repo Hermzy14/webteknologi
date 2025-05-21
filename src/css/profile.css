@@ -26,12 +26,32 @@ a.course-item {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+.favorite-course-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.course-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  text-decoration: none;
+  width: 100%;
+}
+
 .course-image-cart {
   width: 140px;
   height: 140px;
   object-fit: cover;
   border-radius: 6px;
-  background-color: #eaeaea;
+  background-color: #eee;
   flex-shrink: 0;
 }
 
@@ -78,7 +98,6 @@ a.course-item {
   margin-bottom: 5%;
   margin-top: 3%;
 }
-
 
 /* For mobile */
 @media (max-width: 768px) {
